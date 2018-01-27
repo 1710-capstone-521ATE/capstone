@@ -3,6 +3,7 @@ const app = new Koa();
 const PORT = process.env.PORT || 5218;
 const socketio = require('socket.io');
 const { db } = require('./db/models');
+const bodyParser = require('koa-bodyparser')
 const path = require('path');
 // const api = require('./api');
 
@@ -15,14 +16,14 @@ const startListening = async () => {
   require('./socket')(io);
 }
 
-const syncDb = () => db.sync({force: true});
+const syncDb = () => db.sync();
 
 const createApp =  () => {
   app.use(async (ctx, next) => {
     ctx.db = db;
     await next();
   });
-
+  app.use(bodyParser());
   app.use(require('./api'));
 
 }

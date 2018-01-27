@@ -47,9 +47,6 @@ const User = db.define('user', {
     validate: {
       isNumeric: true
     }
-  },
-  cuisine: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
   }
 })
 

@@ -4,6 +4,7 @@ const PORT = process.env.PORT || 5218;
 const socketio = require('socket.io');
 const { db } = require('./db/models');
 const path = require('path');
+// const api = require('./api');
 
 const startListening = async () => {
   await createApp();
@@ -22,7 +23,8 @@ const createApp =  () => {
     await next();
   });
 
-  //app.use(require('./routes'));
+  app.use(require('./api'));
+
 }
 
 async function decision () {

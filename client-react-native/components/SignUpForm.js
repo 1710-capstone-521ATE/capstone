@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, TextInput} from 'react-native';
+import {KeyboardAvoidingView, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
 class SignUpForm extends Component {
@@ -17,53 +17,95 @@ class SignUpForm extends Component {
   }
 
   onChange(event) {
+    console.log('hi', event.target.value)
     let name = event.target.name;
     let value = event.target.value
-    this.setState({[name]: value});
+    this.setState({[name]: value });
   }
 
   render() {
     return (
-      <View>
+      <KeyboardAvoidingView
+        behavior = "padding"
+        style={styles.container}
+        >
       <TextInput
       placeholder="First Name"
-      value={this.state.firstName}
       name="firstName"
-      onChangeText={this.onChange}
+      onChangeText={(firstName) => this.setState({ firstName })}
+      style = {styles.input}
       />
       <TextInput
       placeholder="Last Name"
-      value={this.state.lastName}
       name="lastName"
-      onChangeText={this.onChange}
+      onChangeText={(lastName) => this.setState({ lastName })}
+      style = {styles.input}
       />
       <TextInput
       placeholder="Email Address"
-      value={this.state.email}
       name="email"
-      onChangeText={this.onChange}
+      onChangeText={(email) => this.setState({ email })}
+      style = {styles.input}
       />
       <TextInput
       placeholder="Password"
-      value={this.state.password}
       name="password"
-      onChangeText={this.onChange}
+      onChangeText={(password) => this.setState({ password })}
+      style = {styles.input}
       />
       <TextInput
       placeholder="Date of Birth (yyyy-mm-dd)"
-      value={this.state.dob}
       name="dob"
-      onChangeText={this.onChange}
+      onChangeText={(dob) => this.setState({ dob })}
+      style = {styles.input}
       />
       <TextInput
       placeholder="Zipcode"
-      value={this.state.zipcode}
       name="zipcode"
-      onChangeText={this.onChange}
+      onChangeText={(zipcode) => this.setState({ zipcode })}
+      style = {styles.input}
       />
-      </View>
+      <TouchableOpacity
+      style = {styles.signupButtonContainer}
+      onPress={() => console.log(this.state)}
+    >
+    <Text style ={styles.loginbutton}>
+    SIGNUP
+    </Text>
+    </TouchableOpacity>
+      </KeyboardAvoidingView>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 20,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#43CCD8',
+  },
+  input: {
+    minWidth: 300,
+    flexWrap: 'wrap',
+    height: 40,
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    paddingHorizontal: 10,
+    color: '#fff',
+    marginBottom: 10,
+  },
+  signupButtonContainer: {
+    backgroundColor: '#11b21f',
+    paddingVertical: 10,
+    marginBottom: 20,
+    width: 300
+  },
+  loginbutton: {
+    color: '#ffffff',
+    textAlign: 'center',
+    fontWeight: '700'
+  },
+})
 
 export default SignUpForm;

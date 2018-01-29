@@ -3,18 +3,25 @@ import { StyleSheet, Text, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import Login from './components/Login';
 import SignUpForm from './components/SignUpForm';
+import Map from './components/Map.js';
 
 export default StackNavigator({
-  Main: {
-    screen: Login,
+  // Main: {
+  //   screen: Login,
+  //   navigationOptions: {
+  //       headerTitle: 'Login'
+  //   }
+  // },
+  // SignUpForm: {
+  //   screen: SignUpForm,
+  //   navigationOptions: {
+  //     headerTitle: 'Signup'
+  //   }
+  // },
+  Map: {
+    screen: Map,
     navigationOptions: {
-        headerTitle: 'Login'
-    }
-  },
-  SignUpForm: {
-    screen: SignUpForm,
-    navigationOptions: {
-      headerTitle: 'Signup'
+      headerTitle: 'DIS WHERE YOU BE!'
     }
   }
 });

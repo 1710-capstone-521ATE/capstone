@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {KeyboardAvoidingView, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import { addNewUser } from '../store/reducers/User'
+import { addNewUser } from '../store'
 
 class SignUpForm extends Component {
   constructor(props) {

@@ -32,6 +32,8 @@ userRouter.post('/', async (ctx, next) => {
   ctx.body = await userModel.create(
     ctx.request.body
   );
+  ctx.session.user = ctx.body.id;
+  console.log(ctx.session.user)
 });
 
 

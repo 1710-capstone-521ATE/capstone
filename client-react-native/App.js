@@ -1,10 +1,12 @@
 import React from 'react';
+import { Provider } from 'react-redux'
 import { StyleSheet, Text, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import Login from './components/Login';
-import SignUpForm from './components/SignUpForm';
+import SignUpFormContainer from './components/SignUpForm';
+import store from './store'
 
-export default StackNavigator({
+const RootNavigator = StackNavigator({
   Main: {
     screen: Login,
     navigationOptions: {
@@ -12,22 +14,22 @@ export default StackNavigator({
     }
   },
   SignUpForm: {
-    screen: SignUpForm,
+    screen: SignUpFormContainer,
     navigationOptions: {
       headerTitle: 'Signup'
     }
   }
 });
 
-// export default class App extends React.Component {
-//   render() {
-//     return (
-//       <View style={styles.container}>
-//         <Text>Open up App.js to start working on your app!</Text>
-//       </View>
-//     );
-//   }
-// }
+export default class App extends React.Component {
+  render() {
+    return (
+     <Provider store={store}>
+        <RootNavigator/>
+      </Provider>
+    );
+  }
+}
 
 // const styles = StyleSheet.create({
 //   container: {

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {KeyboardAvoidingView, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+import { addNewUser } from '../store/reducers/User'
 
 class SignUpForm extends Component {
   constructor(props) {
@@ -67,7 +68,7 @@ class SignUpForm extends Component {
       />
       <TouchableOpacity
       style = {styles.signupButtonContainer}
-      onPress={() => console.log(this.state)}
+      onPress={() => this.props.handleSubmit(this.state)}
     >
     <Text style ={styles.loginbutton}>
     SIGNUP
@@ -108,4 +109,14 @@ const styles = StyleSheet.create({
   },
 })
 
-export default SignUpForm;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleSubmit(state) {
+      dispatch(addNewUser(state))
+    }
+  }
+}
+
+const SignUpFormContainer = connect(null, mapDispatchToProps)(SignUpForm)
+
+export default SignUpFormContainer;

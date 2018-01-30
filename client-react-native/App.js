@@ -4,8 +4,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import Login from './components/Login';
 import SignUpFormContainer from './components/SignUpForm';
-import store from './store'
-// import Map from './components/Map';
+import store from './store';
+import Map from './components/Map';
 import MapTemp from './components/MapTemp';
 
 const RootNavigator = StackNavigator({
@@ -21,12 +21,12 @@ const RootNavigator = StackNavigator({
       headerTitle: 'Signup'
     }
   },
-  // Map: {
-  //   screen: Map,
-  //   navigationOptions: {
-  //     headerTitle: '(/ﾟДﾟ)/'
-  //   }
-  // },
+  Map: {
+    screen: Map,
+    navigationOptions: {
+      headerTitle: '(/ﾟДﾟ)/'
+    }
+  },
   MapTemp: {
     screen: MapTemp,
     navigationOptions: {
@@ -45,11 +45,3 @@ export default class App extends React.Component {
   }
 }
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });

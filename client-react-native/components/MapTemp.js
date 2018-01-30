@@ -10,18 +10,12 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 export default class App extends Component {
   state = {
-      mapRegion: { latitude: 37.78825, longitude: -122.4324, latitudeDelta: LATITUDE_DELTA, longitudeDelta: LONGITUDE_DELTA },
-      locationResult: null,
-      location: {coords: { latitude: 37.78825, longitude: -122.4324}},
+      location: {coords: { latitude: 40.952411, longitude: -74.104963}},
     };
 
     componentDidMount() {
       this._getLocationAsync();
     }
-
-    _handleMapRegionChange = mapRegion => {
-      this.setState({ mapRegion });
-    };
 
     _getLocationAsync = async () => {
      let { status } = await Permissions.askAsync(Permissions.LOCATION);
@@ -29,36 +23,30 @@ export default class App extends Component {
      if (status !== 'granted') {
        this.setState({
          locationResult: 'Permission to access location was denied',
-         location,
        });
      }
 
      let location = await Location.getCurrentPositionAsync({});
-     this.setState({ locationResult: JSON.stringify(location), location, });
-   };
-  // }
+     this.setState({ location: {coords: {latitude: location.coords.latitude, longitude: location.coords.longitude}} });
+   }
 
   render() {
 
+      return (
+          <MapView
+            style={styles.container}
+            region={{ latitude: this.state.location.coords.latitude, longitude: this.state.location.coords.longitude, latitudeDelta: LATITUDE_DELTA, longitudeDelta: LONGITUDE_DELTA }}
+          >
+            <MapView.Marker
+              coordinate={this.state.location.coords}
+              title="My Marker"
+              description="Some description"
 
-    return (
-        <MapView
-          style={styles.container}
-          region={{ latitude: this.state.location.coords.latitude, longitude: this.state.location.coords.longitude, latitudeDelta: LATITUDE_DELTA, longitudeDelta: LONGITUDE_DELTA }}
-          onRegionChange={this._handleMapRegionChange}
-          showsMyLocationButton={false}
-        >
-          <MapView.Marker
-            coordinate={this.state.location.coords}
-            title="My Marker"
-            description="Some description"
-
-          />
-        </MapView>
-
-    );
+            />
+          </MapView>
+      )
+    }
   }
-}
 
 const styles = StyleSheet.create({
   container: {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Expo, {Location, Permissions, Platform, MapView } from 'expo';
 import { StyleSheet, Dimensions, View, Text } from 'react-native';
-import midpointAlgo from './utils/midpoint'
+
 
 const styles = StyleSheet.create({
   container: {
@@ -14,99 +14,97 @@ const styles = StyleSheet.create({
   }
 });
 
-// let coords = [
-//   {
-//     latitude: 40.952411,
-//     longitude: -74.104963,
-//     latitudeDelta: LATITUDE_DELTA,
-//     longitudeDelta: LONGITUDE_DELTA,
-//   },
-//   {
-//     latitude: 40.764760,
-//     longitude: -73.920687,
-//     latitudeDelta: LATITUDE_DELTA,
-//     longitudeDelta: LONGITUDE_DELTA,
-//   },
-//   {
-//     latitude: 40.605848,
-//     longitude: -73.987360,
-//     latitudeDelta: LATITUDE_DELTA,
-//     longitudeDelta: LONGITUDE_DELTA,
-//   },
-//   {
-//     latitude: 40.598308,
-//     longitude: -73.976598,
-//     latitudeDelta: LATITUDE_DELTA,
-//     longitudeDelta: LONGITUDE_DELTA,
-//   },
-// ]
+let coords = [
+  {
+    latitude: 40.952411,
+    longitude: -74.104963
+  },
+  {
+    latitude: 40.764760,
+    longitude: -73.920687
+  },
+  {
+    latitude: 40.605848,
+    longitude: -73.987360
+  },
+  {
+    latitude: 40.598308,
+    longitude: -73.976598
+  },
+  {
+    latitude: 40.598308,
+    longitude: -73.986598
+  },
 
-// let { width, height } = Dimensions.get('window');
-// const ASPECT_RATIO = width / height;
-// const LATITUDE = 40.705043;
-// const LONGITUDE = -74.009032;
-// const LATITUDE_DELTA = 0.0922;
-// const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+]
+
+
+function getMidpoint (arrayOfCoords) {
+  let midpoint = {
+    latitude: 0,
+    longitude: 0
+  }
+
+  for (let i = 0; i < arrayOfCoords.length; i++) {
+    let individualLatitude = arrayOfCoords[i].latitude;
+    let individualLongitude = arrayOfCoords[i].longitude;
+
+    midpoint.latitude += individualLatitude;
+    midpoint.longitude += individualLongitude;
+  }
+
+  midpoint.latitude = midpoint.latitude / arrayOfCoords.length;
+  midpoint.longitude = midpoint.longitude / arrayOfCoords.length;
+
+  return midpoint
+}
+
+let { width, height } = Dimensions.get('window');
+const ASPECT_RATIO = width / height;
+const LATITUDE_DELTA = 0.0922;
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 export default class Map extends Component {
   constructor() {
     super();
     this.state = {
-      region:
-      [
+    regionCenter:
         {
-          latitude: 40.952411,
-          longitude: -74.104963,
-          latitudeDelta: 0.0922,
-          // longitudeDelta: LONGITUDE_DELTA,
-        },
-        {
-          latitude: 40.764760,
-          longitude: -73.920687,
-          latitudeDelta: 0.0922,
-          // longitudeDelta: LONGITUDE_DELTA,
-        },
-        {
-          latitude: 40.605848,
-          longitude: -73.987360,
-          latitudeDelta: 0.0922,
-          // longitudeDelta: LONGITUDE_DELTA,
-        },
-        {
-          latitude: 40.598308,
-          longitude: -73.976598,
-          latitudeDelta: 0.0922,
-          // longitudeDelta: LONGITUDE_DELTA,
-        },
-      ]
-
-      // {
-      //   latitude: LATITUDE,
-      //   longitude: LONGITUDE,
-      //   latitudeDelta: LATITUDE_DELTA,
-      //   longitudeDelta: LONGITUDE_DELTA,
-      // }
+          latitude: 40.7051,
+          longitude: -74.0092,
+        }
     }
   }
 
+  componentDidMount() {
+    let midpoint = getMidpoint(coords);
+    this.setState({regionCenter: midpoint})
+
+  };
+
   render() {
-    let midpoint = midpointAlgo(this.state.region);
+    const {regionCenter} = this.state
       return (
         <MapView
           style={ styles.container }
-          initialRegion={
-            midpoint
-          }
+          region={{
+            latitude: regionCenter.latitude,
+            longitude: regionCenter.longitude,
+            latitudeDelta: LATITUDE_DELTA,
+            longitudeDelta: LONGITUDE_DELTA
+          }}
         >
-        {this.state.region.map(coord =>
+        {coords.map((coord, i) =>
           (<MapView.Marker
-              key={coord.latitude}
+              key={i}
               coordinate={coord}
           />)
         )}
-        </MapView>
+        <MapView.Marker
+          coordinate={regionCenter}
+       />
+       </MapView>
       );
     }
-
 }
 

@@ -8,6 +8,7 @@ import store from './store';
 import Map from './components/Map';
 import MapTemp from './components/MapTemp';
 import EventView from './components/EventView';
+import './socket';
 
 const RootNavigator = StackNavigator({
   Main: {

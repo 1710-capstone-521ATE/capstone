@@ -10,13 +10,19 @@ import {
 } from 'react-native';
 
 export default class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+
+    };
+  }
   render() {
     return (
       <View style={styles.container}>
           <View style = {styles.logoConten}>
           <Text style = {styles.titleApp}>Welcome to 521ATE</Text>
           </View>
-          <LoginForm style ={{flex: 0}} />
+          <LoginForm style ={{flex: 0}} navigation={this.props.navigation} />
           <Text>OR</Text>
           <TouchableOpacity
             style = {styles.signupButtonContainer}

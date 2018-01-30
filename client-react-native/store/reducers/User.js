@@ -21,10 +21,13 @@ const removeUser = () => ({type: REMOVE_USER});
  * THUNK CREATORS
  */
 
-export const logIn = (user) => {
+export const logIn = (user, navigation) => {
   return (dispatch) => {
     axios.post(`${SERVER}/auth/login`, user)
-    .then(user => getUser(user.data))
+    .then(user => {
+      dispatch(getUser(user.data));
+      navigation.navigate('EventView');
+    })
     .catch(console.error)
   }
 }
@@ -53,10 +56,13 @@ export const logout = () =>
       })
       .catch(err => console.log(err))
 
-export const addNewUser = (user) => {
+export const addNewUser = (user, navigation) => {
     return  dispatch =>
     axios.post(`${SERVER}/api/users`, user)
-      .then(res => getUser(res.data))
+      .then(res => {
+        dispatch(getUser(res.data));
+        navigation.navigate('EventView');
+      })
       .catch(err => console.error(err))
 }
 

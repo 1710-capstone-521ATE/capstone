@@ -7,6 +7,7 @@ import SignUpFormContainer from './components/SignUpForm';
 import store from './store';
 import Map from './components/Map';
 import MapTemp from './components/MapTemp';
+import EventView from './components/EventView';
 
 const RootNavigator = StackNavigator({
   Main: {
@@ -32,6 +33,12 @@ const RootNavigator = StackNavigator({
     navigationOptions: {
       headerTitle: '(/ﾟДﾟ)/'
     }
+  },
+  EventView: {
+    screen: EventView,
+    navigationOptions: {
+      headerTitle: 'Event?'
+    }
   }
 });
 
@@ -39,7 +46,7 @@ export default class App extends React.Component {
   render() {
     return (
      <Provider store={store}>
-        <RootNavigator/>
+        <RootNavigator />
       </Provider>
     );
   }

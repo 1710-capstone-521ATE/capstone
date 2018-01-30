@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.17.1",
     "crypto": "^1.0.1",
     "koa": "^2.4.1",
     "koa-bodyparser": "^4.2.0",

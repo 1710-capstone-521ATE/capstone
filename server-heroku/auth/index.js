@@ -2,8 +2,6 @@ const Router = require('koa-router');
 const authRouter = new Router({prefix: '/auth'});
 
 authRouter.post('/login', async (ctx, next) => {
-  console.log(ctx.request.body.email)
-  console.log(ctx.request.body.password)
   let user = await ctx.db.models.user.findOne({
     where: {
       email: ctx.request.body.email
@@ -21,6 +19,7 @@ authRouter.post('/login', async (ctx, next) => {
     ctx.session.user = user.id;
     ctx.user = user;
     ctx.status = 200;
+    ctx.body = user;
   }
 })
 

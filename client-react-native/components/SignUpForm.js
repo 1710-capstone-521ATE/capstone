@@ -109,10 +109,10 @@ const styles = StyleSheet.create({
   },
 })
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     handleSubmit(state) {
-      dispatch(addNewUser(state))
+      dispatch(addNewUser(state, ownProps.navigation))
     }
   }
 }

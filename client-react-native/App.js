@@ -23,7 +23,7 @@ const RootNavigator = StackNavigator({
   Map: {
     screen: Map,
     navigationOptions: {
-      headerTitle: 'PLEASE WORK!'
+      headerTitle: '(/ﾟДﾟ)/'
     }
   }
 });

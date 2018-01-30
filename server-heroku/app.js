@@ -18,6 +18,8 @@ const CONFIG = {
   renew: false
 }
 
+// if (process.env.NODE_ENV !== 'production') require('./secrets');
+
 const startListening = async () => {
   await createApp();
   const server = app.listen(PORT, () => {

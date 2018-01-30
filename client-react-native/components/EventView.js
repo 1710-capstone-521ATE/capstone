@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, TextInput} from 'react-native';
 import { connect } from 'react-redux';
+import { fetchUsers } from '../store';
 
 class EventView extends Component {
   constructor(props) {
@@ -10,13 +11,17 @@ class EventView extends Component {
     }
   }
 
+  componentDidMount() {
+    this.props.loadUsers();
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Text>Hi {this.props.currentUser && this.props.currentUser.firstName}</Text>
         <TouchableOpacity
         style={styles.signupButtonContainer}
-        onPress={() => console.log('made it to events')}
+        onPress={() => this.props.navigation.navigate('AddUsers')}
         >
           <Text style={styles.loginbutton}>
             CREATE EVENT
@@ -104,4 +109,10 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(EventView);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadUsers: () => dispatch(fetchUsers())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventView);

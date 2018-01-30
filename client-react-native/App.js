@@ -5,7 +5,8 @@ import { StackNavigator } from 'react-navigation';
 import Login from './components/Login';
 import SignUpFormContainer from './components/SignUpForm';
 import store from './store'
-import Map from './components/Map';
+// import Map from './components/Map';
+import MapTemp from './components/MapTemp';
 
 const RootNavigator = StackNavigator({
   Main: {
@@ -20,8 +21,14 @@ const RootNavigator = StackNavigator({
       headerTitle: 'Signup'
     }
   },
-  Map: {
-    screen: Map,
+  // Map: {
+  //   screen: Map,
+  //   navigationOptions: {
+  //     headerTitle: '(/ﾟДﾟ)/'
+  //   }
+  // },
+  MapTemp: {
+    screen: MapTemp,
     navigationOptions: {
       headerTitle: '(/ﾟДﾟ)/'
     }

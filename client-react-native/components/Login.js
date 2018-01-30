@@ -28,7 +28,7 @@ export default class Login extends Component {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.signupButtonContainer}
-            onPress={() => this.props.navigation.navigate('Map')}
+            onPress={() => this.props.navigation.navigate('MapTemp')}
           >
             <Text style={styles.loginbutton}>
               GO TO MAP

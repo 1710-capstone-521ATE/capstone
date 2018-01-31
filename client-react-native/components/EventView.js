@@ -26,7 +26,7 @@ class EventView extends Component {
         onPress={() => this.props.navigation.navigate('AddUsers')}
         >
           <Text style={styles.loginbutton}>
-            {`userProps bro ${this.props.currentUser.toString()}`}
+            CREATE EVENT
           </Text>
         </TouchableOpacity>
         <Text>These Are Your Events</Text>

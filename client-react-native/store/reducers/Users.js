@@ -4,7 +4,7 @@ import { getEvent } from '../index';
 
 const GET_USERS = 'GET_USERS';
 
-const getUsers = function(users) {
+export const getUsers = function(users) {
   return {
     type: GET_USERS,
     users

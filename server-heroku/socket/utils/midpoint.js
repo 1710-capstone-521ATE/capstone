@@ -25,21 +25,18 @@ function getMidpoint (arrayOfCoords) {
   }
 
   for (let i = 0; i < arrayOfCoords.length; i++) {
-    let individualLatitude = arrayOfCoords[i].latitude;
-    let individualLongitude = arrayOfCoords[i].longitude;
+    let individualLatitude = Number(arrayOfCoords[i].latitude);
+    let individualLongitude = Number(arrayOfCoords[i].longitude);
 
     midpoint.latitude += individualLatitude;
     midpoint.longitude += individualLongitude;
   }
 
-  midpoint.latitude = midpoint.latitude / arrayOfCoords.length;
-  midpoint.longitude = midpoint.longitude / arrayOfCoords.length;
-
-  console.log(midpoint)
-
+  midpoint.latitude = (midpoint.latitude / arrayOfCoords.length).toString();
+  midpoint.longitude = (midpoint.longitude / arrayOfCoords.length).toString();
   return midpoint
 }
 
-getMidpoint(coords)
+//getMidpoint(coords)
 
 module.exports = getMidpoint;

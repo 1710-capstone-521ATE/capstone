@@ -4,6 +4,7 @@ const User = require('./user');
 const Group = require('./group');
 const Event = require('./event');
 const Cuisine = require('./cuisine');
+const GroupMembers = require('./groupMembers');
 
 User.belongsToMany(Group, { through: 'groupMembers' });
 Group.belongsToMany(User, { through: 'groupMembers' });
@@ -22,16 +23,7 @@ module.exports = {
   Event,
   User,
   Cuisine,
+  GroupMembers,
   db
 };
 
-
-// db.sync();
-
-// async function alpha() {
-//   let user = await User.create({email: 'sarahzhao25@gmail.com', firstName: 'Sarah', lastName: 'Zhao'});
-//   let event = await Event.create({});
-//   event.setUser(user);
-// }
-
-// alpha();

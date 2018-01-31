@@ -7,6 +7,7 @@ const bodyParser = require('koa-bodyparser');
 const path = require('path');
 // const api = require('./api');
 const session = require('koa-session');
+const passport = require('koa-passport');
 
 const CONFIG = {
   key: 'koa:sess',
@@ -18,7 +19,14 @@ const CONFIG = {
   renew: false
 }
 
-// if (process.env.NODE_ENV !== 'production') require('./secrets');
+if (process.env.NODE_ENV !== 'production') require('./secrets');
+
+passport.serializeUser((user, done) => { done(null, user.id); });
+
+passport.deserializeUser(async (id, done) => {
+  let user = await db.models.user.findById(id);
+  done(null, user);
+});
 
 const startListening = async () => {
   await createApp();
@@ -38,7 +46,12 @@ const createApp = () => {
   });
   app.use(bodyParser());
   app.use(session(CONFIG, app));
+
+  app.use(passport.initialize());
+  app.use(passport.session());
+
   app.use(require('./auth').routes());
+
   app.use(require('./api'));
 };
 

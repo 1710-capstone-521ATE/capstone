@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {KeyboardAvoidingView, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import { addNewUser } from '../store'
+import { auth } from '../store'
 
 class SignUpForm extends Component {
   constructor(props) {
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     handleSubmit(state) {
-      dispatch(addNewUser(state, ownProps.navigation))
+      dispatch(auth(state, ownProps.navigation, 'signup'))
     }
   }
 }

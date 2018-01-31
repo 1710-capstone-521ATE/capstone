@@ -6,10 +6,14 @@ import {
   Text,
   View,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  Linking
 } from 'react-native';
+import { connect } from 'react-redux';
+import { googleLogin } from '../store';
+import {SERVER} from '../serverInfo';
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,6 +27,14 @@ export default class Login extends Component {
           <Text style = {styles.titleApp}>Welcome to 521ATE</Text>
           </View>
           <LoginForm style ={{flex: 0}} navigation={this.props.navigation} />
+          <TouchableOpacity
+            style = {styles.redButtonContainer}
+            onPress={() => Linking.openURL(`${SERVER}/auth/google`).then(user => googleLogin(user))}
+          >
+          <Text style ={styles.loginbutton}>
+          LOGIN WITH GOOGLE
+          </Text>
+          </TouchableOpacity>
           <Text>OR</Text>
           <TouchableOpacity
             style = {styles.signupButtonContainer}
@@ -90,4 +102,18 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginBottom: 10
   },
+  redButtonContainer: {
+    backgroundColor: '#FF0000',
+    paddingVertical: 10,
+    marginBottom: 10,
+    width: 300
+  }
 });
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    googleLogin: (user) => dispatch(googleLogin(user, ownProps.navigation))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Login);

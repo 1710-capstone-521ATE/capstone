@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { SERVER } from '../../serverInfo';
+import { getEvent } from '../index';
 
 const GET_USERS = 'GET_USERS';
 
@@ -24,10 +25,12 @@ export function createAndFetchGroup(userIds, hostId) {
     return axios.post(`${SERVER}/api/groups`, {userIds: userIds.concat(hostId)})
     .then(group => {
       invitedUsers = group.data.users;
-      console.log(invitedUsers)
       return axios.post(`${SERVER}/api/groups/${group.data.id}/events`, {hostId});
     })
-    .then(event => dispatch(getUsers(invitedUsers)))
+    .then(event => {
+      dispatch(getUsers(invitedUsers)); //updates the users array with invite list
+      dispatch(getEvent(event.code)); //updates the event reducer with event hash code
+    })
     .catch(console.error);
   }
 }

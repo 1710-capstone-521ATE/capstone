@@ -12,5 +12,10 @@ module.exports = (io) => {
       console.log(`Connection ${socket.id} has left the eatery!`)
     })
 
+    socket.on('createRoom', ({ eventId, hostId, groupId, latitude, longitude }) => {
+      // Unsure about restfulness
+      axios.put(`/api/groups/${groupId}/events/${eventId}`, { userId: hostId, latitude, longitude })
+    })
+
   });
 };

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { SERVER } from '../../serverInfo';
-import { getEvent } from '../store';
+import { getEvent } from '../index';
 
 const GET_USERS = 'GET_USERS';
 

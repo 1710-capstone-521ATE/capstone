@@ -1,5 +1,5 @@
 import io from 'socket.io-client';
-const SERVER = 'http://172.16.22.226:5218';
+import {SERVER} from './serverInfo';
 
 const socket = io(SERVER)
 

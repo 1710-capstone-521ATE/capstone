@@ -2,14 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View, ScrollView, Button, TouchableOpacity } from 'react-native';
 import { createAndFetchGroup } from '../store';
+import socket from '../socket'
+import _getLocationAsync from '../Utils/location'
 
 class AddUsers extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      newGroup: []
+      newGroup: [],
+      location: {},
+      locationResult: ''
     };
     this.buttonHandler = this.buttonHandler.bind(this);
+
   }
 
   buttonHandler(user) {
@@ -21,8 +26,13 @@ class AddUsers extends Component {
     }
   }
 
-  addFriendsHandler(userIds, hostId) {
-    this.props.createGroup(userIds, hostId);
+  async addFriendsHandler(userIds, hostId) {
+    await this.props.createGroup(userIds, hostId);
+    const {event} = this.props;
+    const userLocation = await _getLocationAsync();
+    const data = {...userLocation, hostId, event}
+
+    socket.emit('createRoom', data);
   }
 
   render() {
@@ -58,7 +68,8 @@ class AddUsers extends Component {
 const mapStateToProps = (state) => {
   return {
     users: state.users,
-    user: state.user
+    user: state.user,
+    event: state.event
   }
 }
 

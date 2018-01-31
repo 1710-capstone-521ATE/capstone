@@ -12,9 +12,14 @@ module.exports = (io) => {
       console.log(`Connection ${socket.id} has left the eatery!`)
     })
 
-    socket.on('createRoom', ({ eventId, hostId, groupId, latitude, longitude }) => {
+    socket.on('createRoom', async ({ eventId, hostId, groupId, latitude, longitude }) => {
       // Unsure about restfulness
-      axios.put(`/api/groups/${groupId}/events/${eventId}`, { userId: hostId, latitude, longitude })
+      let currentGroupStatusArr = await axios.put(`/api/groups/${groupId}/events/${eventId}`, { userId: hostId, latitude, longitude });
+      if (currentGroupStatusArr.length) {
+        socket.join(`${eventId}`); //join the event with that event ID as its name
+        io.to(`${eventId}`).emit('currentStatus', currentGroupStatusArr); //send back the array
+      }
+
     })
 
   });

@@ -19,7 +19,6 @@ groupRouter.post('/', async (ctx, next) => {
 groupRouter.post('/:id/events', async (ctx, next) => {
   let newEvent = await ctx.db.models.event.create({groupId: ctx.params.id, hostId: ctx.request.body.hostId})
   ctx.body = newEvent;
-  //have to add to the event schema - a hash code.
 })
 
 module.exports = groupRouter;

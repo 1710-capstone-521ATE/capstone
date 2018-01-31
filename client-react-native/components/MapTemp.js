@@ -12,6 +12,7 @@ export default class App extends Component {
   state = {
       location: {coords: { latitude: 40.952411, longitude: -74.104963}},
     };
+    
 
     componentDidMount() {
       this._getLocationAsync();

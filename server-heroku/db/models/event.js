@@ -19,7 +19,7 @@ const Event = db.define('event', {
 })
 
 const setCode = (event) => {
-    event.code = crypto.randomBytes(8).toString('hex');
+    event.code = crypto.randomBytes(3).toString('hex');
 }
 
 Event.beforeCreate(setCode);

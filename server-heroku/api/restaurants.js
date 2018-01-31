@@ -3,7 +3,7 @@ const restRouter = new Router({ prefix: '/api/restaurants' });
 const request = require('koa-http-request');
 const app = new Router();
 const axios = require('axios');
-const { yelpClientId } = require('../secrets')
+const { yelpKey } = require('../secrets')
 
 
 restRouter.get('/:lat/:long', async(ctx, next) => {
@@ -16,7 +16,7 @@ restRouter.get('/:lat/:long', async(ctx, next) => {
       url: url,
       headers: {
         Authorization:
-        `BEARER ${yelpClientId}`
+        `BEARER ${yelpKey}`
       }
     }
   ).then((restaurants) => {return restaurants.data.businesses})

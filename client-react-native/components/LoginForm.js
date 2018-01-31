@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { logIn } from '../store';
+import { auth } from '../store';
 import {
   AppRegistry,
   StyleSheet,
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    login: (user) => dispatch(logIn(user, ownProps.navigation))
+    login: (user) => dispatch(auth(user, ownProps.navigation, 'login'))
   }
 }
 

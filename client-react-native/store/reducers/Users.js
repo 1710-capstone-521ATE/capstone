@@ -24,7 +24,6 @@ export function createAndFetchGroup(userIds, hostId) {
     return axios.post(`${SERVER}/api/groups`, {userIds: userIds.concat(hostId)})
     .then(group => {
       invitedUsers = group.data.users;
-      console.log(invitedUsers)
       return axios.post(`${SERVER}/api/groups/${group.data.id}/events`, {hostId});
     })
     .then(event => dispatch(getUsers(invitedUsers)))

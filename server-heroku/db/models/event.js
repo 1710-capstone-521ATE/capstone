@@ -15,6 +15,10 @@ const Event = db.define('event', {
   code: {
     type: Sequelize.STRING,
     unique: true
+  },
+  startEvent: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
 })
 

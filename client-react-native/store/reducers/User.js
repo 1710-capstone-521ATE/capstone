@@ -1,5 +1,5 @@
 import axios from 'axios';
-const SERVER = 'http://172.16.27.86:5218'
+import { SERVER } from '../../serverInfo';
 
 /**
  * ACTION TYPES

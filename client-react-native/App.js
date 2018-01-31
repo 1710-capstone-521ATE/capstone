@@ -8,6 +8,8 @@ import store from './store';
 import Map from './components/Map';
 import MapTemp from './components/MapTemp';
 import EventView from './components/EventView';
+import AddUsers from './components/AddUsers';
+import './socket';
 
 const RootNavigator = StackNavigator({
   Main: {
@@ -38,6 +40,12 @@ const RootNavigator = StackNavigator({
     screen: EventView,
     navigationOptions: {
       headerTitle: 'Event?'
+    }
+  },
+  AddUsers: {
+    screen: AddUsers,
+    navigationOptions: {
+      headerTitle: 'AddUsers'
     }
   }
 });

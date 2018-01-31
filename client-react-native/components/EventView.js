@@ -16,6 +16,7 @@ class EventView extends Component {
   }
 
   render() {
+    let {currentUser} = this.props;
     return (
       <View style={styles.container}>
         <Text>Hi {this.props.currentUser && this.props.currentUser.firstName}</Text>
@@ -27,6 +28,25 @@ class EventView extends Component {
             CREATE EVENT
           </Text>
         </TouchableOpacity>
+        <Text>These Are Your Events</Text>
+        {
+          currentUser.events && currentUser.events.map(event => {
+            if (event) {
+              return (
+                  <TouchableOpacity
+                    key={event.id}
+                    style={styles.signupButtonContainer}
+                    onPress={() => console.log(this.state)}
+                  >
+                  <Text style={styles.loginbutton}>
+                    {`${event.code}`}
+                  </Text>
+                  </TouchableOpacity>
+              )} else {
+              return null
+            }
+        })}
+
         <TextInput
           name="eventCode"
           placeholder="Type CODE Here"

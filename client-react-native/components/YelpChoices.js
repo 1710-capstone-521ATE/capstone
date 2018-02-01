@@ -13,17 +13,35 @@ class YelpChoices extends Component {
   }
 
   componentDidMount() {
-
+    console.log(this.state.restaurants)
   }
 
   render() {
+    console.log("restaurants: ", this.props.restaurants)
    
     return (
       <View>
-      <Text>
-      HELLO FRONDS
-      </Text>
-      <Image style={styles.corgo} source={{uri: 'https://i.imgur.com/k9i7YLN.jpg'}} />
+        {(this.props.restaurants.length > 0)
+        
+          ?
+        
+        <Text>
+        {this.props.restaurants.map((restaurant) => {
+          console.log(restaurant.name)
+        })}
+        </Text>
+          
+          :
+        
+        <View>
+        <Text>
+        HELLO FRONDS
+        </Text>
+        <Image style={styles.corgo} source={{uri: 'https://i.imgur.com/k9i7YLN.jpg'}} />
+        
+        </View>
+      }
+      
       </View>
     )
   }
@@ -38,7 +56,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-
+    restaurants: state.restaurants
   }
 }
 
@@ -48,4 +66,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(null, null)(YelpChoices);
+export default connect(mapStateToProps, null)(YelpChoices);

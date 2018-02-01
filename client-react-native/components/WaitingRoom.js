@@ -19,12 +19,13 @@ componentDidMount(){
 
 
 render() {
+    console.log(this.props.restaurants)
     return(
         <View style = {styles.container}>
         <Text>
             Hi!
         </Text>
-        <Map style = {styles.map}/>
+        <Map />
         <YelpChoices />
         </View>
     )
@@ -34,11 +35,13 @@ render() {
 const styles = StyleSheet.create({
     container: {
         flex: 1
-    },
-    map: {
-
     }
-
 })
+
+const mapStateToProps = (state) => {
+    return{
+        restaurants: state.restaurants
+    }
+}
 
 export default connect(null, null)(WaitingRoom)

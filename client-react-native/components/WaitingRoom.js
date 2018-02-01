@@ -13,18 +13,15 @@ class WaitingRoom extends Component {
         }
     }
 componentDidMount(){
-    
+
   }
 
 
 
 render() {
-    console.log(this.props.restaurants)
+
     return(
         <View style = {styles.container}>
-        <Text>
-            Hi!
-        </Text>
         <Map />
         <YelpChoices />
         </View>

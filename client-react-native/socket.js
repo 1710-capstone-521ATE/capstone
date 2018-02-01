@@ -12,12 +12,8 @@ socket.on('connect', () => {
 socket.on('currentStatus', ({users, midpoint}) => {
   if (midpoint.latitude) {
     store.dispatch(fetchRestaurants(midpoint));
-    store.dispatch(getUsers(users));
-   // store.dispatch ...=> send to the next view. The above is currently a placeholder.
   }
-  else {
     store.dispatch(getUsers(users));
-  }
 })
 
 export default socket;

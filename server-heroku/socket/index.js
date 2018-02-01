@@ -1,4 +1,5 @@
 const axios = require('axios');
+const { SERVER } = require('../secrets.js');
 
 module.exports = (io) => {
   io.on('connection', (socket) => {
@@ -8,9 +9,9 @@ module.exports = (io) => {
       console.log(`Connection ${socket.id} has left the eatery!`)
     })
 
-    socket.on('createRoom', async ({ eventId, hostId, groupId, latitude, longitude }) => {
-      // Unsure about restfulness
-      let {users, midpoint} = await axios.put(`/api/groups/${groupId}/events/${eventId}`, { userId: hostId, latitude, longitude });
+    socket.on('joinRoom', async ({groupId, eventId, hostId, latitude, longitude}) => {
+      let body = await axios.put(`${SERVER}/api/groups/${groupId}/events/${eventId}`, { userId: hostId, latitude, longitude });
+      let {users, midpoint} = body.data;
       if (users.length) {
         socket.join(`${eventId}`); //join the event with that event ID as its name
         io.to(`${eventId}`).emit('currentStatus', {users, midpoint}); //send back the array

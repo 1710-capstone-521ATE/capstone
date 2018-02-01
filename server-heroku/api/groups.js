@@ -26,8 +26,12 @@ groupRouter.post('/:id/events', async (ctx, next) => {
 We are updating the User's latitude and longitude when they join an event.
 Currently groups can only have one event, otherwise there will be two latitudes and longitudes
 */
-groupRouter.put('/:id/events/:eventId', async (ctx, next) => {
-  let event = await ctx.db.models.event.findById(ctx.params.eventId);
+groupRouter.put('/:id/events/:eventCode', async (ctx, next) => {
+  let event = await ctx.db.models.event.findOne({
+    where: {
+      code: ctx.params.eventCode
+    }
+  });
   let { userId, latitude, longitude } = ctx.request.body;
   ctx.body = {users: [], midpoint: {}};
   //ensures the event has NOT started, and that the groupId matches the event's groupId

@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, TextInput} from 'react-native';
 import { connect } from 'react-redux';
 import { fetchUsers, fetchUserEvents } from '../store';
+import socket from '../socket';
+import _getLocationAsync from '../Utils/location'
 
 
 class EventView extends Component {
@@ -10,6 +12,8 @@ class EventView extends Component {
     this.state = {
       eventCode: ''
     }
+    this.joinRoomHandler = this.joinRoomHandler.bind(this);
+    this.invitationHandler = this.invitationHandler.bind(this);
   }
 
   async componentDidMount() {
@@ -17,9 +21,22 @@ class EventView extends Component {
     this.props.loadUserEvents(this.props.currentUser.id);
   }
 
+  async joinRoomHandler (user, event) {
+    const userLocation = await _getLocationAsync();
+    const data = {...userLocation, groupId: event.groupId, userId: user.id, eventCode: event.code}
+    socket.emit('joinRoom', data);
+    this.props.navigation.navigate('WaitingRoom')
+  }
+
+  invitationHandler (user, events, eventCode) {
+    let verified = events.find(event => event.code === eventCode.toLowerCase())
+    if (verified) this.joinRoomHandler(user, verified)
+    else this.setState({eventCode: ''});
+  }
+
   render() {
-    let {userEvents} = this.props;
-    this.props.currentUser && console.log('what them props user bro?', this.props.currentUser)
+    let {userEvents, currentUser} = this.props;
+    // this.props.currentUser && console.log('what them props user bro?', this.props.currentUser)
     return (
       <View style={styles.container}>
         <Text>Hi {this.props.currentUser && this.props.currentUser.firstName}</Text>
@@ -39,10 +56,11 @@ class EventView extends Component {
                   <TouchableOpacity
                     key={event.id}
                     style={styles.signupButtonContainer}
-                    onPress={() => this.props.navigation.navigate('WaitingRoom')}
+
+                    onPress={() => this.joinRoomHandler(currentUser, event)}
                   >
                   <Text style={styles.loginbutton}>
-                    {`${event.code}`}
+                    {`Please join ${event.code}`}
                   </Text>
                   </TouchableOpacity>
               )} else {
@@ -54,11 +72,12 @@ class EventView extends Component {
           name="eventCode"
           placeholder="Type CODE Here"
           style={styles.input}
+          value={this.state.eventCode}
           onChangeText={(eventCode) => {this.setState({ eventCode })}}
         />
         <TouchableOpacity
           style={styles.signupButtonContainer}
-          onPress={() => console.log(this.state)}
+          onPress={() => this.invitationHandler(currentUser, userEvents, this.state.eventCode)}
         >
           <Text style={styles.loginbutton}>
             JOIN EVENT

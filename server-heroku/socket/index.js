@@ -9,12 +9,13 @@ module.exports = (io) => {
       console.log(`Connection ${socket.id} has left the eatery!`)
     })
 
-    socket.on('joinRoom', async ({groupId, eventId, hostId, latitude, longitude}) => {
-      let body = await axios.put(`${SERVER}/api/groups/${groupId}/events/${eventId}`, { userId: hostId, latitude, longitude });
+    socket.on('joinRoom', async ({groupId, eventCode, userId, latitude, longitude}) => {
+      let body = await axios.put(`${SERVER}/api/groups/${groupId}/events/${eventCode}`, { userId: userId, latitude, longitude });
       let {users, midpoint} = body.data;
+
       if (users.length) {
-        socket.join(`${eventId}`); //join the event with that event ID as its name
-        io.to(`${eventId}`).emit('currentStatus', {users, midpoint}); //send back the array
+        socket.join(`${eventCode}`); //join the event with that event ID as its name
+        io.to(`${eventCode}`).emit('currentStatus', {users, midpoint}); //send back the array
       }
 
     })

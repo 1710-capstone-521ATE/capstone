@@ -13,6 +13,7 @@ class EventView extends Component {
       eventCode: ''
     }
     this.joinRoomHandler = this.joinRoomHandler.bind(this);
+    this.invitationHandler = this.invitationHandler.bind(this);
   }
 
   async componentDidMount() {
@@ -26,7 +27,7 @@ class EventView extends Component {
     socket.emit('joinRoom', data);
   }
 
-  checkInvitation (user, events, eventCode) {
+  invitationHandler (user, events, eventCode) {
     let verified = events.find(event => event.code === eventCode.toLowerCase())
     if (verified) this.joinRoomHandler(user, verified)
     else this.setState({eventCode: ''});
@@ -74,7 +75,7 @@ class EventView extends Component {
         />
         <TouchableOpacity
           style={styles.signupButtonContainer}
-          onPress={() => this.checkInvitation(currentUser, userEvents, this.state.eventCode)}
+          onPress={() => this.invitationHandler(currentUser, userEvents, this.state.eventCode)}
         >
           <Text style={styles.loginbutton}>
             JOIN EVENT

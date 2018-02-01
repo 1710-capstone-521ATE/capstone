@@ -30,7 +30,7 @@ export function createAndFetchGroup(userIds, hostId) {
     })
     .then(event => {
       dispatch(getUsers(invitedUsers)); //updates the users array with invite list
-      dispatch(getEvent({eventId: event.data.code, groupId: newGroupId})); //updates the event reducer with event hash code
+      dispatch(getEvent({eventCode: event.data.code, groupId: newGroupId})); //updates the event reducer with event hash code
     })
     .catch(console.error);
   }

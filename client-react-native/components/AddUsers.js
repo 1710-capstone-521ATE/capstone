@@ -14,6 +14,7 @@ class AddUsers extends Component {
       locationResult: ''
     };
     this.buttonHandler = this.buttonHandler.bind(this);
+    this.addFriendsHandler = this.addFriendsHandler.bind(this);
 
   }
 
@@ -33,6 +34,7 @@ class AddUsers extends Component {
     const data = {...userLocation, groupId: event.groupId, hostId: hostId, eventId: event.eventId}
 
     socket.emit('joinRoom', data);
+    this.props.navigation.navigate('WaitingRoom')
 
   }
 

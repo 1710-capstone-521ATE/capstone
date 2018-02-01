@@ -35,7 +35,7 @@ class Map extends Component {
     const {regionCenter} = this.state;
     const {users, restaurants} = this.props;
     let arrivedUsers = users.filter(user => user.coords && user.coords.latitude !== null);
-    const pinColors = ['plum', 'teal', 'orange', 'green', 'yellow', 'tan', 'gold', 'indigo', 'wheat', 'linen', 'tomato']
+    const pinColors = ['plum', 'teal', 'orange', 'green', 'yellow', 'tan', 'gold', 'indigo', 'wheat', 'linen', 'tomato'];
     let randPinColor = pinColors[Math.floor(Math.random() * pinColors.length)];
 
       return (
@@ -58,9 +58,14 @@ class Map extends Component {
               pinColor={randPinColor}
           />)}
         )}
-        <MapView.Marker
-          coordinate={regionCenter}
-       />
+        {restaurants.slice(0, 5).map(restaurant => {
+          return (<MapView.Marker
+              key={restaurant.id}
+              coordinate={restaurant.coordinates}
+              title={restaurant.name}
+              pinColor={'indigo'}
+          />)}
+        )}
        </MapView>
       );
     }

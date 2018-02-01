@@ -6,7 +6,6 @@ import Login from './components/Login';
 import SignUpFormContainer from './components/SignUpForm';
 import store from './store';
 import Map from './components/Map';
-import MapTemp from './components/MapTemp';
 import EventView from './components/EventView';
 import AddUsers from './components/AddUsers';
 import WaitingRoom from './components/WaitingRoom';
@@ -28,12 +27,6 @@ const RootNavigator = StackNavigator({
   },
   Map: {
     screen: Map,
-    navigationOptions: {
-      headerTitle: '(/ﾟДﾟ)/'
-    }
-  },
-  MapTemp: {
-    screen: MapTemp,
     navigationOptions: {
       headerTitle: '(/ﾟДﾟ)/'
     }

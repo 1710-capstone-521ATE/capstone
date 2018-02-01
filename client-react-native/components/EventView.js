@@ -17,7 +17,7 @@ class EventView extends Component {
 
   render() {
     let {currentUser} = this.props;
-    console.log('what them props user bro?', this.props.currentUser)
+    this.props.currentUser && console.log('what them props user bro?', this.props.currentUser)
     return (
       <View style={styles.container}>
         <Text>Hi {this.props.currentUser && this.props.currentUser.firstName}</Text>

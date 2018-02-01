@@ -29,6 +29,21 @@ userRouter.get('/:id', async (ctx, next) => {
   await next();
 })
 
+userRouter.get('/:id/groups/events', async (ctx, next) => {
+  let userModel = ctx.db.models.user;
+  let eventModel = ctx.db.models.event;
+
+  let groupModel = ctx.db.models.groups;
+  const testGroups = await ctx.state.user.getGroups();
+  const testEvents = await Promise.all(testGroups.map((group) => {
+    return eventModel.findAll({where: {groupId : group.id}})
+  }))
+  const eventArray = [].concat(...testEvents)
+  ctx.body = eventArray
+  console.log(ctx.body)
+
+})
+
 userRouter.get('/', async (ctx, next) => {
   let userModel = ctx.db.models.user;
   ctx.body = await userModel.findAll();

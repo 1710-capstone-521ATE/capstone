@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 import {SERVER} from './serverInfo';
-import store, { getUsers} from './store';
+import store, { getUsers, getRestaurants} from './store';
 
 const socket = io(SERVER)
 
@@ -12,6 +12,7 @@ socket.on('connect', () => {
 socket.on('currentStatus', (currentGroupStatusArr) => {
   let midpoint = currentGroupStatusArr.filter(points => points.id === 'midpoint')[0];
   if (midpoint) {
+   // store.dispatch(getRestaurants(midpoint));
     store.dispatch(getUsers(currentGroupStatusArr))
    // store.dispatch ...=> send to the next view. The above is currently a placeholder.
   }

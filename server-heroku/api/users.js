@@ -39,8 +39,7 @@ userRouter.get('/:id/groups/events', async (ctx, next) => {
     return eventModel.findAll({where: {groupId : group.id}})
   }))
   const eventArray = [].concat(...testEvents)
-  ctx.body = eventArray
-  console.log(ctx.body)
+  ctx.body = eventArray;
 
 })
 

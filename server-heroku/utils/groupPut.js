@@ -37,6 +37,37 @@ function getMidpoint (arrayOfCoords) {
   return midpoint
 }
 
-//getMidpoint(coords)
+function addMidPointToCTX(usersArr) {
+  const coordArr = usersArr.map(user => {
+    let userCoords = {
+      latitude: user.coords.latitude,
+      longitude: user.coords.longitude
+    }
+    return userCoords;
+  });
+  return getMidpoint(coordArr);
+}
 
-module.exports = getMidpoint;
+async function fetchGroupUsers(group) {
+  let users = await group.getUsers();
+  return users.map(user => {
+    let userObj =
+    {
+      id: user.id,
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      coords: {
+        latitude: user.groupMembers.latitude,
+        longitude: user.groupMembers.longitude
+      }
+    }
+    return userObj;
+  });
+}
+
+module.exports = {
+  getMidpoint,
+  addMidPointToCTX,
+  fetchGroupUsers
+};

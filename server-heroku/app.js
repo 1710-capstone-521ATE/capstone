@@ -8,6 +8,7 @@ const path = require('path');
 // const api = require('./api');
 const session = require('koa-session');
 const passport = require('koa-passport');
+const logger = require('koa-logger');
 
 const CONFIG = {
   key: 'koa:sess',
@@ -44,6 +45,7 @@ const createApp = () => {
     ctx.db = db;
     await next();
   });
+  app.use(logger());
   app.use(bodyParser());
   app.use(session(CONFIG, app));
 

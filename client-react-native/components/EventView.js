@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, TextInput} from 'react-native';
 import { connect } from 'react-redux';
-import { fetchUsers } from '../store';
+import { fetchUsers, fetchUserEvents } from '../store';
+
 
 class EventView extends Component {
   constructor(props) {
@@ -11,11 +12,14 @@ class EventView extends Component {
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.props.loadUsers();
+    this.props.loadUserEvents(this.props.currentUser.id);
   }
 
   render() {
+    let {userEvents} = this.props;
+    this.props.currentUser && console.log('what them props user bro?', this.props.currentUser)
     return (
       <View style={styles.container}>
         <Text>Hi {this.props.currentUser && this.props.currentUser.firstName}</Text>
@@ -27,6 +31,25 @@ class EventView extends Component {
             CREATE EVENT
           </Text>
         </TouchableOpacity>
+        <Text>These Are Your Events</Text>
+        {
+          userEvents && userEvents.map(event => {
+            if (event) {
+              return (
+                  <TouchableOpacity
+                    key={event.id}
+                    style={styles.signupButtonContainer}
+                    onPress={() => console.log(this.state)}
+                  >
+                  <Text style={styles.loginbutton}>
+                    {`${event.code}`}
+                  </Text>
+                  </TouchableOpacity>
+              )} else {
+              return null
+            }
+        })}
+
         <TextInput
           name="eventCode"
           placeholder="Type CODE Here"
@@ -105,13 +128,15 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    currentUser: state.user
+    currentUser: state.user,
+    userEvents: state.userEvents
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loadUsers: () => dispatch(fetchUsers())
+    loadUsers: () => dispatch(fetchUsers()),
+    loadUserEvents: (id) => dispatch(fetchUserEvents(id))
   }
 }
 

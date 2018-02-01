@@ -5,8 +5,9 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import user from './reducers/User';
 import users from './reducers/Users';
 import event from './reducers/Event';
+import userEvents from './reducers/UserEvents'
 
-const reducer = combineReducers({user, users, event})
+const reducer = combineReducers({user, users, event, userEvents})
 const middleware = composeWithDevTools(applyMiddleware(thunkMiddleware, createLogger({collapsed: true})))
 
 const store = createStore(reducer, middleware)
@@ -15,3 +16,4 @@ export default store
 export * from './reducers/User';
 export * from './reducers/Users';
 export * from './reducers/Event';
+export * from './reducers/UserEvents';

@@ -16,7 +16,8 @@ authRouter.post('/login', async (ctx, next) => {
   let user = await ctx.db.models.user.findOne({
     where: {
       email: ctx.request.body.email
-    }
+    },
+    include: {all: true}
   })
   if (!user) {
     ctx.status = 401;
@@ -38,7 +39,8 @@ authRouter.post('/signup', async (ctx, next) => {
   let repeatedUser = await ctx.db.models.user.findOne({
     where: {
       email: ctx.request.body.email
-    }
+    },
+    include: {all: true}
   });
   if (repeatedUser) {
     ctx.status = 401;

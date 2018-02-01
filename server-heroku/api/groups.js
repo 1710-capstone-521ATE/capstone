@@ -59,21 +59,27 @@ groupRouter.put('/:id/events/:eventId', async (ctx, next) => {
     //this checks that if everyone has responded (updated their lat/long), then the event will start AND the midpoint is calculated.
     if (!usersArr.filter(user => !user.groupMembers.latitude).length) {
       await event.update({ startEvent: true });
-      const coordArr = usersArr.map(user => {
-        let userCoords = {
-          latitude: user.groupMembers.latitude,
-          longitude: user.groupMembers.longitude
-        }
-        return userCoords;
-      });
-      let midpoint = getMidpoint(coordArr);
-      ctx.body = ctx.body.concat({
-        id: 'midpoint', //separating midpoint from users
-        firstName: 'Midpoint',
-        coords: midpoint
-      })
+      let midPoint = addMidPointToCTX(usersArr);
+      ctx.body = ctx.body.concat(midPoint);
     }
   }
 })
+
+function addMidPointToCTX(usersArr) {
+  const coordArr = usersArr.map(user => {
+    let userCoords = {
+      latitude: user.groupMembers.latitude,
+      longitude: user.groupMembers.longitude
+    }
+    return userCoords;
+  });
+  let midpoint = getMidpoint(coordArr);
+  let midpointObj = {
+    id: 'midpoint', //separating midpoint from users
+    firstName: 'Midpoint',
+    coords: midpoint
+  }
+  return midpointObj;
+}
 
 module.exports = groupRouter;

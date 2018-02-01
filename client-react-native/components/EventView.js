@@ -25,6 +25,7 @@ class EventView extends Component {
     const userLocation = await _getLocationAsync();
     const data = {...userLocation, groupId: event.groupId, userId: user.id, eventCode: event.code}
     socket.emit('joinRoom', data);
+    this.props.navigation.navigate('WaitingRoom')
   }
 
   invitationHandler (user, events, eventCode) {
@@ -55,6 +56,7 @@ class EventView extends Component {
                   <TouchableOpacity
                     key={event.id}
                     style={styles.signupButtonContainer}
+
                     onPress={() => this.joinRoomHandler(currentUser, event)}
                   >
                   <Text style={styles.loginbutton}>

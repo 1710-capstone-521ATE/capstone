@@ -9,6 +9,8 @@ import Map from './components/Map';
 import MapTemp from './components/MapTemp';
 import EventView from './components/EventView';
 import AddUsers from './components/AddUsers';
+import WaitingRoom from './components/WaitingRoom';
+import YelpChoices from './components/YelpChoices';
 import './socket';
 
 const RootNavigator = StackNavigator({
@@ -46,6 +48,18 @@ const RootNavigator = StackNavigator({
     screen: AddUsers,
     navigationOptions: {
       headerTitle: 'AddUsers'
+    }
+  },
+  WaitingRoom: {
+    screen: WaitingRoom,
+    navigationOptions: {
+      headerTitle: 'Waiting Room'
+    }
+  },
+  YelpChoices: {
+    screen: YelpChoices,
+    navigationOptions: {
+      headerTitle: 'Yelp Choices'
     }
   }
 });

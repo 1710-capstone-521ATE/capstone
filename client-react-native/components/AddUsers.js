@@ -30,7 +30,7 @@ class AddUsers extends Component {
     await this.props.createGroup(userIds, hostId);
     const {event} = this.props;
     const userLocation = await _getLocationAsync();
-    const data = {...userLocation, groupId: event.groupId, hostId: hostId, eventId: event.eventId}
+    const data = {...userLocation, groupId: event.groupId, userId: hostId, eventCode: event.eventCode}
 
     socket.emit('joinRoom', data);
 

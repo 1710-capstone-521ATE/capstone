@@ -33,6 +33,7 @@ class AddUsers extends Component {
     const data = {...userLocation, hostId, event}
 
     socket.emit('createRoom', data);
+
   }
 
   render() {

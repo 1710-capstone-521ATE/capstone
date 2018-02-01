@@ -17,8 +17,16 @@ userRouter.put('/:id', async(ctx, next) => {
   ctx.status = 418;
 })
 
-userRouter.get('/:id', (ctx, next) => {
-  ctx.body = ctx.state.user
+userRouter.get('/:id', async (ctx, next) => {
+  let userModel = ctx.db.models.user;
+  ctx.state.user = await userModel.findOne({
+    where: {
+      id: +ctx.params.id
+    },
+    include: {all: true}
+  });
+  ctx.body = ctx.state.user;
+  await next();
 })
 
 userRouter.get('/', async (ctx, next) => {

@@ -39,7 +39,7 @@ class EventView extends Component {
                   <TouchableOpacity
                     key={event.id}
                     style={styles.signupButtonContainer}
-                    onPress={() => console.log(this.state)}
+                    onPress={() => this.props.navigation.navigate('WaitingRoom')}
                   >
                   <Text style={styles.loginbutton}>
                     {`${event.code}`}

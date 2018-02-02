@@ -11,7 +11,8 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { googleLogin } from '../store';
-import {SERVER} from '../serverInfo';
+import { SERVER } from '../serverInfo';
+import { Container, Header, Content, Icon, Button } from 'native-base'
 
 class Login extends Component {
   constructor(props) {
@@ -23,27 +24,30 @@ class Login extends Component {
   render() {
     return (
       <View style={styles.container}>
-          <View style = {styles.logoConten}>
-          <Text style = {styles.titleApp}>Welcome to 521ATE</Text>
-          </View>
-          <LoginForm style ={{flex: 0}} navigation={this.props.navigation} />
-          <TouchableOpacity
-            style = {styles.redButtonContainer}
-            onPress={() => Linking.openURL(`${SERVER}/auth/google`).then(user => googleLogin(user))}
-          >
-          <Text style ={styles.loginbutton}>
-          LOGIN WITH GOOGLE
+        <View style={styles.logoConten}>
+          <Text style={styles.titleApp}>Welcome to 521ATE</Text>
+        </View>
+        <LoginForm style={{ flex: 0 }} navigation={this.props.navigation} />
+
+        <Button
+          style={styles.redButtonContainer}
+          onPress={() => Linking.openURL(`${SERVER}/auth/google`).then(user => googleLogin(user))}
+        >
+          <Icon style={styles.googleIcon} name='logo-google' />
+          <Text style={styles.googleText}>
+            Google
           </Text>
-          </TouchableOpacity>
-          <Text>OR</Text>
-          <TouchableOpacity
-            style = {styles.signupButtonContainer}
-            onPress={() => this.props.navigation.navigate('SignUpForm')}
-          >
-          <Text style ={styles.loginbutton}>
-          SIGNUP
+        </Button>
+
+        <Text>OR</Text>
+        <TouchableOpacity
+          style={styles.signupButtonContainer}
+          onPress={() => this.props.navigation.navigate('SignUpForm')}
+        >
+          <Text style={styles.loginbutton}>
+            SIGNUP
           </Text>
-          </TouchableOpacity>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -88,6 +92,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '700'
   },
+  googleText: {
+    color: '#ffffff',
+    textAlign: 'center',
+    fontWeight: '700'
+  },
+  googleIcon: {
+    color: 'white',
+  },
   buttonContainer: {
     backgroundColor: '#1980b9',
     paddingVertical: 10,
@@ -96,6 +108,8 @@ const styles = StyleSheet.create({
   },
   redButtonContainer: {
     backgroundColor: '#FF0000',
+    alignSelf: 'center',
+    justifyContent: 'center',
     paddingVertical: 10,
     marginBottom: 10,
     width: 300

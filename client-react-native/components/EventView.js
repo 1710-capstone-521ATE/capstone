@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, TextInput, ScrollView} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, TextInput, ScrollView, RefreshControl} from 'react-native';
 import { connect } from 'react-redux';
 import { fetchUsers, fetchUserEvents, addEventCode, clearingRestaurants, clearingBallot} from '../store';
 import socket from '../socket';
@@ -10,10 +10,12 @@ class EventView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      eventCode: ''
+      eventCode: '',
+      refreshing: false
     }
     this.joinRoomHandler = this.joinRoomHandler.bind(this);
     this.invitationHandler = this.invitationHandler.bind(this);
+    this.onRefresh = this.onRefresh.bind(this);
   }
 
   async componentDidMount() {
@@ -36,6 +38,12 @@ class EventView extends Component {
     else this.setState({eventCode: ''});
   }
 
+  async onRefresh(){
+    this.setState({refreshing: true})
+    await this.props.loadUserEvents(this.props.currentUser.id)
+    this.setState({refreshing: false})
+  }
+
   render() {
     let {userEvents, currentUser} = this.props;
     // this.props.currentUser && console.log('what them props user bro?', this.props.currentUser)
@@ -52,7 +60,15 @@ class EventView extends Component {
         </TouchableOpacity>
         <Text>These Are Your Events</Text>
         
-          <ScrollView>
+          <ScrollView
+            refreshControl={
+              <RefreshControl
+              refreshing = {this.state.refreshing}
+              onRefresh= {this.onRefresh}
+              />
+            }
+          >
+          
           {userEvents && userEvents.map(event => {
             if (event) {
               return (

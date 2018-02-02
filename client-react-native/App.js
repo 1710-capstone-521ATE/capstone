@@ -66,6 +66,12 @@ const RootNavigator = StackNavigator({
       headerTitle: 'Votes!',
       headerLeft: null
     }
+  },
+  LogOutButton: {
+    screen: LogOutButton,
+    navigationOptions:{
+
+    }
   }
 });
 

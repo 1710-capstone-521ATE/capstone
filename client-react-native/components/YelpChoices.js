@@ -1,38 +1,43 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, TextInput, Image, TouchableHighlight} from 'react-native';
 import { connect } from 'react-redux';
+import socket from '../socket';
 
 class YelpChoices extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isSelected : false
+      selection: ''
     }
+    this.voteHandler = this.voteHandler.bind(this);
   }
 
   componentDidMount() {
+  }
 
+  voteHandler() {
+    if (this.state.selection) socket.emit('vote', this.state.selection, this.props.event);
   }
 
   render() {
-
     return (
       <View style={styles.container}>
         {(this.props.restaurants.length > 0)
-
           ?
         <View>
         {this.props.restaurants.slice(0, 5).map((restaurant) => {
-          return <TouchableOpacity
+          return (<TouchableOpacity
             key={restaurant.id}
-            style={styles.buttonContainer}>
+            style={this.state.selection === restaurant.name ? styles.selectedButtonContainer : styles.buttonContainer}
+            onPress={() => this.setState({selection: restaurant.name})}>
             <Text style={styles.button}>
               {restaurant.name}
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity>)
         })}
 
-          <TouchableOpacity style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.buttonContainer}
+          onPress={this.voteHandler}>
             <Text style={styles.button}>
               VOTE
             </Text>
@@ -76,12 +81,19 @@ const styles = StyleSheet.create({
       color: '#ffffff',
       textAlign: 'center',
       fontWeight: '700'
+    },
+    selectedButtonContainer: {
+      backgroundColor: '#00414c',
+      paddingVertical: 10,
+      marginBottom: 20,
+      width: 300
     }
 });
 
 const mapStateToProps = (state) => {
   return {
-    restaurants: state.restaurants
+    restaurants: state.restaurants,
+    event: state.event
   }
 }
 

@@ -33,36 +33,49 @@ class SignUpForm extends Component {
       <TextInput
       placeholder="First Name"
       name="firstName"
+      autoCorrect = {false}
+      autoCapitalize = "none"
       onChangeText={(firstName) => this.setState({ firstName })}
       style = {styles.input}
       />
       <TextInput
       placeholder="Last Name"
       name="lastName"
+      autoCorrect = {false}
+      autoCapitalize = "none"
       onChangeText={(lastName) => this.setState({ lastName })}
       style = {styles.input}
       />
       <TextInput
       placeholder="Email Address"
       name="email"
+      autoCorrect = {false}
+      autoCapitalize = "none"
       onChangeText={(email) => this.setState({ email })}
       style = {styles.input}
       />
       <TextInput
       placeholder="Password"
       name="password"
+      secureTextEntry
+      autoCorrect = {false}
+      autoCapitalize = "none"
       onChangeText={(password) => this.setState({ password })}
       style = {styles.input}
       />
       <TextInput
       placeholder="Date of Birth (yyyy-mm-dd)"
       name="dob"
+      autoCorrect = {false}
+      autoCapitalize = "none"
       onChangeText={(dob) => this.setState({ dob })}
       style = {styles.input}
       />
       <TextInput
       placeholder="Zipcode"
       name="zipcode"
+      autoCorrect = {false}
+      autoCapitalize = "none"
       onChangeText={(zipcode) => this.setState({ zipcode })}
       style = {styles.input}
       />

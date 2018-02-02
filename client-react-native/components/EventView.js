@@ -46,7 +46,6 @@ class EventView extends Component {
 
   render() {
     let {userEvents, currentUser} = this.props;
-    // this.props.currentUser && console.log('what them props user bro?', this.props.currentUser)
     return (
       <View style={styles.container}>
         <Text>Hi {this.props.currentUser && this.props.currentUser.firstName}</Text>
@@ -59,7 +58,7 @@ class EventView extends Component {
           </Text>
         </TouchableOpacity>
         <Text>These Are Your Events</Text>
-        
+
           <ScrollView
             refreshControl={
               <RefreshControl
@@ -68,7 +67,7 @@ class EventView extends Component {
               />
             }
           >
-          
+
           {userEvents && userEvents.map(event => {
             if (event) {
               return (

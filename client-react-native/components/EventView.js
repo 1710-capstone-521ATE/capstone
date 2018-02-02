@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, TextInput} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, TextInput, ScrollView} from 'react-native';
 import { connect } from 'react-redux';
 import { fetchUsers, fetchUserEvents, addEventCode, clearingRestaurants, clearingBallot} from '../store';
 import socket from '../socket';
@@ -51,8 +51,9 @@ class EventView extends Component {
           </Text>
         </TouchableOpacity>
         <Text>These Are Your Events</Text>
-        {
-          userEvents && userEvents.map(event => {
+        
+          <ScrollView>
+          {userEvents && userEvents.map(event => {
             if (event) {
               return (
                   <TouchableOpacity
@@ -69,6 +70,7 @@ class EventView extends Component {
               return null
             }
         })}
+          </ScrollView>
 
         <TextInput
           name="eventCode"

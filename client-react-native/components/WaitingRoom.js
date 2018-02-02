@@ -22,7 +22,7 @@ render() {
     return(
         <View style = {styles.container}>
         <Map />
-        <YelpChoices />
+        <YelpChoices navigation={this.props.navigation}/>
         </View>
     )
   }

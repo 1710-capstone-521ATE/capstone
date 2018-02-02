@@ -58,7 +58,7 @@ class Map extends Component {
               pinColor={randPinColor}
           />)}
         )}
-        {restaurants.slice(0, 5).map(restaurant => {
+        {restaurants.map(restaurant => {
           return (<MapView.Marker
               key={restaurant.id}
               coordinate={restaurant.coordinates}

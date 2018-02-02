@@ -10,6 +10,7 @@ import EventView from './components/EventView';
 import AddUsers from './components/AddUsers';
 import WaitingRoom from './components/WaitingRoom';
 import YelpChoices from './components/YelpChoices';
+import ResultView from './components/ResultView';
 import './socket';
 
 const RootNavigator = StackNavigator({
@@ -53,6 +54,12 @@ const RootNavigator = StackNavigator({
     screen: YelpChoices,
     navigationOptions: {
       headerTitle: 'Yelp Choices'
+    }
+  },
+  ResultView: {
+    screen: ResultView,
+    navigationOptions: {
+      headerTitle: 'Votes!'
     }
   }
 });

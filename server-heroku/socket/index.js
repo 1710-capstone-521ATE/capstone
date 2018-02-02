@@ -15,10 +15,12 @@ module.exports = (io) => {
 
       if (users.length) {
         socket.join(`${eventCode}`); //join the event with that event ID as its name
-        io.to(`${eventCode}`).emit('currentStatus', {users, midpoint}); //send back the array
+        io.to(`${eventCode}`).emit('currentStatus', {users, midpoint, eventCode}); //send back the array
       }
 
     })
-
+    socket.on('vote', (restaurantName, eventCode) => {
+      io.to(`${eventCode}`).emit('ballot', restaurantName)
+    })
   });
 };

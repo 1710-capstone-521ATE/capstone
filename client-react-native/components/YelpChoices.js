@@ -17,6 +17,7 @@ class YelpChoices extends Component {
 
   voteHandler() {
     if (this.state.selection) socket.emit('vote', this.state.selection, this.props.event);
+    this.props.navigation.navigate('ResultView');
   }
 
   render() {
@@ -36,7 +37,8 @@ class YelpChoices extends Component {
           </TouchableOpacity>)
         })}
 
-          <TouchableOpacity style={styles.buttonContainer}
+          <TouchableOpacity
+style={styles.buttonContainer}
           onPress={this.voteHandler}>
             <Text style={styles.button}>
               VOTE

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, TextInput} from 'react-native';
 import { connect } from 'react-redux';
-import { fetchUsers, fetchUserEvents, addEventCode} from '../store';
+import { fetchUsers, fetchUserEvents, addEventCode, clearingRestaurants} from '../store';
 import socket from '../socket';
 import _getLocationAsync from '../Utils/location'
 
@@ -19,6 +19,7 @@ class EventView extends Component {
   async componentDidMount() {
     this.props.loadUsers();
     this.props.loadUserEvents(this.props.currentUser.id);
+    this.props.clearRestaurants();
   }
 
   async joinRoomHandler (user, event) {
@@ -157,7 +158,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     loadUsers: () => dispatch(fetchUsers()),
     loadUserEvents: (id) => dispatch(fetchUserEvents(id)),
-    setEvent: (eventCode) => dispatch(addEventCode(eventCode))
+    setEvent: (eventCode) => dispatch(addEventCode(eventCode)),
+    clearRestaurants: () => dispatch(clearingRestaurants())
   }
 }
 

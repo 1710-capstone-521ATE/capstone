@@ -21,6 +21,7 @@ class YelpChoices extends Component {
   }
 
   render() {
+    console.log(this.state.selection)
     return (
       <View style={styles.container}>
         {(this.props.restaurants.length > 0)
@@ -37,7 +38,8 @@ class YelpChoices extends Component {
           </TouchableOpacity>)
         })}
 
-          <TouchableOpacity style={styles.buttonContainer}
+          <TouchableOpacity
+style={styles.buttonContainer}
           onPress={this.voteHandler}>
             <Text style={styles.button}>
               VOTE

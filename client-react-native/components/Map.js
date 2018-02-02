@@ -35,7 +35,7 @@ class Map extends Component {
     const {regionCenter} = this.state;
     const {users, restaurants} = this.props;
     let arrivedUsers = users.filter(user => user.coords && user.coords.latitude !== null);
-    const pinColors = ['plum', 'teal', 'orange', 'green', 'yellow', 'tan', 'gold', 'indigo', 'wheat', 'linen', 'tomato'];
+    const pinColors = ['plum', 'teal', 'orange', 'green', 'yellow', 'gold', 'tomato'];
 
       return (
         <MapView

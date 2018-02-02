@@ -16,12 +16,11 @@ class YelpChoices extends Component {
   }
 
   voteHandler() {
-    if (this.state.selection) socket.emit('vote', this.state.selection, this.props.event.eventCode);
+    if (this.state.selection) socket.emit('vote', this.state.selection, this.props.event);
     this.props.navigation.navigate('ResultView');
   }
 
   render() {
-    console.log(this.state.selection)
     return (
       <View style={styles.container}>
         {(this.props.restaurants.length > 0)

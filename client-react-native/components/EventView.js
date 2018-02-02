@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, TextInput} from 'react-native';
 import { connect } from 'react-redux';
-import { fetchUsers, fetchUserEvents, addEventCode, clearingRestaurants} from '../store';
+import { fetchUsers, fetchUserEvents, addEventCode, clearingRestaurants, clearingBallot} from '../store';
 import socket from '../socket';
 import _getLocationAsync from '../Utils/location'
 
@@ -20,13 +20,13 @@ class EventView extends Component {
     this.props.loadUsers();
     this.props.loadUserEvents(this.props.currentUser.id);
     this.props.clearRestaurants();
+    this.props.clearBallot();
   }
 
   async joinRoomHandler (user, event) {
     const userLocation = await _getLocationAsync();
     const data = {...userLocation, groupId: event.groupId, userId: user.id, eventCode: event.code}
     socket.emit('joinRoom', data);
-    this.props.setEvent(event.code);
     this.props.navigation.navigate('WaitingRoom');
   }
 
@@ -158,8 +158,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     loadUsers: () => dispatch(fetchUsers()),
     loadUserEvents: (id) => dispatch(fetchUserEvents(id)),
-    setEvent: (eventCode) => dispatch(addEventCode(eventCode)),
-    clearRestaurants: () => dispatch(clearingRestaurants())
+    clearRestaurants: () => dispatch(clearingRestaurants()),
+    clearBallot: () => dispatch(clearingBallot())
   }
 }
 

@@ -15,7 +15,7 @@ module.exports = (io) => {
 
       if (users.length) {
         socket.join(`${eventCode}`); //join the event with that event ID as its name
-        io.to(`${eventCode}`).emit('currentStatus', {users, midpoint}); //send back the array
+        io.to(`${eventCode}`).emit('currentStatus', {users, midpoint, eventCode}); //send back the array
       }
 
     })

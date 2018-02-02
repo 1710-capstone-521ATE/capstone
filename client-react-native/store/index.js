@@ -9,7 +9,7 @@ import userEvents from './reducers/UserEvents';
 import restaurants from './reducers/Restaurants';
 
 const reducer = combineReducers({user, users, event, userEvents, restaurants})
-const middleware = composeWithDevTools(applyMiddleware(thunkMiddleware, createLogger({collapsed: true})))
+const middleware = applyMiddleware(thunkMiddleware)
 
 const store = createStore(reducer, middleware)
 

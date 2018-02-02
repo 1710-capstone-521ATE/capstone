@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Expo, {Location, Permissions, Platform, MapView } from 'expo';
 import { StyleSheet, Dimensions, View, Text } from 'react-native';
-
+import { connect } from 'react-redux';
 
 const styles = StyleSheet.create({
   container: {
@@ -14,57 +14,12 @@ const styles = StyleSheet.create({
   }
 });
 
-let coords = [
-  {
-    latitude: 40.952411,
-    longitude: -74.104963
-  },
-  {
-    latitude: 40.764760,
-    longitude: -73.920687
-  },
-  {
-    latitude: 40.605848,
-    longitude: -73.987360
-  },
-  {
-    latitude: 40.598308,
-    longitude: -73.976598
-  },
-  {
-    latitude: 40.598308,
-    longitude: -73.986598
-  },
-
-]
-
-
-function getMidpoint (arrayOfCoords) {
-  let midpoint = {
-    latitude: 0,
-    longitude: 0
-  }
-
-  for (let i = 0; i < arrayOfCoords.length; i++) {
-    let individualLatitude = arrayOfCoords[i].latitude;
-    let individualLongitude = arrayOfCoords[i].longitude;
-
-    midpoint.latitude += individualLatitude;
-    midpoint.longitude += individualLongitude;
-  }
-
-  midpoint.latitude = midpoint.latitude / arrayOfCoords.length;
-  midpoint.longitude = midpoint.longitude / arrayOfCoords.length;
-
-  return midpoint
-}
-
 let { width, height } = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
-const LATITUDE_DELTA = 0.0922;
+const LATITUDE_DELTA = 0.0092;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-export default class Map extends Component {
+class Map extends Component {
   constructor() {
     super();
     this.state = {
@@ -76,14 +31,12 @@ export default class Map extends Component {
     }
   }
 
-  componentDidMount() {
-    let midpoint = getMidpoint(coords);
-    this.setState({regionCenter: midpoint})
-
-  };
-
   render() {
-    const {regionCenter} = this.state
+    const {regionCenter} = this.state;
+    const {users, restaurants} = this.props;
+    let arrivedUsers = users.filter(user => user.coords && user.coords.latitude !== null);
+    const pinColors = ['plum', 'teal', 'orange', 'green', 'yellow', 'gold', 'tomato'];
+
       return (
         <MapView
           style={ styles.container }
@@ -94,17 +47,36 @@ export default class Map extends Component {
             longitudeDelta: LONGITUDE_DELTA
           }}
         >
-        {coords.map((coord, i) =>
-          (<MapView.Marker
-              key={i}
-              coordinate={coord}
-          />)
+        {arrivedUsers.map(user => {
+          let latitude = Number(user.coords.latitude);
+          let longitude = Number(user.coords.longitude);
+          let randPinColor = pinColors[Math.floor(Math.random() * pinColors.length)];
+          return (<MapView.Marker
+              key={user.id}
+              coordinate={{latitude, longitude}}
+              title={`${user.firstName} ${user.lastName}`}
+              pinColor={randPinColor}
+          />)}
         )}
-        <MapView.Marker
-          coordinate={regionCenter}
-       />
+        {restaurants.slice(0, 5).map(restaurant => {
+          return (<MapView.Marker
+              key={restaurant.id}
+              coordinate={restaurant.coordinates}
+              title={restaurant.name}
+              pinColor={'indigo'}
+          />)}
+        )}
        </MapView>
       );
     }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    users: state.users,
+    currentUser: state.user,
+    restaurants: state.restaurants
+  }
+}
+
+export default connect(mapStateToProps, null)(Map);

@@ -34,12 +34,15 @@ userRouter.get('/:id/groups/events', async (ctx, next) => {
   let eventModel = ctx.db.models.event;
 
   let groupModel = ctx.db.models.groups;
-  const testGroups = await ctx.state.user.getGroups();
-  const testEvents = await Promise.all(testGroups.map((group) => {
-    return eventModel.findAll({where: {groupId : group.id}})
+  const groups = await ctx.state.user.getGroups();
+  const events = await Promise.all(groups.map((group) => {
+    return eventModel.findAll({where: {
+      groupId : group.id,
+      startEvent: false
+      }})
   }))
-  const eventArray = [].concat(...testEvents)
-  ctx.body = eventArray;
+  const eventsArray = [].concat(...events)
+  ctx.body = eventsArray;
 
 })
 

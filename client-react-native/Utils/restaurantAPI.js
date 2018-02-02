@@ -13,5 +13,5 @@ export const fetchYelpRestaurants = (url) => axios(
     }
   }
 )
-.then((restaurants) => {return restaurants.data.businesses})
+.then((restaurants) => {return restaurants.data.businesses.slice(0, 5)})
 .catch(console.error);

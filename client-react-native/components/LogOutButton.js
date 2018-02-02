@@ -24,7 +24,7 @@ class LogOutButton extends Component {
         name='exit-to-app'
         color='#43CCD8'
         raised
-        onPress={()=>
+        // onPress={()=>
       />
     )
   }

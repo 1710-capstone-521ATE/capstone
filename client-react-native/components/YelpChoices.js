@@ -25,7 +25,7 @@ class YelpChoices extends Component {
         {(this.props.restaurants.length > 0)
           ?
         <View>
-        {this.props.restaurants.slice(0, 5).map((restaurant) => {
+        {this.props.restaurants.map((restaurant) => {
           return (<TouchableOpacity
             key={restaurant.id}
             style={this.state.selection === restaurant.name ? styles.selectedButtonContainer : styles.buttonContainer}

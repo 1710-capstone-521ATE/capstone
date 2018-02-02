@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 import {SERVER} from './serverInfo';
-import store, { getUsers, fetchRestaurants} from './store';
+import store, { getUsers, fetchRestaurants, updateBallot } from './store';
 
 const socket = io(SERVER)
 
@@ -14,6 +14,10 @@ socket.on('currentStatus', ({users, midpoint}) => {
     store.dispatch(fetchRestaurants(midpoint));
   }
     store.dispatch(getUsers(users));
+})
+
+socket.on('ballot', restaurantName => {
+  store.dispatch(updateBallot(restaurantName));
 })
 
 export default socket;

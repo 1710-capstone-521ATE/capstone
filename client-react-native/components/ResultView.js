@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, TextInput, Image, TouchableHighlight} from 'react-native';
 import { connect } from 'react-redux';
 
-class YelpChoices extends Component {
+class ResultView extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,45 +10,24 @@ class YelpChoices extends Component {
     }
   }
 
-  componentDidMount() {
-
-  }
-
   render() {
 
+    const {users, restaurants} = this.props;
+
+    console.log('these are them users baby!', users)
     return (
-      <View style={styles.container}>
-        {(this.props.restaurants.length > 0)
+      <View>
+        {restaurants.map(restaurant => {
+          return (
+            <Text>{`${restaurant.name}`}</Text>
 
-          ?
-        <View>
-        {this.props.restaurants.map((restaurant) => {
-          return <TouchableOpacity
-            key={restaurant.id}
-            style={styles.buttonContainer}>
-            <Text style={styles.button}>
-              {restaurant.name}
-            </Text>
-          </TouchableOpacity>
-        })}
+          )}
+        )}
 
-          <TouchableOpacity style={styles.buttonContainer}>
-            <Text style={styles.button}>
-              VOTE
-            </Text>
-          </TouchableOpacity>
-        </View>
-
-          :
-
-        <View>
         <Text>
         HELLO FRONDS
         </Text>
         <Image style={styles.corgo} source={{uri: 'https://i.imgur.com/k9i7YLN.jpg'}} />
-
-        </View>
-      }
 
       </View>
     )
@@ -81,7 +60,10 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    restaurants: state.restaurants
+    restaurants: state.restaurants,
+    users: state.users,
+    ballot: state.ballot
+
   }
 }
 
@@ -91,4 +73,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, null)(YelpChoices);
+export default connect(mapStateToProps, null)(ResultView);

@@ -57,7 +57,14 @@ class EventView extends Component {
             CREATE EVENT
           </Text>
         </TouchableOpacity>
-        <Text>These Are Your Events</Text>
+        {
+          (!this.state.refreshing) ?
+          <Text>Pull Down to Update!</Text>
+        :
+          <Text></Text>
+        }
+      
+      
 
           <ScrollView
             refreshControl={

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, TextInput} from 'react-native';
 import { connect } from 'react-redux';
-import { fetchUsers, fetchUserEvents } from '../store';
+import { fetchUsers, fetchUserEvents, addEventCode} from '../store';
 import socket from '../socket';
 import _getLocationAsync from '../Utils/location'
 
@@ -25,7 +25,8 @@ class EventView extends Component {
     const userLocation = await _getLocationAsync();
     const data = {...userLocation, groupId: event.groupId, userId: user.id, eventCode: event.code}
     socket.emit('joinRoom', data);
-    this.props.navigation.navigate('WaitingRoom')
+    this.props.setEvent(event.code);
+    this.props.navigation.navigate('WaitingRoom');
   }
 
   invitationHandler (user, events, eventCode) {
@@ -155,7 +156,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     loadUsers: () => dispatch(fetchUsers()),
-    loadUserEvents: (id) => dispatch(fetchUserEvents(id))
+    loadUserEvents: (id) => dispatch(fetchUserEvents(id)),
+    setEvent: (eventCode) => dispatch(addEventCode(eventCode))
   }
 }
 

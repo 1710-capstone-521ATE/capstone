@@ -19,7 +19,6 @@ componentDidMount(){
 
 
 render() {
-
     return(
         <View style = {styles.container}>
         <Map />

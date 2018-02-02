@@ -1,14 +1,12 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, TextInput, Image} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, TextInput, Image, TouchableHighlight} from 'react-native';
 import { connect } from 'react-redux';
-
-
 
 class YelpChoices extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      isSelected : false
     }
   }
 
@@ -23,8 +21,8 @@ class YelpChoices extends Component {
         {(this.props.restaurants.length > 0)
 
           ?
-
-        this.props.restaurants.slice(0, 5).map((restaurant) => {
+        <View>
+        {this.props.restaurants.slice(0, 5).map((restaurant) => {
           return <TouchableOpacity
             key={restaurant.id}
             style={styles.buttonContainer}>
@@ -32,8 +30,14 @@ class YelpChoices extends Component {
               {restaurant.name}
             </Text>
           </TouchableOpacity>
-        })
+        })}
 
+          <TouchableOpacity style={styles.buttonContainer}>
+            <Text style={styles.button}>
+              VOTE
+            </Text>
+          </TouchableOpacity>
+        </View>
 
           :
 

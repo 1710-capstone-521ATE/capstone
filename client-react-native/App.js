@@ -11,6 +11,7 @@ import AddUsers from './components/AddUsers';
 import WaitingRoom from './components/WaitingRoom';
 import YelpChoices from './components/YelpChoices';
 import ResultView from './components/ResultView';
+import LogOutButton from './components/LogOutButton';
 import './socket';
 
 const RootNavigator = StackNavigator({
@@ -36,7 +37,8 @@ const RootNavigator = StackNavigator({
     screen: EventView,
     navigationOptions: {
       headerTitle: 'Event',
-      headerLeft: null
+      headerLeft: null,
+      headerRight: <LogOutButton />
     }
   },
   AddUsers: {

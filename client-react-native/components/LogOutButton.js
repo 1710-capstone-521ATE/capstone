@@ -20,11 +20,14 @@ class LogOutButton extends Component {
   render() {
     return (
       <Icon
-        name='log-out'
+        reverse
+        name='exit-to-app'
+        color='#43CCD8'
         raised
-
+        onPress={()=>
       />
     )
   }
-
 }
+
+export default LogOutButton;

@@ -15,6 +15,7 @@ class AddUsers extends Component {
     };
     this.buttonHandler = this.buttonHandler.bind(this);
     this.addFriendsHandler = this.addFriendsHandler.bind(this);
+    this.selectionHandler = this.selectionHandler.bind(this);
 
   }
 
@@ -25,6 +26,10 @@ class AddUsers extends Component {
     else {
       this.setState({newGroup: this.state.newGroup.concat(user.id)})
     }
+  }
+
+  selectionHandler(user) {
+    return (this.state.newGroup.find(userId => Number(userId) === Number(user.id)))
   }
 
   async addFriendsHandler(userIds, hostId) {
@@ -48,15 +53,20 @@ class AddUsers extends Component {
         <ScrollView>
           {
             filteredUsers.map(user => (
-              <Button
+              <TouchableOpacity
                 key={user.id}
-                title={`${user.firstName} ${user.lastName} ${user.email}`}
-                onPress={() => this.buttonHandler(user)} />
+                style={this.selectionHandler(user) ? styles.selectedContainer : styles.buttonContainer}
+                onPress={() => this.buttonHandler(user)}
+              >
+                <Text style={styles.loginbutton}>
+                {user.firstName} {user.lastName}
+                </Text>
+              </TouchableOpacity>
             ))
           }
         </ScrollView>
         <TouchableOpacity
-          style={styles.buttonContainer}
+          style={styles.signupButtonContainer}
           onPress={() => {this.addFriendsHandler(newGroup, user.id)}}
         >
           <Text style={styles.loginbutton}>
@@ -116,13 +126,22 @@ const styles = StyleSheet.create({
   signupButtonContainer: {
     backgroundColor: '#11b21f',
     paddingVertical: 10,
+    marginTop: 15,
     marginBottom: 20,
+    width: 300
+  },
+  selectedContainer: {
+    backgroundColor: '#ff33ec',
+    paddingVertical: 10,
+    marginTop: 15,
+    marginBottom: 10,
     width: 300
   },
   loginbutton: {
     color: '#ffffff',
     textAlign: 'center',
-    fontWeight: '700'
+    fontWeight: '700',
+    width: 300
   },
   buttonContainer: {
     backgroundColor: '#1980b9',

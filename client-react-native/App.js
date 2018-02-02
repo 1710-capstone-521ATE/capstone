@@ -35,19 +35,21 @@ const RootNavigator = StackNavigator({
   EventView: {
     screen: EventView,
     navigationOptions: {
-      headerTitle: 'Event?'
+      headerTitle: 'Event',
+      headerLeft: null
     }
   },
   AddUsers: {
     screen: AddUsers,
     navigationOptions: {
-      headerTitle: 'AddUsers'
+      headerTitle: 'AddUsers',
+      headerLeft: null
     }
   },
   WaitingRoom: {
     screen: WaitingRoom,
     navigationOptions: {
-      headerTitle: 'Waiting Room'
+      headerTitle: 'Waiting Room',
     }
   },
   YelpChoices: {
@@ -59,7 +61,8 @@ const RootNavigator = StackNavigator({
   ResultView: {
     screen: ResultView,
     navigationOptions: {
-      headerTitle: 'Votes!'
+      headerTitle: 'Votes!',
+      headerLeft: null
     }
   }
 });

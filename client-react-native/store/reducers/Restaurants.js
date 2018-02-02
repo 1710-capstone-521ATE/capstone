@@ -26,5 +26,3 @@ export default (state = [], action) => {
       return state;
   }
 }
-
-[{r1}, r2, r4]

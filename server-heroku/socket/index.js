@@ -19,9 +19,8 @@ module.exports = (io) => {
       }
 
     })
-    // restaurant = {resName: count}
-    socket.on('vote', async (restaurantName, eventCode) => {
-      socket.to(`${eventCode}`).emit('ballot', restaurantName)
+    socket.on('vote', (restaurantName, eventCode) => {
+      io.to(`${eventCode}`).emit('ballot', restaurantName)
     })
   });
 };

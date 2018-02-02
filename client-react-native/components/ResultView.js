@@ -6,21 +6,20 @@ class ResultView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isSelected : false
     }
   }
 
+
   render() {
 
-    const {users, restaurants} = this.props;
+    const {users, restaurants, ballot} = this.props;
 
-    console.log('these are them users baby!', users)
     return (
       <View>
         {restaurants.map(restaurant => {
+          let count = ballot[restaurant.name] || 0
           return (
-            <Text>{`${restaurant.name}`}</Text>
-
+            <Text key={restaurant.name}>{`${restaurant.name} : ${count}`}</Text>
           )}
         )}
 
@@ -63,14 +62,7 @@ const mapStateToProps = (state) => {
     restaurants: state.restaurants,
     users: state.users,
     ballot: state.ballot
-
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-
-  }
-}
-
-export default connect(mapStateToProps, null)(ResultView);
+export default connect(mapStateToProps)(ResultView);

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { fetchUsers, fetchUserEvents, addEventCode, clearingRestaurants, clearingBallot} from '../store';
 import socket from '../socket';
 import _getLocationAsync from '../Utils/location'
+import LogOutButton from './LogOutButton'
 
 
 class EventView extends Component {
@@ -57,14 +58,14 @@ class EventView extends Component {
             CREATE EVENT
           </Text>
         </TouchableOpacity>
+
+        <Text>These Are Your Events</Text>
         {
           (!this.state.refreshing) ?
           <Text>Pull Down to Update!</Text>
         :
           <Text></Text>
         }
-      
-      
 
           <ScrollView
             refreshControl={
@@ -109,6 +110,7 @@ class EventView extends Component {
             JOIN EVENT
           </Text>
         </TouchableOpacity>
+
       </View>
     )
   }

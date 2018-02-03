@@ -35,10 +35,8 @@ export const auth = (user, navigation, method) =>
 
 export const logout = () =>
   dispatch =>
-    axios.post('/auth/logout')
-      .then(_ => {
-        dispatch(removeUser())
-      })
+    axios.post(`${SERVER}/auth/logout`)
+      .then(_ => dispatch(removeUser()))
       .catch(err => console.log(err))
 
 //nope not this one. In progress, but not actually working.

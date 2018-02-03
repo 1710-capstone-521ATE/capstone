@@ -59,8 +59,6 @@ class EventView extends Component {
           </Text>
         </TouchableOpacity>
 
-       {/* <LogOutButton navigate={this.props.navigation} /> */}
-
         <Text>These Are Your Events</Text>
         {
           (!this.state.refreshing) ?

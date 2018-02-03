@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { fetchUsers, fetchUserEvents, addEventCode, clearingRestaurants, clearingBallot} from '../store';
 import socket from '../socket';
 import _getLocationAsync from '../Utils/location'
+import LogOutButton from './LogOutButton'
 
 
 class EventView extends Component {
@@ -58,8 +59,11 @@ class EventView extends Component {
             CREATE EVENT
           </Text>
         </TouchableOpacity>
+
+        <LogOutButton navigate={this.props.navigation} />
+
         <Text>These Are Your Events</Text>
-        
+
           <ScrollView
             refreshControl={
               <RefreshControl
@@ -68,7 +72,7 @@ class EventView extends Component {
               />
             }
           >
-          
+
           {userEvents && userEvents.map(event => {
             if (event) {
               return (
@@ -103,6 +107,7 @@ class EventView extends Component {
             JOIN EVENT
           </Text>
         </TouchableOpacity>
+
       </View>
     )
   }

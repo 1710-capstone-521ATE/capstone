@@ -9,6 +9,9 @@ import {
   Linking
 } from 'react-native';
 import { Icon } from 'react-native-elements';
+import { logout } from '../store';
+import {connect} from 'react-redux';
+
 
 class LogOutButton extends Component {
   constructor(props) {
@@ -16,18 +19,36 @@ class LogOutButton extends Component {
     this.state = {
 
     }
+    this.clickHandler = this.clickHandler.bind(this);
   }
+
+async clickHandler() {
+    console.log('OUR PROPS ',this.props);
+    await this.props.signOut();
+    console.log('what are pros?', this.props.navigate)
+    this.props.navigate.navigate('Main');
+  }
+
+
   render() {
+    console.log('THIS PROPS: ', this.props)
     return (
       <Icon
         reverse
         name='exit-to-app'
         color='#43CCD8'
         raised
-        onPress={()=>
+        onPress={() => this.clickHandler()}
       />
     )
   }
 }
 
-export default LogOutButton;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signOut: () => dispatch(logout())
+  }
+}
+
+
+export default connect(null, mapDispatchToProps)(LogOutButton);

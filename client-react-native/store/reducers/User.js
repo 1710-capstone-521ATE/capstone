@@ -37,7 +37,8 @@ export const logout = () =>
   dispatch =>
     axios.post('/auth/logout')
       .then(_ => {
-        dispatch(removeUser())
+        console.log('did we hit????????')
+        return dispatch(removeUser())
       })
       .catch(err => console.log(err))
 

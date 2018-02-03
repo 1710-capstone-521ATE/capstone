@@ -68,3 +68,5 @@ async function decision () {
 };
 
 decision();
+
+module.exports = app;

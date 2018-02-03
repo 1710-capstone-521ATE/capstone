@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, ScrollView, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Button } from 'react-native-elements';
 import { createAndFetchGroup } from '../store';
 import socket from '../socket'
 import _getLocationAsync from '../Utils/location'
@@ -53,15 +54,25 @@ class AddUsers extends Component {
         <ScrollView>
           {
             filteredUsers.map(user => (
-              <TouchableOpacity
+
+
+
+
+              <Button
                 key={user.id}
                 style={this.selectionHandler(user) ? styles.selectedContainer : styles.buttonContainer}
                 onPress={() => this.buttonHandler(user)}
+                title={`${user.firstName} ${user.lastName}`}
+                transparent={true}
               >
                 <Text style={styles.loginbutton}>
                 {user.firstName} {user.lastName}
                 </Text>
-              </TouchableOpacity>
+              </Button>
+
+
+
+
             ))
           }
         </ScrollView>
@@ -131,8 +142,15 @@ const styles = StyleSheet.create({
     width: 300
   },
   selectedContainer: {
-    backgroundColor: '#ff33ec',
-    paddingVertical: 10,
+    backgroundColor: '#00414c',
+    // paddingVertical: 10,
+    marginTop: 15,
+    marginBottom: 10,
+    width: 300
+  },
+  buttonContainer: {
+    backgroundColor: '#1980b9',
+    // paddingVertical: 10,
     marginTop: 15,
     marginBottom: 10,
     width: 300
@@ -142,12 +160,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '700',
     width: 300
-  },
-  buttonContainer: {
-    backgroundColor: '#1980b9',
-    paddingVertical: 10,
-    marginTop: 15,
-    marginBottom: 10
   },
   input: {
     minWidth: 300,

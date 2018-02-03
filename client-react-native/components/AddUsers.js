@@ -55,23 +55,18 @@ class AddUsers extends Component {
           {
             filteredUsers.map(user => (
 
-
-
-
               <Button
                 key={user.id}
-                style={this.selectionHandler(user) ? styles.selectedContainer : styles.buttonContainer}
+               buttonStyle={this.selectionHandler(user) ? styles.selectedContainer : styles.buttonContainer}
                 onPress={() => this.buttonHandler(user)}
                 title={`${user.firstName} ${user.lastName}`}
-                transparent={true}
+                // transparent={true}
+                rounded={true}
               >
                 <Text style={styles.loginbutton}>
                 {user.firstName} {user.lastName}
                 </Text>
               </Button>
-
-
-
 
             ))
           }
@@ -158,8 +153,8 @@ const styles = StyleSheet.create({
   loginbutton: {
     color: '#ffffff',
     textAlign: 'center',
-    fontWeight: '700',
-    width: 300
+    fontWeight: '700'
+    // width: 300
   },
   input: {
     minWidth: 300,

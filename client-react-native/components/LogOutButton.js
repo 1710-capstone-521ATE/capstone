@@ -25,8 +25,8 @@ class LogOutButton extends Component {
 async clickHandler() {
     console.log('OUR PROPS ',this.props);
     await this.props.signOut();
-    console.log('what are pros?', this.props.navigate)
-    this.props.navigate.navigate('Main');
+    console.log('what are pros?', this.props.navigation)
+    this.props.navigation.navigate('Main');
   }
 
 

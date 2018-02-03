@@ -11,7 +11,7 @@ import {
 import { Icon } from 'react-native-elements';
 import { logout } from '../store';
 import {connect} from 'react-redux';
-
+import { NavigationActions } from 'react-navigation';
 
 class LogOutButton extends Component {
   constructor(props) {
@@ -22,23 +22,25 @@ class LogOutButton extends Component {
     this.clickHandler = this.clickHandler.bind(this);
   }
 
-async clickHandler() {
-    console.log('OUR PROPS ',this.props);
+  async clickHandler() {
     await this.props.signOut();
-    console.log('what are pros?', this.props.navigation)
-    this.props.navigation.navigate('Main');
-  }
-
+    // dispatch an action that will 'clear routing history' in Stack Navigator and navigate user
+    // back to Main page
+    await this.props.navigation.dispatch(NavigationActions.reset({
+      index: 0,
+      key: null,
+      actions: [NavigationActions.navigate({ routeName: 'Main' })]
+    }))
+}
 
   render() {
-    console.log('THIS PROPS: ', this.props)
     return (
       <Icon
         reverse
         name='exit-to-app'
         color='#43CCD8'
         raised
-        onPress={() => this.clickHandler()}
+        onPress={this.clickHandler}
       />
     )
   }
@@ -49,6 +51,5 @@ const mapDispatchToProps = (dispatch) => {
     signOut: () => dispatch(logout())
   }
 }
-
 
 export default connect(null, mapDispatchToProps)(LogOutButton);

@@ -56,7 +56,7 @@ authRouter.post('/signup', async (ctx, next) => {
 
 authRouter.post('/logout', async (ctx, next) => {
   ctx.logout();
-  ctx.session.destroy()
+  ctx.session = null;
   ctx.body = {};
 })
 

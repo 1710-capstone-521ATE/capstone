@@ -70,14 +70,21 @@ class AddUsers extends Component {
             ))
           }
         </ScrollView>
-        <TouchableOpacity
-          style={styles.signupButtonContainer}
+
+
+
+        <Button
+          color='#1980b9'
+          buttonStyle={styles.inviteFriendsContainer}
           onPress={() => {this.addFriendsHandler(newGroup, user.id)}}
+          title="INVITE FRIENDS"
+          rounded={true}
+          outline={true}
         >
-          <Text style={styles.loginbutton}>
-            INVITE FRIENDS
-          </Text>
-        </TouchableOpacity>
+        </Button>
+
+
+
       </View>
     )
   }
@@ -127,6 +134,17 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
+  },
+  inviteFriendsContainer: {
+    // backgroundColor: '#11b21f',
+    position: 'relative',
+    borderColor: '#1980b9',
+    borderWidth: 2.5,
+    paddingVertical: 10,
+    marginTop: 15,
+    marginBottom: 20,
+    width: 300,
+    bottom: 35
   },
   signupButtonContainer: {
     backgroundColor: '#11b21f',

@@ -25,16 +25,9 @@ class Login extends Component {
       <View style={styles.container}>
           <View style = {styles.logoConten}>
           <Text style = {styles.titleApp}>Welcome to 521ATE</Text>
+          <Image style={styles.corgo} source={{uri: 'https://i.imgur.com/k9i7YLN.jpg'}} />
           </View>
           <LoginForm style ={{flex: 0}} navigation={this.props.navigation} />
-          <TouchableOpacity
-            style = {styles.redButtonContainer}
-            onPress={() => Linking.openURL(`${SERVER}/auth/google`).then(user => googleLogin(user))}
-          >
-          <Text style ={styles.loginbutton}>
-          LOGIN WITH GOOGLE
-          </Text>
-          </TouchableOpacity>
           <Text>OR</Text>
           <TouchableOpacity
             style = {styles.signupButtonContainer}
@@ -71,6 +64,10 @@ const styles = StyleSheet.create({
   logo: {
     width: 100,
     height: 100
+  },
+  corgo: {
+    height: 300,
+    width: 300
   },
   instructions: {
     textAlign: 'center',

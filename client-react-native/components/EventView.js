@@ -47,7 +47,6 @@ class EventView extends Component {
 
   render() {
     let {userEvents, currentUser} = this.props;
-    // this.props.currentUser && console.log('what them props user bro?', this.props.currentUser)
     return (
       <View style={styles.container}>
         <Text>Hi {this.props.currentUser && this.props.currentUser.firstName}</Text>
@@ -63,6 +62,14 @@ class EventView extends Component {
         <LogOutButton navigate={this.props.navigation} />
 
         <Text>These Are Your Events</Text>
+        {
+          (!this.state.refreshing) ?
+          <Text>Pull Down to Update!</Text>
+        :
+          <Text></Text>
+        }
+
+
 
           <ScrollView
             refreshControl={

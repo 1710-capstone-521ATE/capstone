@@ -18,7 +18,6 @@ class SignUpForm extends Component {
   }
 
   onChange(event) {
-    console.log('hi', event.target.value)
     let name = event.target.name;
     let value = event.target.value
     this.setState({[name]: value });

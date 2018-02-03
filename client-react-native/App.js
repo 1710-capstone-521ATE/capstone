@@ -11,6 +11,7 @@ import AddUsers from './components/AddUsers';
 import WaitingRoom from './components/WaitingRoom';
 import YelpChoices from './components/YelpChoices';
 import ResultView from './components/ResultView';
+import LogOutButton from './components/LogOutButton';
 import './socket';
 
 const RootNavigator = StackNavigator({
@@ -34,36 +35,41 @@ const RootNavigator = StackNavigator({
   },
   EventView: {
     screen: EventView,
-    navigationOptions: {
+    navigationOptions: ({ navigation }) => ({
       headerTitle: 'Event',
-      headerLeft: null
-    }
+      headerLeft: null,
+      headerRight: <LogOutButton navigation={navigation} />
+    })
   },
   AddUsers: {
     screen: AddUsers,
-    navigationOptions: {
+    navigationOptions: ({ navigation }) => ({
       headerTitle: 'AddUsers',
-      headerLeft: null
-    }
+      headerLeft: null,
+      headerRight: <LogOutButton navigation={navigation} />
+    })
   },
   WaitingRoom: {
     screen: WaitingRoom,
-    navigationOptions: {
+    navigationOptions: ({ navigation }) => ({
       headerTitle: 'Waiting Room',
-    }
+      headerRight: <LogOutButton navigation={navigation} />
+    })
   },
   YelpChoices: {
     screen: YelpChoices,
-    navigationOptions: {
-      headerTitle: 'Yelp Choices'
-    }
+    navigationOptions: ({ navigation }) => ({
+      headerTitle: 'Yelp Choices',
+      headerRight: <LogOutButton navigation={navigation} />
+    })
   },
   ResultView: {
     screen: ResultView,
-    navigationOptions: {
+    navigationOptions: ({ navigation }) => ({
       headerTitle: 'Votes!',
-      headerLeft: null
-    }
+      headerLeft: null,
+      headerRight: <LogOutButton navigation={navigation} />
+    })
   }
 });
 

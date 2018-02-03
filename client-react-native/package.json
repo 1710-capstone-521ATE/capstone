@@ -4,8 +4,10 @@
   "dependencies": {
     "axios": "^0.17.1",
     "expo": "^25.0.0",
+    "mdi-react": "^2.1.19",
     "react": "16.2.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
+    "react-native-animatable": "^1.2.4",
     "react-native-elements": "^0.19.0",
     "react-native-maps": "^0.19.0",
     "react-native-safari-view": "^2.1.0",

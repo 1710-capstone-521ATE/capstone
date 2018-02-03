@@ -60,7 +60,6 @@ class AddUsers extends Component {
                buttonStyle={this.selectionHandler(user) ? styles.selectedContainer : styles.buttonContainer}
                 onPress={() => this.buttonHandler(user)}
                 title={`${user.firstName} ${user.lastName}`}
-                // transparent={true}
                 rounded={true}
               >
                 <Text style={styles.loginbutton}>
@@ -138,14 +137,12 @@ const styles = StyleSheet.create({
   },
   selectedContainer: {
     backgroundColor: '#00414c',
-    // paddingVertical: 10,
     marginTop: 15,
     marginBottom: 10,
     width: 300
   },
   buttonContainer: {
     backgroundColor: '#1980b9',
-    // paddingVertical: 10,
     marginTop: 15,
     marginBottom: 10,
     width: 300
@@ -154,7 +151,6 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     textAlign: 'center',
     fontWeight: '700'
-    // width: 300
   },
   input: {
     minWidth: 300,

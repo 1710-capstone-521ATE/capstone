@@ -7,15 +7,21 @@ userRouter.param('id', async(id, ctx, next) => {
   await next();
 })
 
-userRouter.delete('/:id', async(ctx, next) => {
-  await ctx.state.user.destroy();
-  ctx.status = 204;
-})
+userRouter.get('/', async (ctx, next) => {
+  let userModel = ctx.db.models.user;
+  ctx.body = await userModel.findAll();
+  ctx.body = ctx.body.map(user => user.sanitize());
+});
 
-userRouter.put('/:id', async(ctx, next) => {
-  ctx.body = await ctx.state.user.update(ctx.request.body);
-  ctx.status = 418;
-})
+userRouter.post('/', async (ctx, next) => {
+  let userModel = ctx.db.models.user;
+  delete ctx.request.body.salt;
+  ctx.body = await userModel.create(
+    ctx.request.body
+  );
+  ctx.session.user = ctx.body.id;
+  ctx.body = ctx.body.sanitize();
+});
 
 userRouter.get('/:id', async (ctx, next) => {
   let userModel = ctx.db.models.user;
@@ -25,8 +31,19 @@ userRouter.get('/:id', async (ctx, next) => {
     },
     include: {all: true}
   });
-  ctx.body = ctx.state.user;
+  ctx.body = ctx.state.user.sanitize();
   await next();
+})
+
+userRouter.put('/:id', async(ctx, next) => {
+  delete ctx.request.body.salt;
+  ctx.body = await ctx.state.user.update(ctx.request.body);
+  ctx.body = ctx.body.sanitize();
+})
+
+userRouter.delete('/:id', async(ctx, next) => {
+  await ctx.state.user.destroy();
+  ctx.status = 204;
 })
 
 userRouter.get('/:id/groups/events', async (ctx, next) => {
@@ -43,22 +60,6 @@ userRouter.get('/:id/groups/events', async (ctx, next) => {
   }))
   const eventsArray = [].concat(...events)
   ctx.body = eventsArray;
-
 })
-
-userRouter.get('/', async (ctx, next) => {
-  let userModel = ctx.db.models.user;
-  ctx.body = await userModel.findAll();
-});
-
-
-userRouter.post('/', async (ctx, next) => {
-  let userModel = ctx.db.models.user;
-  ctx.body = await userModel.create(
-    ctx.request.body
-  );
-  ctx.session.user = ctx.body.id;
-});
-
 
 module.exports = userRouter;

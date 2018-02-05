@@ -57,6 +57,7 @@ async function fetchGroupUsers(group) {
       email: user.email,
       firstName: user.firstName,
       lastName: user.lastName,
+      fullName: user.fullName,
       coords: {
         latitude: user.groupMembers.latitude,
         longitude: user.groupMembers.longitude

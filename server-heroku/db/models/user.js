@@ -47,6 +47,12 @@ const User = db.define('user', {
     validate: {
       isNumeric: true
     }
+  },
+  fullName: {
+    type: Sequelize.VIRTUAL,
+    get () {
+      return this.getDataValue('firstName') + ' ' + this.getDataValue('lastName');
+    }
   }
 })
 

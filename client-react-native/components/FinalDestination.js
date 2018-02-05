@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, TextInput, Image, TouchableHighlight, Dimensions} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, TextInput, Image, TouchableHighlight, Dimensions, Linking} from 'react-native';
 import { connect } from 'react-redux';
 import { MapView } from 'expo';
 
@@ -57,7 +57,7 @@ export default (props) => {
         <Text>Address: {restaurant.location.display_address}</Text>
         <Text>{`Is It pricey? : ${restaurant.price}`}</Text>
         <Text>{`Phone: ${restaurant.display_phone}`}</Text>
-        <Text>{restaurant.url}</Text>
+        <Text onPress={() => Linking.openURL(restaurant.url)}>Click me!</Text>
       </View>
     </View>
   )

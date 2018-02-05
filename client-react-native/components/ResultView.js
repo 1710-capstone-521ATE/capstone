@@ -45,12 +45,14 @@ class ResultView extends Component {
 
     return (
       <View style={styles.container}>
-        {restaurants.map(restaurant => {
-          let count = ballot[restaurant.name] || 0
-          return (
-            <Text style = {styles.restaurantText} key={restaurant.name}>{`${restaurant.name} : ${count}`}</Text>
+        <View style={styles.votes}>
+          {restaurants.map(restaurant => {
+            let count = ballot[restaurant.name] || 0
+            return (
+              <Text style = {styles.restaurantText} key={restaurant.name}>{`${restaurant.name} : ${count}`}</Text>
+            )}
           )}
-        )}
+        </View>
         <View>
         {(this.voteCounter() < this.props.users.length)
           ? <Text> Waiting for Results! </Text>
@@ -63,7 +65,7 @@ class ResultView extends Component {
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
+      //flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: '#43CCD8'
@@ -92,6 +94,9 @@ const styles = StyleSheet.create({
       color: '#ffffff',
       textAlign: 'center',
       fontWeight: '700'
+    },
+    votes: {
+      flex: 3
     }
 });
 

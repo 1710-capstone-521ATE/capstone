@@ -7,10 +7,20 @@ const styles = StyleSheet.create({
   container: {
     height: '100%',
     width: '100%',
-    display: 'flex',
+    flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  map: {
+    flex: 1
+  },
+  yelp: {
+    flex: 1
+  },
+  image: {
+    height: 150,
+    width: 150
   }
 });
 
@@ -23,8 +33,9 @@ export default (props) => {
   const restaurant = props.restaurant;
 
   return (
-    <View style={styles.container}>
+    <View>
       <MapView
+        style={styles.container}
         region={{
           latitude: restaurant.coordinates.latitude,
           longitude: restaurant.coordinates.longitude,
@@ -39,9 +50,9 @@ export default (props) => {
           pinColor={'indigo'}
         />
       </MapView>
-      <View>
+      <View style={styles.yelp}>
         <Text> You are going to... </Text>
-        <Image source={{uri: restaurant.image_url}} />
+        <Image source={{uri: restaurant.image_url}} style={styles.image} />
         <Text>{`Restaurant Name: ${restaurant.name}`}</Text>
         <Text>Address: {restaurant.location.display_address}</Text>
         <Text>{`Is It pricey? : ${restaurant.price}`}</Text>

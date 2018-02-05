@@ -17,7 +17,7 @@ class LoginForm extends Component { //attached the prototype chain
     super(props); //Component.call(this);
     this.state = {
       email: '',
-      password: ''
+      password: '',
     }
   }
   render() {
@@ -27,7 +27,7 @@ class LoginForm extends Component { //attached the prototype chain
         barStyle = "light-content"
       />
         <TextInput
-          placeholder = "User name or email"
+          placeholder = "Email"
           placeholderTextColor = "#8c9393"
           returnKeyType="next"
           keyboardType = "email-address"
@@ -50,9 +50,25 @@ class LoginForm extends Component { //attached the prototype chain
           onChangeText={(password) => this.setState({ password })}
         />
 
+        {(this.props.user.error)
+
+          ?
+
+          <Text style={styles.loginError}>
+            Incorrect Email or Password
+          </Text>
+
+          :
+
+          null
+        }
+
         <TouchableOpacity
         style = {styles.buttonContainer}
-        onPress = {() => this.props.login(this.state)}>
+        onPress = {() => {
+          this.props.login(this.state)
+          this.setState({loginAttempted: true})
+          }}>
         <Text style ={styles.loginbutton}>LOGIN</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
@@ -88,8 +104,19 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     textAlign: 'center',
     fontWeight: '700'
+  },
+  loginError: {
+    color: '#F00',
+    textAlign: 'center',
+    fontWeight: '700'
   }
 });
+
+const mapStateToProps = (storeState) => {
+  return {
+    user: storeState.user
+  }
+}
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
@@ -97,4 +124,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(LoginForm)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)

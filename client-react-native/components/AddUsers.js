@@ -13,7 +13,8 @@ class AddUsers extends Component {
       newGroup: [],
       location: {},
       locationResult: '',
-      eventName: ''
+      eventName: '',
+      searchName: ''
     };
     this.buttonHandler = this.buttonHandler.bind(this);
     this.addFriendsHandler = this.addFriendsHandler.bind(this);
@@ -53,14 +54,24 @@ class AddUsers extends Component {
 
     return (
       <View style={styles.container}>
+
+      {/* Allows you to name your event */}
       <TextInput
       placeholder="Name your event!"
-      onChangeText={(eventName) => this.setState({eventName})}
+      onChangeText={(eventName) => this.setState({ eventName })}
       style={styles.input}
       />
+
+      {/* Allows you to filter your friends */}
+      <TextInput
+        placeholder="Search for friends!"
+        onChangeText={(searchName) => this.setState({ searchName })}
+        style={styles.input}
+      />
+
         <ScrollView>
           {
-            filteredUsers.map(user => (
+            filteredUsers.filter((ele) => {return ele.fullName.includes(this.state.searchName)}).map(user => (
 
               <Button
                 key={user.id}

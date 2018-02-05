@@ -8,7 +8,6 @@ class ResultView extends Component {
     super(props);
 
     this.state = {
-      dinnerWinner : {}
     }
 
     this.winnerHandler = this.winnerHandler.bind(this)
@@ -17,15 +16,17 @@ class ResultView extends Component {
   }
 
   winnerHandler(){
-   const ballot = this.props.ballot;
+   const {ballot, restaurants} = this.props;
    let winner = 0;
    for (let restaurant in ballot) {
      if (ballot[restaurant] > (ballot[winner] || 0)){
        winner = restaurant
      }
    }
-
-        return winner;
+   let restaurant = restaurants.find(res => res.name === winner);
+    return (
+      <FinalDestination restaurant={restaurant} />
+    )
   }
 
   voteCounter(){
@@ -51,18 +52,12 @@ class ResultView extends Component {
             <Text style = {styles.restaurantText} key={restaurant.name}>{`${restaurant.name} : ${count}`}</Text>
           )}
         )}
-
-        <Text style = {styles.restaurantText}>
-        HELLO FRONDS
-        </Text>
-        <Image style={styles.corgo} source={{uri: 'https://i.imgur.com/k9i7YLN.jpg'}} />
         <View>
         <Text>You're going to ...</Text>
         {(this.voteCounter() < this.props.users.length)
           ? <Text> Waiting for Results! </Text>
-          : <Text style = {styles.winner}>{this.winnerHandler()}</Text>}
+          : this.winnerHandler()}
         </View>
-
       </View>
     )
   }

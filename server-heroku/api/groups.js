@@ -11,11 +11,13 @@ groupRouter.post('/', async (ctx, next) => {
     },
     include: [
      {
-       model: ctx.db.models.user
+       model: ctx.db.models.user,
+       attributes: {
+         exclude: ['password', 'salt', 'googleId', 'createdAt', 'updatedAt', 'zipcode']
+      }
      }
     ]
   })
-  ctx.body.users = ctx.body.users.map(user => user.sanitize());
 })
 
 groupRouter.post('/:id/events', async (ctx, next) => {

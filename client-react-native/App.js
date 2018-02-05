@@ -61,7 +61,7 @@ const RootNavigator = StackNavigator({
   ResultView: {
     screen: ResultView,
     navigationOptions: ({ navigation }) => ({
-      headerTitle: 'Votes!',
+      headerTitle: 'You are going to ...',
       headerLeft: null,
       gesturesEnabled: false,
       headerRight: <LogOutButton navigation={navigation} />

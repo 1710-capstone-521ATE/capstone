@@ -1,21 +1,42 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, TextInput, Image, TouchableHighlight, Dimensions, Linking} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, TextInput, Image, TouchableHighlight, Dimensions, Linking, Button} from 'react-native';
 import { connect } from 'react-redux';
 import { MapView } from 'expo';
 
 const styles = StyleSheet.create({
   container: {
+    width: '100%',
+    height: '100%',
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#43CCD8'
   },
   yelp: {
-    flex: 1
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   image: {
     height: 150,
-    width: 150
+    width: 150,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  restaurantText: {
+    fontWeight: '700',
+    textAlign: 'center',
+    color: '#ffffff',
+    fontSize: 12
+  },
+  nameText: {
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#ffffff',
+    fontSize: 18
   }
 });
 
@@ -28,7 +49,9 @@ export default (props) => {
   const restaurant = props.restaurant;
 
   return (
-    <View>
+    <View style={styles.container}>
+      <Text style={styles.restaurantText}> You are going to... </Text>
+      <Text style={styles.nameText}>{restaurant.name}</Text>
       <MapView
         style={styles.container}
         region={{
@@ -46,13 +69,14 @@ export default (props) => {
         />
       </MapView>
       <View style={styles.yelp}>
-        <Text> You are going to... </Text>
         <Image source={{uri: restaurant.image_url}} style={styles.image} />
-        <Text>{`Restaurant Name: ${restaurant.name}`}</Text>
-        <Text>Address: {restaurant.location.display_address}</Text>
-        <Text>{`Is It pricey? : ${restaurant.price}`}</Text>
-        <Text>{`Phone: ${restaurant.display_phone}`}</Text>
-        <Text onPress={() => Linking.openURL(restaurant.url)}>Click me!</Text>
+        <Text style={styles.restaurantText}>Address: {restaurant.location.display_address}</Text>
+        <Text style={styles.restaurantText}>{`Is It pricey? : ${restaurant.price}`}</Text>
+        <Text style={styles.restaurantText}>{`Phone: ${restaurant.display_phone}`}</Text>
+        <Button
+          onPress={() => Linking.openURL(restaurant.url)}
+          style={styles.restaurantText}
+          title="More Yelp Info!" />
       </View>
     </View>
   )

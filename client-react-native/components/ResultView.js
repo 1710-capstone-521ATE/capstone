@@ -40,34 +40,29 @@ class ResultView extends Component {
 
 
   render() {
-
     const {users, restaurants, ballot} = this.props;
-
-    return (
-      <View style={styles.container}>
+    return this.voteCounter() < this.props.users.length ?
+      (<View style={styles.container}>
         {restaurants.map(restaurant => {
           let count = ballot[restaurant.name] || 0
           return (
             <Text style = {styles.restaurantText} key={restaurant.name}>{`${restaurant.name} : ${count}`}</Text>
           )}
         )}
-        <View>
-        {(this.voteCounter() < this.props.users.length)
-          ? <Text> Waiting for Results! </Text>
-          : this.winnerHandler()}
-        </View>
-      </View>
-    )
+        <Text style={styles.restaurantText}> Waiting for Results! </Text>
+      </View>)
+      :
+      this.winnerHandler()
   }
 }
 
 const styles = StyleSheet.create({
     container: {
-      display: 'flex',
+      flex: 1,
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: '#43CCD8'
+      backgroundColor: '#43CCD8',
     },
     corgo: {
         height: 300,

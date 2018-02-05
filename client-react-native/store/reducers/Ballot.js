@@ -1,5 +1,6 @@
 const UPDATE_BALLOT = 'UPDATE_BALLOT';
 const CLEAR_BALLOT = 'CLEAR_BALLOT';
+
 export const updateBallot = (restaurantName) => {
   return {
     type: UPDATE_BALLOT,

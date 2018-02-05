@@ -19,18 +19,18 @@ export function fetchUsers() {
   }
 }
 
-export function createAndFetchGroup(userIds, hostId) {
+export function createAndFetchGroup(userIds, hostId, eventName) {
   let invitedUsers, newGroupId;
   return (dispatch) => {
     return axios.post(`${SERVER}/api/groups`, {userIds: userIds.concat(hostId)})
     .then(group => {
       invitedUsers = group.data.users;
       newGroupId = group.data.id;
-      return axios.post(`${SERVER}/api/groups/${group.data.id}/events`, {hostId});
+      return axios.post(`${SERVER}/api/groups/${group.data.id}/events`, {hostId, name: eventName});
     })
     .then(event => {
       dispatch(getUsers(invitedUsers)); //updates the users array with invite list
-      dispatch(getEvent({eventCode: event.data.code, groupId: newGroupId})); //updates the event reducer with event hash code
+      dispatch(getEvent({eventCode: event.data.code, groupId: newGroupId, name: event.data.name})); //updates the event reducer with event hash code
     })
     .catch(console.error);
   }

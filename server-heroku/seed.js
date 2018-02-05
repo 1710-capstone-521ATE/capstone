@@ -53,9 +53,9 @@ async function seed() {
   ])
 
   const events = await Promise.all([
-    Event.create({ restaurantId: 'Sams Noodles', rating: 4, hostId: 1, groupId: 1 }),
-    Event.create({ restaurantId: 'Pams Noodles', rating: 2, hostId: 4, groupId: 2 }),
-    Event.create({ restaurantId: 'Dans Noodles', rating: 3, hostId: 7, groupId: 3 })
+    Event.create({ restaurantId: 'Sams Noodles', rating: 4, hostId: 1, groupId: 1, name: "Test Event 1" }),
+    Event.create({ restaurantId: 'Pams Noodles', rating: 2, hostId: 4, groupId: 2, name: "Test Event 2" }),
+    Event.create({ restaurantId: 'Dans Noodles', rating: 3, hostId: 7, groupId: 3, name: "Test Event 3" })
   ])
 
   const groupMembers = await Promise.all([

@@ -19,7 +19,8 @@ groupRouter.post('/', async (ctx, next) => {
 })
 
 groupRouter.post('/:id/events', async (ctx, next) => {
-  let newEvent = await ctx.db.models.event.create({groupId: ctx.params.id, hostId: ctx.request.body.hostId})
+  console.log(ctx.request.body.name)
+  let newEvent = await ctx.db.models.event.create({groupId: ctx.params.id, hostId: ctx.request.body.hostId, name: ctx.request.body.name})
   ctx.body = newEvent;
 })
 

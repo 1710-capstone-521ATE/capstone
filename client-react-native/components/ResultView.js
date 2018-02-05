@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, TextInput, Image, TouchableHighlight} from 'react-native';
 import { connect } from 'react-redux';
+import FinalDestination from './FinalDestination';
 
 class ResultView extends Component {
   constructor(props) {
@@ -18,19 +19,19 @@ class ResultView extends Component {
   winnerHandler(){
    const ballot = this.props.ballot;
    let winner = 0;
-   for (restaurant in ballot) {
-     if(ballot[restaurant] > (ballot[winner] || 0)){
+   for (let restaurant in ballot) {
+     if (ballot[restaurant] > (ballot[winner] || 0)){
        winner = restaurant
      }
    }
-   
+
         return winner;
   }
 
   voteCounter(){
     const ballot = this.props.ballot;
     let votes = 0;
-    for(restaurant in ballot){
+    for (let restaurant in ballot){
       votes += ballot[restaurant]
     }
 
@@ -57,8 +58,8 @@ class ResultView extends Component {
         <Image style={styles.corgo} source={{uri: 'https://i.imgur.com/k9i7YLN.jpg'}} />
         <View>
         <Text>You're going to ...</Text>
-        {(this.voteCounter() < this.props.users.length) 
-          ? <Text> Waiting for Results! </Text> 
+        {(this.voteCounter() < this.props.users.length)
+          ? <Text> Waiting for Results! </Text>
           : <Text style = {styles.winner}>{this.winnerHandler()}</Text>}
         </View>
 
@@ -108,5 +109,6 @@ const mapStateToProps = (state) => {
     ballot: state.ballot
   }
 }
+
 
 export default connect(mapStateToProps)(ResultView);

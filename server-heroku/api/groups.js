@@ -15,6 +15,7 @@ groupRouter.post('/', async (ctx, next) => {
      }
     ]
   })
+  ctx.body.users = ctx.body.users.map(user => user.sanitize());
 })
 
 groupRouter.post('/:id/events', async (ctx, next) => {

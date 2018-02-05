@@ -57,6 +57,16 @@ User.prototype.correctPassword = function (candidatePwd) {
   return User.encryptPassword(candidatePwd, this.salt) === this.password
 }
 
+const excludedFields = ['password', 'salt', 'googleId', 'createdAt', 'updatedAt', 'zipcode'];
+User.prototype.sanitize = function() {
+  const obj = {};
+  for (const k of Object.keys(this.toJSON())) {
+    if (excludedFields.includes(k)) continue;
+    obj[k] = this[k];
+  }
+  return obj;
+}
+
 /**
  * classMethods
  */

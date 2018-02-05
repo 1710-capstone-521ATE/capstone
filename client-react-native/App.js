@@ -38,6 +38,7 @@ const RootNavigator = StackNavigator({
     navigationOptions: ({ navigation }) => ({
       headerTitle: 'Event',
       headerLeft: null,
+      gesturesEnabled: false,
       headerRight: <LogOutButton navigation={navigation} />
     })
   },
@@ -46,6 +47,7 @@ const RootNavigator = StackNavigator({
     navigationOptions: ({ navigation }) => ({
       headerTitle: 'AddUsers',
       headerLeft: null,
+      gesturesEnabled: false,
       headerRight: <LogOutButton navigation={navigation} />
     })
   },
@@ -68,6 +70,7 @@ const RootNavigator = StackNavigator({
     navigationOptions: ({ navigation }) => ({
       headerTitle: 'Votes!',
       headerLeft: null,
+      gesturesEnabled: false,
       headerRight: <LogOutButton navigation={navigation} />
     })
   }

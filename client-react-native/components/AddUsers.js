@@ -141,10 +141,10 @@ const styles = StyleSheet.create({
     borderColor: '#1980b9',
     borderWidth: 2.5,
     paddingVertical: 10,
-    marginTop: 15,
+    marginTop: 35,
     marginBottom: 20,
     width: 300,
-    bottom: 35
+    bottom: 25
   },
   signupButtonContainer: {
     backgroundColor: '#11b21f',

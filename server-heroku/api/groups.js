@@ -4,6 +4,7 @@ const { getMidpoint, fetchGroupUsers, addMidPointToCTX} = require('../utils/grou
 
 groupRouter.post('/', async (ctx, next) => {
   let newGroup = await ctx.db.models.group.create();
+  console.log(ctx.request.body.userIds);
   await newGroup.addUsers(ctx.request.body.userIds);
   ctx.body = await ctx.db.models.group.findOne({
     where: {
@@ -11,11 +12,14 @@ groupRouter.post('/', async (ctx, next) => {
     },
     include: [
      {
-       model: ctx.db.models.user
+       model: ctx.db.models.user,
+      //  attributes: ['id', 'firstName', 'lastName']
      }
     ]
   })
-  ctx.body.users = ctx.body.users.map(user => user.sanitize());
+  console.log(ctx.body.dataValues.users);
+  ctx.body.users = ctx.body.dataValues.users.map(user => user.sanitize());
+  console.log(ctx.body.users);
 })
 
 groupRouter.post('/:id/events', async (ctx, next) => {
@@ -37,6 +41,9 @@ groupRouter.put('/:id/events/:eventCode', async (ctx, next) => {
   let { userId, latitude, longitude } = ctx.request.body;
   ctx.body = {users: [], midpoint: {}};
   //ensures the event has NOT started, and that the groupId matches the event's groupId
+
+  //CG: update to 400s?
+  //CG: Can offload into models or utils
   if (event.startEvent || Number(event.groupId) !== Number(ctx.params.id)) {
     ctx.status = 200; //just send back the empty object
   } else {

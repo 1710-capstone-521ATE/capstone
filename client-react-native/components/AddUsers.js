@@ -60,7 +60,6 @@ class AddUsers extends Component {
                buttonStyle={this.selectionHandler(user) ? styles.selectedContainer : styles.buttonContainer}
                 onPress={() => this.buttonHandler(user)}
                 title={`${user.firstName} ${user.lastName}`}
-                // transparent={true}
                 rounded={true}
               >
                 <Text style={styles.loginbutton}>
@@ -71,14 +70,21 @@ class AddUsers extends Component {
             ))
           }
         </ScrollView>
-        <TouchableOpacity
-          style={styles.signupButtonContainer}
+
+
+
+        <Button
+          color='#1980b9'
+          buttonStyle={styles.inviteFriendsContainer}
           onPress={() => {this.addFriendsHandler(newGroup, user.id)}}
+          title="INVITE FRIENDS"
+          rounded={true}
+          outline={true}
         >
-          <Text style={styles.loginbutton}>
-            INVITE FRIENDS
-          </Text>
-        </TouchableOpacity>
+        </Button>
+
+
+
       </View>
     )
   }
@@ -129,6 +135,17 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+  inviteFriendsContainer: {
+    // backgroundColor: '#11b21f',
+    position: 'relative',
+    borderColor: '#1980b9',
+    borderWidth: 2.5,
+    paddingVertical: 10,
+    marginTop: 35,
+    marginBottom: 20,
+    width: 300,
+    bottom: 25
+  },
   signupButtonContainer: {
     backgroundColor: '#11b21f',
     paddingVertical: 10,
@@ -138,14 +155,12 @@ const styles = StyleSheet.create({
   },
   selectedContainer: {
     backgroundColor: '#00414c',
-    // paddingVertical: 10,
     marginTop: 15,
     marginBottom: 10,
     width: 300
   },
   buttonContainer: {
     backgroundColor: '#1980b9',
-    // paddingVertical: 10,
     marginTop: 15,
     marginBottom: 10,
     width: 300
@@ -154,7 +169,6 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     textAlign: 'center',
     fontWeight: '700'
-    // width: 300
   },
   input: {
     minWidth: 300,

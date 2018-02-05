@@ -79,7 +79,7 @@ class EventView extends Component {
                     onPress={() => this.joinRoomHandler(currentUser, event)}
                   >
                   <Text style={styles.loginbutton}>
-                    {`Please join ${event.code}`}
+                    {`Please join ${event.name}`}
                   </Text>
                   </TouchableOpacity>
               )} else {

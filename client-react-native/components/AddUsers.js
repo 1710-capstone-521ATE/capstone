@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput } from 'react-native';
 import { Button } from 'react-native-elements';
 import { createAndFetchGroup } from '../store';
 import socket from '../socket'
@@ -12,7 +12,8 @@ class AddUsers extends Component {
     this.state = {
       newGroup: [],
       location: {},
-      locationResult: ''
+      locationResult: '',
+      eventName: ''
     };
     this.buttonHandler = this.buttonHandler.bind(this);
     this.addFriendsHandler = this.addFriendsHandler.bind(this);
@@ -33,8 +34,8 @@ class AddUsers extends Component {
     return (this.state.newGroup.find(userId => Number(userId) === Number(user.id)))
   }
 
-  async addFriendsHandler(userIds, hostId) {
-    await this.props.createGroup(userIds, hostId);
+  async addFriendsHandler(userIds, hostId, eventName) {
+    await this.props.createGroup(userIds, hostId, eventName);
     const {event} = this.props;
     const userLocation = await _getLocationAsync();
     const data = {...userLocation, groupId: event.groupId, userId: hostId, eventCode: event.eventCode}
@@ -47,10 +48,15 @@ class AddUsers extends Component {
   render() {
     let { users, user } = this.props;
     let { newGroup } = this.state;
+    let { eventName } = this.state;
     let filteredUsers = users.filter(u => Number(u.id) !== user.id);
 
     return (
       <View style={styles.container}>
+      <TextInput
+      placeholder="Name your event!"
+      onChangeText={(eventName) => this.setState({eventName})}
+      />
         <ScrollView>
           {
             filteredUsers.map(user => (
@@ -76,7 +82,7 @@ class AddUsers extends Component {
         <Button
           color='#1980b9'
           buttonStyle={styles.inviteFriendsContainer}
-          onPress={() => {this.addFriendsHandler(newGroup, user.id)}}
+          onPress={() => {this.addFriendsHandler(newGroup, user.id, eventName)}}
           title="INVITE FRIENDS"
           rounded={true}
           outline={true}
@@ -100,7 +106,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createGroup: (userIds, hostId) => dispatch(createAndFetchGroup(userIds, hostId))
+    createGroup: (userIds, hostId, eventName) => dispatch(createAndFetchGroup(userIds, hostId, eventName))
   }
 }
 

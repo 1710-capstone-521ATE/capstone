@@ -50,14 +50,7 @@ class EventView extends Component {
     return (
       <View style={styles.container}>
         <Text>Hi {this.props.currentUser && this.props.currentUser.firstName}</Text>
-        <TouchableOpacity
-        style={styles.signupButtonContainer}
-        onPress={() => this.props.navigation.navigate('AddUsers')}
-        >
-          <Text style={styles.loginbutton}>
-            CREATE EVENT
-          </Text>
-        </TouchableOpacity>
+       
 
         <Text>These Are Your Events</Text>
         {
@@ -95,19 +88,13 @@ class EventView extends Component {
         })}
           </ScrollView>
 
-        <TextInput
-          name="eventCode"
-          placeholder="Type CODE Here"
-          style={styles.input}
-          value={this.state.eventCode}
-          onChangeText={(eventCode) => {this.setState({ eventCode })}}
-        />
+        
         <TouchableOpacity
-          style={styles.signupButtonContainer}
-          onPress={() => this.invitationHandler(currentUser, userEvents, this.state.eventCode)}
+        style={styles.signupButtonContainer}
+        onPress={() => this.props.navigation.navigate('AddUsers')}
         >
           <Text style={styles.loginbutton}>
-            JOIN EVENT
+            CREATE EVENT
           </Text>
         </TouchableOpacity>
 

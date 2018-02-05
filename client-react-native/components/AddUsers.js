@@ -56,6 +56,7 @@ class AddUsers extends Component {
       <TextInput
       placeholder="Name your event!"
       onChangeText={(eventName) => this.setState({eventName})}
+      style={styles.input}
       />
         <ScrollView>
           {
@@ -185,5 +186,5 @@ const styles = StyleSheet.create({
     color: '#fff',
     marginBottom: 10,
     textAlign: 'center'
-  },
+  }
 });

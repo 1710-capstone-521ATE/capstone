@@ -12,7 +12,6 @@ class ResultView extends Component {
 
     this.winnerHandler = this.winnerHandler.bind(this)
     this.voteCounter = this.voteCounter.bind(this)
-
   }
 
   winnerHandler(){
@@ -53,7 +52,6 @@ class ResultView extends Component {
           )}
         )}
         <View>
-        <Text>You're going to ...</Text>
         {(this.voteCounter() < this.props.users.length)
           ? <Text> Waiting for Results! </Text>
           : this.winnerHandler()}

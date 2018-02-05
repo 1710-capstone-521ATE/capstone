@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
   container: {
     height: '100%',
     width: '100%',
-    flex: 1,
+    display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
@@ -20,12 +20,11 @@ const LATITUDE_DELTA = 0.0092;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 export default (props) => {
-  const restaurant = props.restaurant
+  const restaurant = props.restaurant;
 
   return (
-    <View>
+    <View style={styles.container}>
       <MapView
-        style={ styles.container }
         region={{
           latitude: restaurant.coordinates.latitude,
           longitude: restaurant.coordinates.longitude,
@@ -40,13 +39,15 @@ export default (props) => {
           pinColor={'indigo'}
         />
       </MapView>
-      <Text> You are going to... </Text>
-      <Image soure={{uri: restaurant.image.url}} />
-      <Text>{`Restaurant Name: ${restaurant.name}`}</Text>
-      <Text>Address: {restaurant.location.display_address}</Text>
-      <Text>{`Is It pricey? : ${restaurant.price}`}</Text>
-      <Text>{`Phone: ${restaurant.display_phone}`}</Text>
-      <Text>{restaurant.url}</Text>
+      <View>
+        <Text> You are going to... </Text>
+        <Image source={{uri: restaurant.image_url}} />
+        <Text>{`Restaurant Name: ${restaurant.name}`}</Text>
+        <Text>Address: {restaurant.location.display_address}</Text>
+        <Text>{`Is It pricey? : ${restaurant.price}`}</Text>
+        <Text>{`Phone: ${restaurant.display_phone}`}</Text>
+        <Text>{restaurant.url}</Text>
+      </View>
     </View>
   )
 }

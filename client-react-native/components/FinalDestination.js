@@ -5,15 +5,10 @@ import { MapView } from 'expo';
 
 const styles = StyleSheet.create({
   container: {
-    height: '100%',
-    width: '100%',
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  map: {
-    flex: 1
   },
   yelp: {
     flex: 1

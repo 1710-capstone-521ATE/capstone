@@ -5,7 +5,6 @@ import { StackNavigator } from 'react-navigation';
 import Login from './components/Login';
 import SignUpFormContainer from './components/SignUpForm';
 import store from './store';
-import Map from './components/Map';
 import EventView from './components/EventView';
 import AddUsers from './components/AddUsers';
 import WaitingRoom from './components/WaitingRoom';
@@ -25,12 +24,6 @@ const RootNavigator = StackNavigator({
     screen: SignUpFormContainer,
     navigationOptions: {
       headerTitle: 'Signup'
-    }
-  },
-  Map: {
-    screen: Map,
-    navigationOptions: {
-      headerTitle: '(/ﾟДﾟ)/'
     }
   },
   EventView: {

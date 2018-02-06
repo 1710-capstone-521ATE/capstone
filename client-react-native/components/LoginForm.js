@@ -50,6 +50,7 @@ class LoginForm extends Component { //attached the prototype chain
           onChangeText={(password) => this.setState({ password })}
         />
 
+        {/* logic for wrong username or passoword */}
         {(this.props.user.error)
 
           ?

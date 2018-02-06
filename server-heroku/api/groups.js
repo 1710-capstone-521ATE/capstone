@@ -37,7 +37,7 @@ groupRouter.put('/:id/events/:eventCode', async (ctx, next) => {
     }
   });
   let { userId, latitude, longitude } = ctx.request.body;
-  ctx.body = {users: [], midpoint: {}};
+  ctx.body = {users: [], midpoint: {}, event};
   //ensures the event has NOT started, and that the groupId matches the event's groupId
   if (event.startEvent || Number(event.groupId) !== Number(ctx.params.id)) {
     ctx.status = 200; //just send back the empty object

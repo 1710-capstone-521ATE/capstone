@@ -11,11 +11,11 @@ module.exports = (io) => {
 
     socket.on('joinRoom', async ({groupId, eventCode, userId, latitude, longitude}) => {
       let body = await axios.put(`${SERVER}/api/groups/${groupId}/events/${eventCode}`, { userId: userId, latitude, longitude });
-      let {users, midpoint} = body.data;
+      let {users, midpoint, event} = body.data;
 
       if (users.length) {
         socket.join(`${eventCode}`); //join the event with that event ID as its name
-        io.to(`${eventCode}`).emit('currentStatus', {users, midpoint, eventCode}); //send back the array
+        io.to(`${eventCode}`).emit('currentStatus', {users, midpoint, groupId, event, eventCode}); //send back the array
       }
 
     })

@@ -21,6 +21,9 @@ componentDidMount(){
 render() {
     return(
         <View style = {styles.container}>
+        <Text>
+            {this.props.event.name}
+        </Text>
         <Map />
         <YelpChoices navigation={this.props.navigation}/>
         </View>
@@ -30,14 +33,17 @@ render() {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        backgroundColor: '#43CCD8',
+        alignItems: 'center'
     }
 })
 
 const mapStateToProps = (state) => {
-    return{
-        restaurants: state.restaurants
+    return {
+        restaurants: state.restaurants,
+        event: state.event
     }
 }
 
-export default connect(null, null)(WaitingRoom)
+export default connect(mapStateToProps, null)(WaitingRoom)

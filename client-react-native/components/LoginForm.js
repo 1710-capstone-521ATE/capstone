@@ -1,16 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { auth } from '../store';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-  StatusBar
-} from 'react-native';
+import { StyleSheet, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, StatusBar } from 'react-native';
 
 class LoginForm extends Component { //attached the prototype chain
   constructor(props) {
@@ -22,44 +13,41 @@ class LoginForm extends Component { //attached the prototype chain
   }
   render() {
     return (
-      <KeyboardAvoidingView behavior = "padding" style={styles.container}>
-      <StatusBar
-        barStyle = "light-content"
-      />
+      <KeyboardAvoidingView behavior= "padding" style={styles.container}>
+        <StatusBar
+          barStyle= "light-content"
+        />
         <TextInput
-          placeholder = "Email"
-          placeholderTextColor = "#8c9393"
+          placeholder="Email"
+          placeholderTextColor="#8c9393"
           returnKeyType="next"
-          keyboardType = "email-address"
-          autoCorrect = {false}
-          autoCapitalize = "none"
-          onSubmitEditing = {() => this.passwordInput.focus()}
-          style = {styles.input}
+          keyboardType="email-address"
+          autoCorrect={false}
+          autoCapitalize="none"
+          onSubmitEditing={() => this.passwordInput.focus()}
+          style= {styles.input}
           name="email"
           onChangeText={(email) => this.setState({ email })}
         />
 
         <TextInput
-          placeholder ="Password"
-          placeholderTextColor ="#8c9393"
+          placeholder="Password"
+          placeholderTextColor="#8c9393"
           secureTextEntry
           returnKeyType="go"
-          ref = {(input) => this.passwordInput = input}
-          style = {styles.input}
+          ref={(input) => this.passwordInput = input}
+          style={styles.input}
           name="password"
           onChangeText={(password) => this.setState({ password })}
         />
 
+        {/* logic for wrong username or password */}
         {(this.props.user.error)
-
           ?
-
           <Text style={styles.loginError}>
-            Incorrect Email or Password
+            {this.props.user.error}
           </Text>
-
           :
-
           null
         }
 

@@ -5,7 +5,6 @@ const socketio = require('socket.io');
 const { db } = require('./db/models');
 const bodyParser = require('koa-bodyparser');
 const path = require('path');
-// const api = require('./api');
 const session = require('koa-session');
 const passport = require('koa-passport');
 const logger = require('koa-logger');

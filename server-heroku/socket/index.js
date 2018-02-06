@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { SERVER } = require('../secrets.js');
+const { SERVER } = process.env.PORT || require('../secrets.js');
 
 module.exports = (io) => {
   io.on('connection', (socket) => {

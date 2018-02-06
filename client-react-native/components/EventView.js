@@ -36,6 +36,7 @@ class EventView extends Component {
   async rejectRoomHandler(user, event) {
     const data = {userId:user.id, groupId: event.groupId, eventCode: event.code, isAttending: false}
     socket.emit('joinRoom', data);
+    this.props.navigation.navigate('EventView');
   }
 
   async onRefresh(){
@@ -71,9 +72,8 @@ class EventView extends Component {
           {userEvents && userEvents.map(event => {
             if (event) {
               return (
-                <View>
+                <View key={event.code}>
                   <TouchableOpacity
-                    key={event.id}
                     style={styles.signupButtonContainer}
 
                     onPress={() => this.joinRoomHandler(currentUser, event)}
@@ -83,12 +83,11 @@ class EventView extends Component {
                     </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
-                    key={event.id}
                     style={styles.signupButtonContainer}
 
                     onPress={() => this.rejectRoomHandler(currentUser, event)}
                   >
-                    <Text style={styles.loginbutton}>
+                    <Text style={styles.declineButton}>
                       Bye Felicia!
                     </Text>
                   </TouchableOpacity>
@@ -150,6 +149,11 @@ const styles = StyleSheet.create({
   },
   loginbutton: {
     color: '#ffffff',
+    textAlign: 'center',
+    fontWeight: '700'
+  },
+  declineButton: {
+    backgroundColor: '#F04610',
     textAlign: 'center',
     fontWeight: '700'
   },

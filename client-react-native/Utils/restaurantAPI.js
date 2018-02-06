@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { yelpKey } from '../serverInfo.js';
 
-export const createMidpointUrl = (midpoint) => (`https://api.yelp.com/v3/businesses/search?latitude=${midpoint.latitude}&longitude=${midpoint.longitude}&radius=500&categories=restaurants`);
+export const createMidpointUrl = (midpoint) => (`https://api.yelp.com/v3/businesses/search?latitude=${midpoint.latitude}&longitude=${midpoint.longitude}&radius=250&categories=restaurants`);
 
 export const fetchYelpRestaurants = (url) => axios(
   {

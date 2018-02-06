@@ -50,7 +50,7 @@ class EventView extends Component {
     return (
       <View style={styles.container}>
         <Text>Hi {this.props.currentUser && this.props.currentUser.firstName}</Text>
-       
+
 
         <Text>These Are Your Events</Text>
         {
@@ -88,7 +88,7 @@ class EventView extends Component {
         })}
           </ScrollView>
 
-        
+
         <TouchableOpacity
         style={styles.signupButtonContainer}
         onPress={() => this.props.navigation.navigate('AddUsers')}

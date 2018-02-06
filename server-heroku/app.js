@@ -47,6 +47,13 @@ const createApp = () => {
   });
   app.use(logger());
   app.use(bodyParser());
+  app.use(async (ctx, next) => {
+    try {
+      await next();
+    } catch (err) {
+      ctx.throw(err.status || 500, err.message || 'Internal Server Error');
+    }
+  });
   app.use(session(CONFIG, app));
 
   app.use(passport.initialize());

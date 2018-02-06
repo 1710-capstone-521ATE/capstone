@@ -29,7 +29,7 @@ export const auth = (user, navigation, method) =>
         dispatch(getUser(res.data));
         navigation.navigate('EventView');
       }, authError => { // rare example: a good use case for parallel (non-catch) error handler
-        dispatch(getUser({error: authError}))
+        dispatch(getUser({error: authError.response.data}))
       })
       .catch(err => console.error(err))
 

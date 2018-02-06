@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Expo, {Location, Permissions, Platform, MapView } from 'expo';
 import { StyleSheet, Dimensions, View, Text } from 'react-native';
 import { connect } from 'react-redux';
+import movingMidpoint from '../Utils/midPoint';
 
 const styles = StyleSheet.create({
   container: {
@@ -18,25 +19,20 @@ let { width, height } = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
 const LATITUDE_DELTA = 0.0092;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+const pinColors = ['plum', 'teal', 'orange', 'green', 'yellow', 'gold', 'tomato'];
 
 class Map extends Component {
   constructor() {
     super();
     this.state = {
-    regionCenter:
-        {
-          latitude: 40.7051,
-          longitude: -74.0092,
-        }
+    regionCenter: movingMidpoint(this.props.users)
     }
   }
 
   render() {
     const {regionCenter} = this.state;
-    const {users, restaurants, currentUserCoords} = this.props;
-    console.log('hi', currentUserCoords)
+    const {users, restaurants} = this.props;
     let arrivedUsers = users.filter(user => user.coords && user.coords.latitude !== null);
-    const pinColors = ['plum', 'teal', 'orange', 'green', 'yellow', 'gold', 'tomato'];
 
       return (
         <MapView
@@ -76,8 +72,7 @@ const mapStateToProps = (state) => {
   return {
     users: state.users,
     currentUser: state.user,
-    restaurants: state.restaurants,
-    currentUserCoords: state.users.find(user => Number(user.id) === (state.user.id))
+    restaurants: state.restaurants
   }
 }
 

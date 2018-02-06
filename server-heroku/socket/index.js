@@ -9,8 +9,8 @@ module.exports = (io) => {
       console.log(`Connection ${socket.id} has left the eatery!`)
     })
 
-    socket.on('joinRoom', async ({groupId, eventCode, userId, latitude, longitude}) => {
-      let body = await axios.put(`${SERVER}/api/groups/${groupId}/events/${eventCode}`, { userId: userId, latitude, longitude });
+    socket.on('joinRoom', async ({groupId, eventCode, userId, isAttending, latitude, longitude}) => {
+      let body = await axios.put(`${SERVER}/api/groups/${groupId}/events/${eventCode}`, { userId: userId, isAttending, latitude, longitude });
       let {users, midpoint, event} = body.data;
 
       if (users.length) {
@@ -19,6 +19,16 @@ module.exports = (io) => {
       }
 
     })
+    // socket.on('declineInvite', async ({userId, groupId, eventCode}) => {
+    //   let body = await axios.put(`${SERVER}/api/groups/${groupId}/users/${userId}`);
+    //   let {users, midpoint, event} = body.data;
+
+    //   if (users.length) {
+    //     socket.join(`${eventCode}`); //join the event with that event ID as its name
+    //     io.to(`${eventCode}`).emit('currentStatus', {users, midpoint, groupId, event, eventCode}); //send back the array
+    //   }
+    // })
+
     socket.on('vote', (restaurantName, eventCode) => {
       io.to(`${eventCode}`).emit('ballot', restaurantName)
     })

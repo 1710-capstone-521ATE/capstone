@@ -12,20 +12,15 @@ class WaitingRoom extends Component {
 
         }
     }
-componentDidMount(){
-
-  }
-
-
 
 render() {
-    return(
+    return (
         <View style = {styles.container}>
         <Text>
             {this.props.event.name}
         </Text>
         <Map />
-        <YelpChoices navigation={this.props.navigation}/>
+        <YelpChoices navigation={this.props.navigation} />
         </View>
     )
   }

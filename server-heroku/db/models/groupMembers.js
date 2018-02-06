@@ -9,6 +9,10 @@ const GroupMembers = db.define('groupMembers', {
   longitude: {
     type: Sequelize.STRING,
     defaultValue: null
+  },
+  isAttending: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: true
   }
 })
 

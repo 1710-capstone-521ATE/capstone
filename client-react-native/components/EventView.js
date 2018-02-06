@@ -15,7 +15,7 @@ class EventView extends Component {
       refreshing: false
     }
     this.joinRoomHandler = this.joinRoomHandler.bind(this);
-    this.invitationHandler = this.invitationHandler.bind(this);
+    this.rejectRoomHandler = this.rejectRoomHandler.bind(this);
     this.onRefresh = this.onRefresh.bind(this);
   }
 
@@ -28,15 +28,15 @@ class EventView extends Component {
 
   async joinRoomHandler (user, event) {
     const userLocation = await _getLocationAsync();
-    const data = {...userLocation, groupId: event.groupId, userId: user.id, eventCode: event.code}
+    const data = {...userLocation, groupId: event.groupId, userId: user.id, eventCode: event.code, isAttending: true}
     socket.emit('joinRoom', data);
     this.props.navigation.navigate('WaitingRoom');
   }
 
-  invitationHandler (user, events, eventCode) {
-    let verified = events.find(event => event.code === eventCode.toLowerCase())
-    if (verified) this.joinRoomHandler(user, verified)
-    else this.setState({eventCode: ''});
+  async rejectRoomHandler(user, event) {
+    const data = {userId:user.id, groupId: event.groupId, eventCode: event.code, isAttending: false}
+    socket.emit('joinRoom', data);
+    this.props.navigation.navigate('EventView');
   }
 
   async onRefresh(){
@@ -72,16 +72,26 @@ class EventView extends Component {
           {userEvents && userEvents.map(event => {
             if (event) {
               return (
+                <View key={event.code}>
                   <TouchableOpacity
-                    key={event.id}
                     style={styles.signupButtonContainer}
 
                     onPress={() => this.joinRoomHandler(currentUser, event)}
                   >
-                  <Text style={styles.loginbutton}>
-                    {`Please join ${event.name}`}
-                  </Text>
+                    <Text style={styles.loginbutton}>
+                      {`Please join ${event.name}`}
+                    </Text>
                   </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.signupButtonContainer}
+
+                    onPress={() => this.rejectRoomHandler(currentUser, event)}
+                  >
+                    <Text style={styles.declineButton}>
+                      Bye Felicia!
+                    </Text>
+                  </TouchableOpacity>
+                </View>
               )} else {
               return null
             }
@@ -139,6 +149,11 @@ const styles = StyleSheet.create({
   },
   loginbutton: {
     color: '#ffffff',
+    textAlign: 'center',
+    fontWeight: '700'
+  },
+  declineButton: {
+    backgroundColor: '#F04610',
     textAlign: 'center',
     fontWeight: '700'
   },

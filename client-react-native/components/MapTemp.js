@@ -12,7 +12,7 @@ export default class App extends Component {
   state = {
       location: {coords: { latitude: 40.952411, longitude: -74.104963}},
     };
-    
+
 
     componentDidMount() {
       this._getLocationAsync();
@@ -53,18 +53,5 @@ const styles = StyleSheet.create({
   container: {
     height: '100%',
     width: '100%',
-    // flex: 1,
-    // flexDirection: 'column',
-    // alignItems: 'center',
-    // justifyContent: 'center',
-    // paddingTop: Constants.statusBarHeight,
-    // backgroundColor: '#ecf0f1',
-  },
-  // paragraph: {
-  //   margin: 24,
-  //   fontSize: 18,
-  //   fontWeight: 'bold',
-  //   textAlign: 'center',
-  //   color: '#34495e',
-  // },
+  }
 });

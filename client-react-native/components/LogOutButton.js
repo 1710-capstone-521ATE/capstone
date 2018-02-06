@@ -38,7 +38,7 @@ class LogOutButton extends Component {
       <Icon
         reverse
         name='exit-to-app'
-        color='#43CCD8'
+        color= '#62c2b5'
         raised
         onPress={this.clickHandler}
       />

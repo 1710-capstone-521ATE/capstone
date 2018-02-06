@@ -11,8 +11,6 @@ class SignUpForm extends Component {
       password: '',
       firstName: '',
       lastName: '',
-      dob: '',
-      zipcode: ''
     };
     this.onChange = this.onChange.bind(this);
   }

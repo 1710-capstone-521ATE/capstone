@@ -1,26 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
 import LoginForm from './LoginForm';
-import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity, TouchableHighlight} from 'react-native';
+import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { googleLogin } from '../store';
 
-function Login(props) {
-  return (
-    <View style={styles.container}>
-      <View style = {styles.logoContent}>
-        <Text style = {styles.titleApp}>Welcome to 521ATE</Text>
-        <Image style={styles.corgo} source={{uri: 'https://i.imgur.com/k9i7YLN.jpg'}} />
+class Login extends Component {
+  render () {
+    return (
+      <View style={styles.container}>
+        <View style={styles.logoContent}>
+          <Image style={styles.logo} source={require('../assets/logo.png')} />
+        </View>
+        <LoginForm style={{ flex: 0 }} navigation={this.props.navigation} />
+        <Text>OR</Text>
+        <Button
+          buttonStyle={styles.signupButtonContainer}
+          onPress={() => this.props.navigation.navigate('SignUpForm')}
+          rounded={true}
+          title='SIGN UP'
+          fontWeight='700'
+          TouchableComponent='TouchableOpacity'
+        >
+        </Button>
       </View>
-      <LoginForm style ={{flex: 0}} navigation={props.navigation} />
-      <Text>OR</Text>
-      <TouchableOpacity
-        style = {styles.signupButtonContainer}
-        onPress={() => props.navigation.navigate('SignUpForm')}
-      >
-        <Text style ={styles.loginbutton}>SIGNUP</Text>
-      </TouchableOpacity>
-    </View>
-  );
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -28,27 +33,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#43CCD8',
+    backgroundColor: '#62c2b5',
+    // 43CCD8
   },
   logoContent: {
     flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  titleApp: {
-    width: 200,
-    fontSize: 18,
-    textAlign: 'center',
-    margin: 10,
-    color: '#ffffff'
-  },
   logo: {
-    width: 100,
-    height: 100
-  },
-  corgo: {
-    height: 300,
-    width: 300
+    height: 100,
+    width: 100
   },
   signupButtonContainer: {
     backgroundColor: '#11b21f',

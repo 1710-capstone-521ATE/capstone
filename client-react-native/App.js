@@ -11,6 +11,7 @@ import WaitingRoom from './components/WaitingRoom';
 import YelpChoices from './components/YelpChoices';
 import ResultView from './components/ResultView';
 import LogOutButton from './components/LogOutButton';
+import HomeButton from './components/HomeButton'
 import './socket';
 
 const RootNavigator = StackNavigator({
@@ -38,8 +39,7 @@ const RootNavigator = StackNavigator({
   AddUsers: {
     screen: AddUsers,
     navigationOptions: ({ navigation }) => ({
-      headerTitle: 'AddUsers',
-      headerLeft: null,
+      headerLeft: <HomeButton navigation={navigation}/>,
       gesturesEnabled: false,
       headerRight: <LogOutButton navigation={navigation} />
     })
@@ -48,22 +48,16 @@ const RootNavigator = StackNavigator({
     screen: WaitingRoom,
     navigationOptions: ({ navigation }) => ({
       headerTitle: 'Waiting Room',
-      headerRight: <LogOutButton navigation={navigation} />
+      headerLeft: null,
+      headerRight: null
     })
   },
-  YelpChoices: {
-    screen: YelpChoices,
-    navigationOptions: ({ navigation }) => ({
-      headerTitle: 'Yelp Choices',
-      headerRight: <LogOutButton navigation={navigation} />
-    })
-  },
-  ResultView: {
+   ResultView: {
     screen: ResultView,
     navigationOptions: ({ navigation }) => ({
       headerTitle: 'You are going to ...',
-      headerLeft: null,
       gesturesEnabled: false,
+      headerLeft: <HomeButton navigation={navigation}/>,
       headerRight: <LogOutButton navigation={navigation} />
     })
   }

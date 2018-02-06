@@ -10,11 +10,12 @@ socket.on('connect', () => {
 
 //If there is a midpoint sent from the backend, then we need to alert ALL the users involved in the event that they can move on to the next view.
 socket.on('currentStatus', ({users, midpoint, eventCode, event, groupId}) => {
+  console.log('yay!');
   if (midpoint.latitude) {
     store.dispatch(fetchRestaurants(midpoint));
   }
     store.dispatch(getUsers(users));
-  store.dispatch(getEvent({ eventCode: event.code, groupId: groupId, name: event.name }));
+  store.dispatch(getEvent({ eventCode: event.code, groupId: groupId, name: event.name, hostId: event.hostId }));
 })
 
 socket.on('ballot', restaurantName => {

@@ -33,7 +33,8 @@ class Map extends Component {
 
   render() {
     const {regionCenter} = this.state;
-    const {users, restaurants} = this.props;
+    const {users, restaurants, currentUserCoords} = this.props;
+    console.log('hi', currentUserCoords)
     let arrivedUsers = users.filter(user => user.coords && user.coords.latitude !== null);
     const pinColors = ['plum', 'teal', 'orange', 'green', 'yellow', 'gold', 'tomato'];
 
@@ -75,7 +76,8 @@ const mapStateToProps = (state) => {
   return {
     users: state.users,
     currentUser: state.user,
-    restaurants: state.restaurants
+    restaurants: state.restaurants,
+    currentUserCoords: state.users.find(user => Number(user.id) === (state.user.id))
   }
 }
 

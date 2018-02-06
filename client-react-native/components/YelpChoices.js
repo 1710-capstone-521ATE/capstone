@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, TextInput, Image, TouchableHighlight} from 'react-native';
 import { connect } from 'react-redux';
 import socket from '../socket';
+import { Button } from 'react-native-elements';
 
 class YelpChoices extends Component {
   constructor(props) {
@@ -21,6 +22,7 @@ class YelpChoices extends Component {
   }
 
   render() {
+    let { notRespondedUsers, event } = this.props;
     return (
       <View style={styles.container}>
         {(this.props.restaurants.length > 0)
@@ -49,11 +51,14 @@ style={styles.buttonContainer}
           :
 
         <View>
-        <Text>
-        HELLO FRONDS
-        </Text>
-        <Image style={styles.corgo} source={{uri: 'https://i.imgur.com/k9i7YLN.jpg'}} />
-
+          <Text>Waiting on .... </Text>
+          {
+            notRespondedUsers.map(user => (<Text key={user.id}>{user.fullName}</Text>))
+          }
+          <Button
+          title="Proceed to voting"
+          onPress={() => socket.emit('overrideWaitingRoom', {users: notRespondedUsers, event})}
+          />
         </View>
       }
 
@@ -95,7 +100,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
   return {
     restaurants: state.restaurants,
-    event: state.event
+    event: state.event,
+    notRespondedUsers: state.users.filter(user => user.coords && user.coords.latitude === null)
   }
 }
 

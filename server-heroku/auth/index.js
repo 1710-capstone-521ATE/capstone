@@ -20,12 +20,14 @@ authRouter.post('/login', async (ctx, next) => {
     include: {all: true}
   })
   if (!user) {
-    ctx.status = 401;
-    ctx.message = 'No email exists!'
+    let err = new Error('No such email exists! Please enter valid email address.');
+    err.status = 404;
+    throw(err);
   }
   else if (!user.correctPassword(ctx.request.body.password)) {
-    ctx.status = 401;
-    ctx.message = 'Wrong password. Try again.';
+    let err = new Error('Wrong password. Try again.');
+    err.status = 401;
+    throw(err);
   }
   else {
     ctx.session.user = user.id;
@@ -43,8 +45,9 @@ authRouter.post('/signup', async (ctx, next) => {
     include: {all: true}
   });
   if (repeatedUser) {
-    ctx.status = 401;
-    ctx.message = 'User already exists!';
+    let err = new Error('User already exists! Need unique email.');
+    err.status = 401;
+    throw(err);
   }
   else {
     let user = await ctx.db.models.user.create(ctx.request.body);

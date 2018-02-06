@@ -1,6 +1,5 @@
-import React, {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, TextInput, Image, TouchableHighlight, Dimensions, Linking, Button} from 'react-native';
-import { connect } from 'react-redux';
+import React from 'react';
+import {Text, View, StyleSheet, Image, Dimensions, Linking, Button} from 'react-native';
 import { MapView } from 'expo';
 
 const styles = StyleSheet.create({
@@ -39,13 +38,12 @@ const styles = StyleSheet.create({
     fontSize: 18
   }
 });
-
 let { width, height } = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
 const LATITUDE_DELTA = 0.0092;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-export default (props) => {
+export default function FinalDestination(props) {
   const restaurant = props.restaurant;
 
   return (

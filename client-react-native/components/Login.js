@@ -1,45 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
 import LoginForm from './LoginForm';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  Linking
-} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import { connect } from 'react-redux';
 import { googleLogin } from '../store';
-import {SERVER} from '../serverInfo';
 
-class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-
-    };
-  }
-  render() {
-    return (
-      <View style={styles.container}>
-          <View style = {styles.logoConten}>
-          <Text style = {styles.titleApp}>Welcome to 521ATE</Text>
-          <Image style={styles.corgo} source={{uri: 'https://i.imgur.com/k9i7YLN.jpg'}} />
-          </View>
-          <LoginForm style ={{flex: 0}} navigation={this.props.navigation} />
-          <Text>OR</Text>
-          <TouchableOpacity
-            style = {styles.signupButtonContainer}
-            onPress={() => this.props.navigation.navigate('SignUpForm')}
-          >
-          <Text style ={styles.loginbutton}>
-          SIGNUP
-          </Text>
-          </TouchableOpacity>
+function Login(props) {
+  return (
+    <View style={styles.container}>
+      <View style = {styles.logoContent}>
+        <Text style = {styles.titleApp}>Welcome to 521ATE</Text>
+        <Image style={styles.corgo} source={{uri: 'https://i.imgur.com/k9i7YLN.jpg'}} />
       </View>
-    );
-  }
+      <LoginForm style ={{flex: 0}} navigation={props.navigation} />
+      <Text>OR</Text>
+      <TouchableOpacity
+        style = {styles.signupButtonContainer}
+        onPress={() => props.navigation.navigate('SignUpForm')}
+      >
+        <Text style ={styles.loginbutton}>SIGNUP</Text>
+      </TouchableOpacity>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -49,7 +30,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#43CCD8',
   },
-  logoConten: {
+  logoContent: {
     flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -68,11 +49,6 @@ const styles = StyleSheet.create({
   corgo: {
     height: 300,
     width: 300
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
   },
   signupButtonContainer: {
     backgroundColor: '#11b21f',

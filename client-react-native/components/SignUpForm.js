@@ -62,22 +62,6 @@ class SignUpForm extends Component {
       onChangeText={(password) => this.setState({ password })}
       style = {styles.input}
       />
-      <TextInput
-      placeholder="Date of Birth (yyyy-mm-dd)"
-      name="dob"
-      autoCorrect = {false}
-      autoCapitalize = "none"
-      onChangeText={(dob) => this.setState({ dob })}
-      style = {styles.input}
-      />
-      <TextInput
-      placeholder="Zipcode"
-      name="zipcode"
-      autoCorrect = {false}
-      autoCapitalize = "none"
-      onChangeText={(zipcode) => this.setState({ zipcode })}
-      style = {styles.input}
-      />
       <TouchableOpacity
       style = {styles.signupButtonContainer}
       onPress={() => this.props.handleSubmit(this.state)}
@@ -97,7 +81,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#43CCD8',
+    backgroundColor: '#62c2b5',
   },
   input: {
     minWidth: 300,

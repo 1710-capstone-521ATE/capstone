@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, TextInput, Image, TouchableHighlight} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import { connect } from 'react-redux';
 import socket from '../socket';
+import { Button } from 'react-native-elements';
 
 class YelpChoices extends Component {
   constructor(props) {
@@ -12,15 +13,15 @@ class YelpChoices extends Component {
     this.voteHandler = this.voteHandler.bind(this);
   }
 
-  componentDidMount() {
-  }
-
   voteHandler() {
-    if (this.state.selection) socket.emit('vote', this.state.selection, this.props.event.eventCode);
-    this.props.navigation.navigate('ResultView');
+    if (this.state.selection) {
+      socket.emit('vote', this.state.selection, this.props.event.eventCode);
+      this.props.navigation.navigate('ResultView');
+    }
   }
 
   render() {
+    let { notRespondedUsers, event, isHost } = this.props;
     return (
       <View style={styles.container}>
         {(this.props.restaurants.length > 0)
@@ -38,8 +39,9 @@ class YelpChoices extends Component {
         })}
 
           <TouchableOpacity
-style={styles.buttonContainer}
-          onPress={this.voteHandler}>
+style={styles.voteContainer}
+          onPress={this.voteHandler}
+          >
             <Text style={styles.button}>
               VOTE
             </Text>
@@ -49,11 +51,15 @@ style={styles.buttonContainer}
           :
 
         <View>
-        <Text>
-        HELLO FRONDS
-        </Text>
-        <Image style={styles.corgo} source={{uri: 'https://i.imgur.com/k9i7YLN.jpg'}} />
-
+          <Text>Waiting on .... </Text>
+          {
+            notRespondedUsers.map(user => (<Text key={user.id}>{user.fullName}</Text>))
+          }
+          {isHost &&
+          (<Button
+          title="Proceed to voting"
+          onPress={() => socket.emit('overrideWaitingRoom', {users: notRespondedUsers, event})}
+          />)}
         </View>
       }
 
@@ -76,7 +82,7 @@ const styles = StyleSheet.create({
     buttonContainer: {
       backgroundColor: '#009ba7',
       paddingVertical: 10,
-      marginBottom: 20,
+      marginBottom: 10,
       width: 300
     },
     button: {
@@ -87,15 +93,23 @@ const styles = StyleSheet.create({
     selectedButtonContainer: {
       backgroundColor: '#00414c',
       paddingVertical: 10,
-      marginBottom: 20,
+      marginBottom: 10,
       width: 300
-    }
+    },
+    voteContainer: {
+      backgroundColor: '#11b21f',
+      paddingVertical: 10,
+      marginBottom: 10,
+      width: 300
+    },
 });
 
 const mapStateToProps = (state) => {
   return {
     restaurants: state.restaurants,
-    event: state.event
+    event: state.event,
+    notRespondedUsers: state.users.filter(user => user.coords && user.coords.latitude === null),
+    isHost: Number(state.user.id) === Number(state.event.hostId)
   }
 }
 

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { auth } from '../store';
-import { StyleSheet, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, KeyboardAvoidingView, StatusBar } from 'react-native';
+import { Button, Icon } from 'react-native-elements';
 
 class LoginForm extends Component { //attached the prototype chain
   constructor(props) {
@@ -17,6 +18,14 @@ class LoginForm extends Component { //attached the prototype chain
         <StatusBar
           barStyle= "light-content"
         />
+        <View style={styles.viewContainer}>
+        <Icon
+          type='material-community'
+          name='email-outline'
+          color='rgba(255,255,255, 0.7)'
+          outline={true}
+        />
+        <Text>    </Text>
         <TextInput
           placeholder="Email"
           placeholderTextColor="#8c9393"
@@ -29,7 +38,15 @@ class LoginForm extends Component { //attached the prototype chain
           name="email"
           onChangeText={(email) => this.setState({ email })}
         />
+        </View>
 
+        <View style={styles.viewContainer}>
+        <Icon
+          name='lock-outline'
+          color='rgba(255,255,255, 0.7)'
+          outline={true}
+        />
+        <Text>    </Text>
         <TextInput
           placeholder="Password"
           placeholderTextColor="#8c9393"
@@ -40,6 +57,7 @@ class LoginForm extends Component { //attached the prototype chain
           name="password"
           onChangeText={(password) => this.setState({ password })}
         />
+        </View>
 
         {/* logic for wrong username or password */}
         {(this.props.user.error)
@@ -51,14 +69,19 @@ class LoginForm extends Component { //attached the prototype chain
           null
         }
 
-        <TouchableOpacity
-        style = {styles.buttonContainer}
+        <Button
+        buttonStyle = {styles.buttonContainer}
         onPress = {() => {
           this.props.login(this.state)
           this.setState({loginAttempted: true})
-          }}>
+          }
+        }
+        title='LOGIN'
+        rounded={true}
+        fontWeight='700'
+        >
         <Text style ={styles.loginbutton}>LOGIN</Text>
-        </TouchableOpacity>
+        </Button>
       </KeyboardAvoidingView>
     );
   }
@@ -66,22 +89,30 @@ class LoginForm extends Component { //attached the prototype chain
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20
+    padding: 20,
+  },
+  viewContainer: {
+    flexDirection: 'row',
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    marginBottom: 10,
+    paddingHorizontal: 10
   },
   input: {
     minWidth: 300,
     flexWrap: 'wrap',
     height: 40,
-    backgroundColor: 'rgba(255,255,255,0.2)',
-    paddingHorizontal: 10,
+    // backgroundColor: 'rgba(255,255,255,0.2)',
+    // paddingHorizontal: 10,
     color: '#fff',
-    marginBottom: 10,
+    // marginBottom: 10,
+    flex: 1
   },
   buttonContainer: {
     backgroundColor: '#1980b9',
     paddingVertical: 10,
     marginTop: 15,
-    marginBottom: 10
+    marginBottom: 10,
+    width: 300
   },
   signupButtonContainer: {
     backgroundColor: '#11b21f',

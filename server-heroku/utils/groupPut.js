@@ -49,10 +49,10 @@ function addMidPointToCTX(usersArr) {
 }
 
 async function fetchGroupUsers(group) {
-  console.log('what is group?????', group);
   let users = await group.getUsers();
-  console.log('what are users?????', users);
-  return users.filter(user => user.groupMembers).map(user => {
+  let filteredUsers = await users.filter(user => {
+    return user.groupMembers.isAttending === true
+  }).map(user => {
     let userObj =
     {
       id: user.id,
@@ -67,6 +67,7 @@ async function fetchGroupUsers(group) {
     }
     return userObj;
   });
+  return filteredUsers;
 }
 
 module.exports = {

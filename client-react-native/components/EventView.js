@@ -28,14 +28,14 @@ class EventView extends Component {
 
   async joinRoomHandler (user, event) {
     const userLocation = await _getLocationAsync();
-    const data = {...userLocation, groupId: event.groupId, userId: user.id, eventCode: event.code}
+    const data = {...userLocation, groupId: event.groupId, userId: user.id, eventCode: event.code, isAttending: true}
     socket.emit('joinRoom', data);
     this.props.navigation.navigate('WaitingRoom');
   }
 
   async rejectRoomHandler(user, event) {
-    const data = {userId:user.id, groupId: event.groupId, eventCode: event.code}
-    socket.emit('declineInvite', data);
+    const data = {userId:user.id, groupId: event.groupId, eventCode: event.code, isAttending: false}
+    socket.emit('joinRoom', data);
   }
 
   async onRefresh(){

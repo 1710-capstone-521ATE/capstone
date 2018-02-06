@@ -12,33 +12,19 @@ import { Icon } from 'react-native-elements';
 import { logout } from '../store';
 import {connect} from 'react-redux';
 
-
-class HomeButton extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-
-    }
-    this.clickHandler = this.clickHandler.bind(this);
-  }
-
- clickHandler() {
-    this.props.navigation.navigate("EventView")
-}
-
-  render() {
+export default function(props) {
+  
     return (
       <Icon
         reverse
         name='home'
         color='#43CCD8'
         raised
-        onPress={this.clickHandler}
+        onPress={() => props.navigation.navigate("EventView")}
       />
     )
   }
-}
 
 
 
-export default connect(null, null)(HomeButton);
+

@@ -12,7 +12,7 @@ const GroupMembers = db.define('groupMembers', {
   },
   isAttending: {
     type: Sequelize.BOOLEAN,
-    defaultValue: null
+    defaultValue: true
   }
 })
 

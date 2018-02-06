@@ -55,7 +55,7 @@ Currently groups can only have one event, otherwise there will be two latitudes 
 */
 
 groupRouter.put('/:id/events/:eventCode', async (ctx, next) => {
-  let { userId, isAttending } = ctx.request.body;
+  let { userId, isAttending, latitude, longitude } = ctx.request.body;
 
    //1. Performs PUT request on the groupMembers join table.
   let group = await ctx.db.models.group.findById(ctx.params.id);
@@ -73,17 +73,15 @@ groupRouter.put('/:id/events/:eventCode', async (ctx, next) => {
   } else {
     /* We are updating the User's attendance when s/he declines an invitation*/
     if (!isAttending) {
-      await group.addUser(user, {through: {isAttending}}) // updates the user's DECLINE attendance
+      await group.addUser(user, {through: { latitude, longitude, isAttending}}) // updates the user's DECLINE attendance
     } else {
-      await group.addUser(user, {through: { latitude, longitude, isAttending }}) //updates the user's lat/long and ACCEPTED attendance
+      await group.addUser(user, {through: { latitude, longitude, isAttending}}) //updates the user's lat/long and ACCEPTED attendance
     }
   }
   //2. Obtains the current status of the group & configures response body for front-end
   ctx.body = {users: [], midpoint: {}, event};
-  console.log('what is ctxbody?', ctx.body)
   ctx.body.users = await fetchGroupUsers(group);
-
-  let { latitude, longitude} = ctx.request.body;
+  await console.log('filtered users ', ctx.body.users)
 
   //3. Obtains and attaches midpoint if ALL users have responded.
   if (ctx.body.users.every(user => user.coords.latitude !== null)) {

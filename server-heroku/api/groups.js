@@ -25,29 +25,6 @@ groupRouter.post('/:id/events', async (ctx, next) => {
   ctx.body = newEvent;
 })
 
-// /* We are updating the User's attendance when s/he declines an invitation*/
-
-// groupRouter.put('/:groupId/users/:userId', async (ctx, next) => {
-
-//   let group = await ctx.db.models.group.findById(+ctx.params.groupId);
-//   // CAN'T WE USE KOA PASSPORT SESSION???
-//   let user = await ctx.db.models.user.findById(+ctx.params.userId);
-
-//   //initiate & define ctx.body here
-//   ctx.body = {users: []};
-//   await group.addUser(user, {through: {isAttending: false}}) // updates the user's attendance
-
-//   //2. Obtains the current status of the group & configures response body for front-end
-//   ctx.body.users = await fetchGroupUsers(group);
-
-//   //3. Obtains and attaches midpoint if ALL users have responded.
-//   if (ctx.body.users.every(user => user.coords.latitude !== null)) {
-//     await event.update({ startEvent: true });
-//     let midpoint = addMidPointToCTX(ctx.body.users);
-//     ctx.body.midpoint = midpoint;
-//   }
-// })
-
 /*
 We are updating the User's latitude and longitude when they join an event.
 Currently groups can only have one event, otherwise there will be two latitudes and longitudes

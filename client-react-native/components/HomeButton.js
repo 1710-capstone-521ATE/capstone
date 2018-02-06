@@ -1,16 +1,5 @@
-import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  Linking
-} from 'react-native';
+import React from 'react';
 import { Icon } from 'react-native-elements';
-import { logout } from '../store';
-import {connect} from 'react-redux';
 
 export default function(props) {
   

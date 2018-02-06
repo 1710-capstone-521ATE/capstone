@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, TextInput, Image, TouchableHighlight} from 'react-native';
+import {Text, View, StyleSheet} from 'react-native';
 import { connect } from 'react-redux';
 import FinalDestination from './FinalDestination';
+import { Button } from 'react-native-elements';
+import socket from '../socket';
 
 class ResultView extends Component {
   constructor(props) {
@@ -40,7 +42,7 @@ class ResultView extends Component {
 
 
   render() {
-    const {users, restaurants, ballot} = this.props;
+    const {users, restaurants, ballot, isHost} = this.props;
     return this.voteCounter() < this.props.users.length ?
       (<View style={styles.container}>
         {restaurants.map(restaurant => {
@@ -50,6 +52,11 @@ class ResultView extends Component {
           )}
         )}
         <Text style={styles.restaurantText}> Waiting for Results! </Text>
+        {isHost &&
+        <Button
+          title="Override Votes!"
+          onPress={() => socket.emit('override', this.ballot)}
+        />}
       </View>)
       :
       this.winnerHandler()
@@ -95,7 +102,8 @@ const mapStateToProps = (state) => {
   return {
     restaurants: state.restaurants,
     users: state.users,
-    ballot: state.ballot
+    ballot: state.ballot,
+    isHost: Number(state.user.id) === Number(state.event.hostId)
   }
 }
 

@@ -20,12 +20,15 @@ module.exports = (io) => {
       }
 
     })
+<<<<<<< HEAD
 
     socket.on('overrideWaitingRoom', ({users, event}) => {
       console.log('made it here', users, event)
       let body = await users.map(user => axios.put(`${SERVER}/api/groups/${event.groupId}/events/${event.eventCode}`, { userId: user.id, isAttending: false, latitude: null, longitude: null }));
       console.log('i think i deleted it', body);
     })
+=======
+>>>>>>> master
 
     socket.on('vote', (restaurantName, eventCode) => {
       io.to(`${eventCode}`).emit('ballot', restaurantName)

@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: '#43CCD8',
+      backgroundColor: '#62c2b5',
     },
     corgo: {
         height: 300,

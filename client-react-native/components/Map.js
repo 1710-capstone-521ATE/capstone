@@ -22,24 +22,24 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 const pinColors = ['plum', 'teal', 'orange', 'green', 'yellow', 'gold', 'tomato'];
 
 class Map extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-    regionCenter: movingMidpoint(this.props.users)
+
     }
   }
 
   render() {
-    const {regionCenter} = this.state;
     const {users, restaurants} = this.props;
     let arrivedUsers = users.filter(user => user.coords && user.coords.latitude !== null);
+    const midpoint = movingMidpoint(arrivedUsers);
 
       return (
         <MapView
           style={ styles.container }
           region={{
-            latitude: regionCenter.latitude,
-            longitude: regionCenter.longitude,
+            latitude: midpoint.latitude,
+            longitude: midpoint.longitude,
             latitudeDelta: LATITUDE_DELTA,
             longitudeDelta: LONGITUDE_DELTA
           }}

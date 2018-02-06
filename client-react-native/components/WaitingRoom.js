@@ -12,10 +12,6 @@ class WaitingRoom extends Component {
 
         }
     }
-componentDidMount(){
-
-  }
-
 
 render() {
     return (

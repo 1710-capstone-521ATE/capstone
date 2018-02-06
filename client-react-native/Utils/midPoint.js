@@ -1,5 +1,5 @@
 function movingMidpoint(usersArr) {
-  if (usersArr[0].coords) { //the first time the store returns users - the data structure is different. there are NO coordinates at all.
+  if (usersArr[0] && usersArr[0].coords) { //the first time the store returns users - the data structure is different. there are NO coordinates at all.
     const coordArr = usersArr.map(user => {
       let userCoords = {
         latitude: user.coords.latitude,
@@ -31,8 +31,8 @@ function getMidpoint (arrayOfCoords) {
     midpoint.longitude += individualLongitude;
   }
 
-  midpoint.latitude = (midpoint.latitude / arrayOfCoords.length).toString();
-  midpoint.longitude = (midpoint.longitude / arrayOfCoords.length).toString();
+  midpoint.latitude = (midpoint.latitude / arrayOfCoords.length);
+  midpoint.longitude = (midpoint.longitude / arrayOfCoords.length);
   return midpoint
 }
 

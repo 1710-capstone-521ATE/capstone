@@ -21,7 +21,6 @@ groupRouter.post('/', async (ctx, next) => {
 })
 
 groupRouter.post('/:id/events', async (ctx, next) => {
-  console.log(ctx.request.body.name)
   let newEvent = await ctx.db.models.event.create({groupId: ctx.params.id, hostId: ctx.request.body.hostId, name: ctx.request.body.name})
   ctx.body = newEvent;
 })
@@ -81,7 +80,6 @@ groupRouter.put('/:id/events/:eventCode', async (ctx, next) => {
   //2. Obtains the current status of the group & configures response body for front-end
   ctx.body = {users: [], midpoint: {}, event};
   ctx.body.users = await fetchGroupUsers(group);
-  await console.log('filtered users ', ctx.body.users)
 
   //3. Obtains and attaches midpoint if ALL users have responded.
   if (ctx.body.users.every(user => user.coords.latitude !== null)) {

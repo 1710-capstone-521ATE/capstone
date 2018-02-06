@@ -15,7 +15,7 @@ class EventView extends Component {
       refreshing: false
     }
     this.joinRoomHandler = this.joinRoomHandler.bind(this);
-    this.invitationHandler = this.invitationHandler.bind(this);
+    this.rejectRoomHandler = this.rejectRoomHandler.bind(this);
     this.onRefresh = this.onRefresh.bind(this);
   }
 
@@ -33,10 +33,9 @@ class EventView extends Component {
     this.props.navigation.navigate('WaitingRoom');
   }
 
-  invitationHandler (user, events, eventCode) {
-    let verified = events.find(event => event.code === eventCode.toLowerCase())
-    if (verified) this.joinRoomHandler(user, verified)
-    else this.setState({eventCode: ''});
+  async rejectRoomHandler(user, event) {
+    const data = {userId:user.id, groupId: event.groupId, eventCode: event.code}
+    socket.emit('declineInvite', data);
   }
 
   async onRefresh(){
@@ -50,7 +49,7 @@ class EventView extends Component {
     return (
       <View style={styles.container}>
         <Text>Hi {this.props.currentUser && this.props.currentUser.firstName}</Text>
-       
+
 
         <Text>These Are Your Events</Text>
         {
@@ -72,23 +71,35 @@ class EventView extends Component {
           {userEvents && userEvents.map(event => {
             if (event) {
               return (
+                <View>
                   <TouchableOpacity
                     key={event.id}
                     style={styles.signupButtonContainer}
 
                     onPress={() => this.joinRoomHandler(currentUser, event)}
                   >
-                  <Text style={styles.loginbutton}>
-                    {`Please join ${event.name}`}
-                  </Text>
+                    <Text style={styles.loginbutton}>
+                      {`Please join ${event.name}`}
+                    </Text>
                   </TouchableOpacity>
+                  <TouchableOpacity
+                    key={event.id}
+                    style={styles.signupButtonContainer}
+
+                    onPress={() => this.rejectRoomHandler(currentUser, event)}
+                  >
+                    <Text style={styles.loginbutton}>
+                      Bye Felicia!
+                    </Text>
+                  </TouchableOpacity>
+                </View>
               )} else {
               return null
             }
         })}
           </ScrollView>
 
-        
+
         <TouchableOpacity
         style={styles.signupButtonContainer}
         onPress={() => this.props.navigation.navigate('AddUsers')}

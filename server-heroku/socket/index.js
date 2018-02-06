@@ -19,6 +19,11 @@ module.exports = (io) => {
       }
 
     })
+    socket.on('declineInvite', async ({userId, groupId, eventCode}) => {
+
+
+    })
+
     socket.on('vote', (restaurantName, eventCode) => {
       io.to(`${eventCode}`).emit('ballot', restaurantName)
     })

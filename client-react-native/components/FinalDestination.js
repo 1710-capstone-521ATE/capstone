@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#43CCD8'
+    backgroundColor: '#62c2b5'
   },
   yelp: {
     flex: 1,
@@ -48,7 +48,6 @@ export default function FinalDestination(props) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.restaurantText}> You are going to... </Text>
       <Text style={styles.nameText}>{restaurant.name}</Text>
       <MapView
         style={styles.container}

@@ -18,19 +18,21 @@ const RootNavigator = StackNavigator({
   Main: {
     screen: Login,
     navigationOptions: {
-        headerTitle: 'Login'
+        header: null
     }
   },
   SignUpForm: {
     screen: SignUpFormContainer,
     navigationOptions: {
-      headerTitle: 'Signup'
+      header: null
     }
   },
   EventView: {
     screen: EventView,
     navigationOptions: ({ navigation }) => ({
-      headerTitle: 'Event',
+      headerStyle: {
+        backgroundColor: '#62c2b5'
+      },
       headerLeft: null,
       gesturesEnabled: false,
       headerRight: <LogOutButton navigation={navigation} />
@@ -39,6 +41,10 @@ const RootNavigator = StackNavigator({
   AddUsers: {
     screen: AddUsers,
     navigationOptions: ({ navigation }) => ({
+      headerStyle: {
+        backgroundColor: '#62c2b5'
+      },
+      headerTitle: 'Add your friends',
       headerLeft: <HomeButton navigation={navigation}/>,
       gesturesEnabled: false,
       headerRight: <LogOutButton navigation={navigation} />
@@ -47,6 +53,9 @@ const RootNavigator = StackNavigator({
   WaitingRoom: {
     screen: WaitingRoom,
     navigationOptions: ({ navigation }) => ({
+      headerStyle: {
+        backgroundColor: '#62c2b5'
+      },
       headerTitle: 'Waiting Room',
       headerLeft: null,
       headerRight: null
@@ -55,6 +64,9 @@ const RootNavigator = StackNavigator({
    ResultView: {
     screen: ResultView,
     navigationOptions: ({ navigation }) => ({
+      headerStyle: {
+        backgroundColor: '#62c2b5'
+      },
       headerTitle: 'You are going to ...',
       gesturesEnabled: false,
       headerLeft: <HomeButton navigation={navigation}/>,

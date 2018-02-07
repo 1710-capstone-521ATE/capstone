@@ -76,6 +76,12 @@ class EventView extends Component {
               />
             }
           >
+            <Button
+              buttonStyle={styles.buttonEventContainer}
+              iconRight={{name: 'thumb-down'}}
+              title={`Pull Down to Update!`}
+              rounded={true}
+          />
             {userEvents && userEvents.map(event => {
               if (event) {
                 return (
@@ -85,13 +91,18 @@ class EventView extends Component {
                 >
                   <Button
                     onPress={() => this.joinRoomHandler(currentUser, event)}
-                    buttonStyle={styles.buttonContainer}
+                    buttonStyle={{
+                      flex:1,
+                      backgroundColor: '#1980b9',
+                      marginTop: 15,
+                      width: 250
+                    }}
                     title={`Join ${event.name}`}
                     rounded={true}
                   />
                   <Icon
                     reverse
-                    name='highlight-off'
+                    name='clear'
                     color='#F04610'
                     onPress={() => this.rejectRoomHandler(currentUser, event)}
                   />
@@ -101,17 +112,12 @@ class EventView extends Component {
               }
             })}
           </ScrollView>
-
-
-        <TouchableOpacity
-        style={styles.signupButtonContainer}
-        onPress={() => this.props.navigation.navigate('AddUsers')}
-        >
-          <Text style={styles.loginbutton}>
-            CREATE EVENT
-          </Text>
-        </TouchableOpacity>
-
+          <Button
+            onPress={() => this.props.navigation.navigate('AddUsers')}
+            buttonStyle={styles.buttonEventContainer}
+            title={`Create Event`}
+            rounded={true}
+          />
       </View>
     )
   }
@@ -134,12 +140,18 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     width: 250
   },
+  buttonEventContainer: {
+    backgroundColor: '#11b21f',
+    marginTop: 15,
+    marginBottom: 10,
+    width: 250
+  },
   buttonDeclineContainer: {
     flex:1,
     backgroundColor: '#1980b9',
     marginTop: 15,
     marginBottom: 10,
-    width: 100
+    width: 50
   },
   signupButtonContainer: {
     backgroundColor: '#11b21f',

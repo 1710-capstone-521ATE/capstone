@@ -2,7 +2,6 @@ import React from 'react';
 import { Icon } from 'react-native-elements';
 
 export default function(props) {
-
     return (
       <Icon
         reverse
@@ -13,7 +12,3 @@ export default function(props) {
       />
     )
   }
-
-
-
-

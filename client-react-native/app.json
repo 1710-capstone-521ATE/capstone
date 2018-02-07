@@ -13,7 +13,7 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/tabledoggo.png",
       "resizeMode": "contain",
       "backgroundColor": "#62c2b5"
     },

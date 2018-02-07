@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, TextInput, ScrollView, RefreshControl} from 'react-native';
 import { connect } from 'react-redux';
+import {Text, View, StyleSheet, TouchableOpacity, ScrollView, RefreshControl} from 'react-native';
+import { Button } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 import { fetchUsers, fetchUserEvents, addEventCode, clearingRestaurants, clearingBallot} from '../store';
 import socket from '../socket';
 import _getLocationAsync from '../Utils/location'
@@ -12,11 +14,13 @@ class EventView extends Component {
     super(props);
     this.state = {
       eventCode: '',
-      refreshing: false
+      refreshing: false,
     }
+
     this.joinRoomHandler = this.joinRoomHandler.bind(this);
     this.rejectRoomHandler = this.rejectRoomHandler.bind(this);
     this.onRefresh = this.onRefresh.bind(this);
+    this.selectStyleHandler = this.selectStyleHandler.bind(this);
   }
 
   async componentDidMount() {
@@ -45,6 +49,10 @@ class EventView extends Component {
     this.setState({refreshing: false})
   }
 
+  selectStyleHandler(eventCode) {
+    return (this.state.eventCode === eventCode);
+  }
+
   render() {
     let {userEvents, currentUser} = this.props;
     return (
@@ -68,34 +76,30 @@ class EventView extends Component {
               />
             }
           >
-
-          {userEvents && userEvents.map(event => {
-            if (event) {
-              return (
-                <View key={event.code}>
-                  <TouchableOpacity
-                    style={styles.signupButtonContainer}
-
+            {userEvents && userEvents.map(event => {
+              if (event) {
+                return (
+                <View
+                  key={event.code}
+                  style={styles.rowContainer}
+                >
+                  <Button
                     onPress={() => this.joinRoomHandler(currentUser, event)}
-                  >
-                    <Text style={styles.loginbutton}>
-                      {`Please join ${event.name}`}
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={styles.signupButtonContainer}
-
+                    buttonStyle={styles.buttonContainer}
+                    title={`Join ${event.name}`}
+                    rounded={true}
+                  />
+                  <Icon
+                    reverse
+                    name='highlight-off'
+                    color='#F04610'
                     onPress={() => this.rejectRoomHandler(currentUser, event)}
-                  >
-                    <Text style={styles.declineButton}>
-                      Bye Felicia!
-                    </Text>
-                  </TouchableOpacity>
+                  />
                 </View>
               )} else {
               return null
-            }
-        })}
+              }
+            })}
           </ScrollView>
 
 
@@ -120,26 +124,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#62c2b5',
   },
-  logoConten: {
-    flexGrow: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+  rowContainer:{
+    flexDirection: 'row',
   },
-  titleApp: {
-    width: 200,
-    fontSize: 18,
-    textAlign: 'center',
-    margin: 10,
-    color: '#ffffff'
+  buttonContainer: {
+    flex:1,
+    backgroundColor: '#1980b9',
+    marginTop: 15,
+    marginBottom: 10,
+    width: 250
   },
-  logo: {
-    width: 100,
-    height: 100
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  buttonDeclineContainer: {
+    flex:1,
+    backgroundColor: '#1980b9',
+    marginTop: 15,
+    marginBottom: 10,
+    width: 100
   },
   signupButtonContainer: {
     backgroundColor: '#11b21f',
@@ -156,23 +156,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F04610',
     textAlign: 'center',
     fontWeight: '700'
-  },
-  buttonContainer: {
-    backgroundColor: '#1980b9',
-    paddingVertical: 10,
-    marginTop: 15,
-    marginBottom: 10
-  },
-  input: {
-    minWidth: 300,
-    flexWrap: 'wrap',
-    height: 40,
-    backgroundColor: 'rgba(255,255,255,0.2)',
-    paddingHorizontal: 10,
-    color: '#fff',
-    marginBottom: 10,
-    textAlign: 'center'
-  },
+  }
 });
 
 const mapStateToProps = (state) => {

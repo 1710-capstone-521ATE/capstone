@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#62c2b5',
+    backgroundColor: '#62c2b5'
   },
   input: {
     minWidth: 300,
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255,255,255,0.2)',
     paddingHorizontal: 10,
     color: '#fff',
-    marginBottom: 10,
+    marginBottom: 10
   },
   signupButtonContainer: {
     backgroundColor: '#11b21f',

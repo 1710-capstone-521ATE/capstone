@@ -118,7 +118,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#62c2b5',
   },
   inviteFriendsContainer: {
-    // backgroundColor: '#11b21f',
     position: 'relative',
     borderColor: '#1980b9',
     borderWidth: 2.5,

@@ -1,6 +1,9 @@
 import React from 'react';
 import {Text, View, StyleSheet, Image, Dimensions, Linking, Button} from 'react-native';
+import _getLocationAsync from '../Utils/location'
 import { MapView } from 'expo';
+import axios from 'axios';
+import {SERVER} from '../serverInfo'
 
 const styles = StyleSheet.create({
   container: {
@@ -43,8 +46,17 @@ const ASPECT_RATIO = width / height;
 const LATITUDE_DELTA = 0.0092;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
+
+
 export default function FinalDestination(props) {
   const restaurant = props.restaurant;
+
+  const transitHandler = async (currentRestaurant) => {
+    const location = await _getLocationAsync();
+    const transitTime = await axios.post(`${SERVER}/api/transit/`, {userLat: location.latitude, userLong: location.longitude, restLat: currentRestaurant.coordinates.latitude, restLong: currentRestaurant.coordinates.longitude})
+    return transitTime
+
+  }
 
   return (
     <View style={styles.container}>
@@ -65,6 +77,10 @@ export default function FinalDestination(props) {
           pinColor={'indigo'}
         />
       </MapView>
+      <View>
+        <Text>{transitHandler(props.restaurant)}</Text>
+      </View>
+      
       <View style={styles.yelp}>
         <Image source={{uri: restaurant.image_url}} style={styles.image} />
         <Text style={styles.restaurantText}>Address: {restaurant.location.display_address}</Text>

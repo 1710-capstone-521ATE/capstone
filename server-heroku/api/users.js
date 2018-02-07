@@ -49,10 +49,8 @@ userRouter.delete('/:id', async(ctx, next) => {
 userRouter.get('/:id/groups/events', async (ctx, next) => {
   let userModel = ctx.db.models.user;
   let eventModel = ctx.db.models.event;
-
   let groupModel = ctx.db.models.groups;
   const groups = await ctx.state.user.getGroups();
-  console.log('what are groupMembers>>>', groups[0].groupMembers)
   const filteredGroups = groups.filter(group => group.groupMembers.isAttending)
 
   const events = await Promise.all(filteredGroups.map((group) => {

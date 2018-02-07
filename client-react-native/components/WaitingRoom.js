@@ -15,11 +15,6 @@ class WaitingRoom extends Component {
         }
     }
 
-    override() {
-        this.props.navigation.navigate('ResultView');
-        return null;
-    }
-
     render() {
         return this.props.event.override ?
         (

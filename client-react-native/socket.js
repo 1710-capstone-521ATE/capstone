@@ -21,7 +21,7 @@ socket.on('ballot', restaurantName => {
   store.dispatch(updateBallot(restaurantName));
 })
 
-socket.on('overridden', (event, navigate) => {
+socket.on('overridden', (event) => {
   event.override = true;
   store.dispatch(overrideEvent(event));
 })

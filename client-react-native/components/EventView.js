@@ -20,7 +20,6 @@ class EventView extends Component {
   }
 
   async componentDidMount() {
-    console.log(this.props.navigation);
     this.props.loadUsers();
     this.props.loadUserEvents(this.props.currentUser.id);
     this.props.clearRestaurants();

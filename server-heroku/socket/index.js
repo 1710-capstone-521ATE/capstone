@@ -32,9 +32,8 @@ module.exports = (io) => {
       io.to(`${eventCode}`).emit('ballot', restaurantName)
     })
 
-    socket.on('override', (event, navigate) => {
-      console.log('navigate BE', navigate.slice(46, navigate.length-1))
-      io.to(`${event.eventCode}`).emit('overridden', event, navigate.slice(46, navigate.length-1));
+    socket.on('override', (event) => {
+      io.to(`${event.eventCode}`).emit('overridden', event);
     })
   });
 };

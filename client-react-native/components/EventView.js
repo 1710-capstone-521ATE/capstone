@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, TextInput, ScrollView, RefreshControl} from 'react-native';
 import { connect } from 'react-redux';
+import {Text, View, StyleSheet, TouchableOpacity, ScrollView, RefreshControl} from 'react-native';
+import { Button } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 import { fetchUsers, fetchUserEvents, addEventCode, clearingRestaurants, clearingBallot} from '../store';
 import socket from '../socket';
 import _getLocationAsync from '../Utils/location'
@@ -12,11 +14,13 @@ class EventView extends Component {
     super(props);
     this.state = {
       eventCode: '',
-      refreshing: false
+      refreshing: false,
     }
+
     this.joinRoomHandler = this.joinRoomHandler.bind(this);
     this.rejectRoomHandler = this.rejectRoomHandler.bind(this);
     this.onRefresh = this.onRefresh.bind(this);
+    this.selectStyleHandler = this.selectStyleHandler.bind(this);
   }
 
   async componentDidMount() {
@@ -45,6 +49,10 @@ class EventView extends Component {
     this.setState({refreshing: false})
   }
 
+  selectStyleHandler(eventCode) {
+    return (this.state.eventCode === eventCode);
+  }
+
   render() {
     let {userEvents, currentUser} = this.props;
     return (
@@ -55,7 +63,7 @@ class EventView extends Component {
         <Text>These Are Your Events</Text>
         {
           (!this.state.refreshing) ?
-          <Text>Pull Down to Update!</Text>
+          <Text></Text>
         :
           <Text></Text>
         }
@@ -68,46 +76,47 @@ class EventView extends Component {
               />
             }
           >
-
-          {userEvents && userEvents.map(event => {
-            if (event) {
-              return (
-                <View key={event.code}>
-                  <TouchableOpacity
-                    style={styles.signupButtonContainer}
-
+            <Button
+              buttonStyle={styles.inviteFriendsContainer}
+              backgroundColor="transparent"
+              iconRight={{type:'feather', name: 'chevrons-down'}}
+              title={`Pull Down to Update!`}
+              rounded={true}
+              fontWeight='700'
+          />
+            {userEvents && userEvents.map(event => {
+              if (event) {
+                return (
+                <View
+                  key={event.code}
+                  style={styles.rowContainer}
+                >
+                  <Button
                     onPress={() => this.joinRoomHandler(currentUser, event)}
-                  >
-                    <Text style={styles.loginbutton}>
-                      {`Please join ${event.name}`}
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={styles.signupButtonContainer}
-
+                    buttonStyle={styles.buttonContainer}
+                    title={`Join ${event.name}`}
+                    rounded={true}
+                    fontWeight='700'
+                  />
+                  <Icon
+                    reverse
+                    name='clear'
+                    color='#F04610'
                     onPress={() => this.rejectRoomHandler(currentUser, event)}
-                  >
-                    <Text style={styles.declineButton}>
-                      Bye Felicia!
-                    </Text>
-                  </TouchableOpacity>
+                  />
                 </View>
               )} else {
               return null
-            }
-        })}
+              }
+            })}
           </ScrollView>
-
-
-        <TouchableOpacity
-        style={styles.signupButtonContainer}
-        onPress={() => this.props.navigation.navigate('AddUsers')}
-        >
-          <Text style={styles.loginbutton}>
-            CREATE EVENT
-          </Text>
-        </TouchableOpacity>
-
+          <Button
+            onPress={() => this.props.navigation.navigate('AddUsers')}
+            buttonStyle={styles.buttonEventContainer}
+            title={`Create Event`}
+            rounded={true}
+            fontWeight='700'
+          />
       </View>
     )
   }
@@ -120,26 +129,27 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#62c2b5',
   },
-  logoConten: {
-    flexGrow: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+  rowContainer:{
+    flexDirection: 'row',
   },
-  titleApp: {
-    width: 200,
-    fontSize: 18,
-    textAlign: 'center',
-    margin: 10,
-    color: '#ffffff'
+  buttonContainer: {
+    flex:1,
+    backgroundColor: '#1980b9',
+    marginTop: 10,
+    height: 50,
+    width: 250
   },
-  logo: {
-    width: 100,
-    height: 100
+  buttonPullDownContainer: {
+    backgroundColor: '#11b21f',
+    marginTop: 15,
+    marginBottom: 10,
+    width: 345
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  buttonEventContainer: {
+    backgroundColor: '#11b21f',
+    marginTop: 15,
+    marginBottom: 10,
+    width: 345
   },
   signupButtonContainer: {
     backgroundColor: '#11b21f',
@@ -157,21 +167,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '700'
   },
-  buttonContainer: {
-    backgroundColor: '#1980b9',
-    paddingVertical: 10,
+  buttonPullDownContainer: {
+    flex:1,
+    position: 'relative',
     marginTop: 15,
-    marginBottom: 10
-  },
-  input: {
-    minWidth: 300,
-    flexWrap: 'wrap',
-    height: 40,
-    backgroundColor: 'rgba(255,255,255,0.2)',
-    paddingHorizontal: 10,
-    color: '#fff',
     marginBottom: 10,
-    textAlign: 'center'
+    width: 345
   },
 });
 

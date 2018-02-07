@@ -52,7 +52,10 @@ userRouter.get('/:id/groups/events', async (ctx, next) => {
 
   let groupModel = ctx.db.models.groups;
   const groups = await ctx.state.user.getGroups();
-  const events = await Promise.all(groups.map((group) => {
+  console.log('what are groupMembers>>>', groups[0].groupMembers)
+  const filteredGroups = groups.filter(group => group.groupMembers.isAttending)
+
+  const events = await Promise.all(filteredGroups.map((group) => {
     return eventModel.findAll({where: {
       groupId : group.id,
       startEvent: false

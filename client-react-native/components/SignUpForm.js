@@ -1,7 +1,9 @@
-import React, {Component} from 'react';
-import {KeyboardAvoidingView, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { Component } from 'react';
+import { KeyboardAvoidingView, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
-import { auth } from '../store'
+import { auth } from '../store';
+
 
 class SignUpForm extends Component {
   constructor(props) {
@@ -28,46 +30,47 @@ class SignUpForm extends Component {
         style={styles.container}
         >
       <TextInput
-      placeholder="First Name"
-      name="firstName"
-      autoCorrect = {false}
-      autoCapitalize = "none"
-      onChangeText={(firstName) => this.setState({ firstName })}
-      style = {styles.input}
+        placeholder="First Name"
+        name="firstName"
+        autoCorrect = {false}
+        autoCapitalize = "none"
+        onChangeText={(firstName) => this.setState({ firstName })}
+        style = {styles.input}
       />
       <TextInput
-      placeholder="Last Name"
-      name="lastName"
-      autoCorrect = {false}
-      autoCapitalize = "none"
-      onChangeText={(lastName) => this.setState({ lastName })}
-      style = {styles.input}
+        placeholder="Last Name"
+        name="lastName"
+        autoCorrect = {false}
+        autoCapitalize = "none"
+        onChangeText={(lastName) => this.setState({ lastName })}
+        style = {styles.input}
       />
       <TextInput
-      placeholder="Email Address"
-      name="email"
-      autoCorrect = {false}
-      autoCapitalize = "none"
-      onChangeText={(email) => this.setState({ email })}
-      style = {styles.input}
+        placeholder="Email Address"
+        name="email"
+        autoCorrect = {false}
+        autoCapitalize = "none"
+        onChangeText={(email) => this.setState({ email })}
+        style = {styles.input}
       />
-      <TextInput
-      placeholder="Password"
-      name="password"
-      secureTextEntry
-      autoCorrect = {false}
-      autoCapitalize = "none"
-      onChangeText={(password) => this.setState({ password })}
-      style = {styles.input}
+        <TextInput
+        placeholder="Password"
+        name="password"
+        secureTextEntry
+        autoCorrect = {false}
+        autoCapitalize = "none"
+        onChangeText={(password) => this.setState({ password })}
+        style = {styles.input}
       />
-      <TouchableOpacity
-      style = {styles.signupButtonContainer}
-      onPress={() => this.props.handleSubmit(this.state)}
-    >
-    <Text style ={styles.loginbutton}>
-    SIGNUP
-    </Text>
-    </TouchableOpacity>
+      <Button
+        buttonStyle = {styles.signupButtonContainer}
+        onPress={() => this.props.handleSubmit(this.state)}
+        rounded={true}
+        title='SIGN UP'
+        fontWeight='700'
+        TouchableComponent='TouchableOpacity'
+      >
+       </Button>
       </KeyboardAvoidingView>
     )
   }
@@ -95,12 +98,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     marginBottom: 20,
     width: 300
-  },
-  loginbutton: {
-    color: '#ffffff',
-    textAlign: 'center',
-    fontWeight: '700'
-  },
+  }
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => {

@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 import {SERVER} from './serverInfo';
-import store, { getUsers, fetchRestaurants, updateBallot, getEvent } from './store';
+import store, { getUsers, fetchRestaurants, updateBallot, getEvent, overrideEvent } from './store';
 
 const socket = io(SERVER)
 
@@ -10,7 +10,6 @@ socket.on('connect', () => {
 
 //If there is a midpoint sent from the backend, then we need to alert ALL the users involved in the event that they can move on to the next view.
 socket.on('currentStatus', ({users, midpoint, eventCode, event, groupId}) => {
-  console.log('yay!');
   if (midpoint.latitude) {
     store.dispatch(fetchRestaurants(midpoint));
   }
@@ -20,6 +19,11 @@ socket.on('currentStatus', ({users, midpoint, eventCode, event, groupId}) => {
 
 socket.on('ballot', restaurantName => {
   store.dispatch(updateBallot(restaurantName));
+})
+
+socket.on('overridden', (event) => {
+  event.override = true;
+  store.dispatch(overrideEvent(event));
 })
 
 export default socket;

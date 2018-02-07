@@ -3,6 +3,7 @@ import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import { connect } from 'react-redux';
 import socket from '../socket';
 import { Button } from 'react-native-elements';
+import { overrideEvent } from '../store/index';
 
 class YelpChoices extends Component {
   constructor(props) {
@@ -39,7 +40,7 @@ class YelpChoices extends Component {
         })}
 
           <TouchableOpacity
-style={styles.voteContainer}
+          style={styles.voteContainer}
           onPress={this.voteHandler}
           >
             <Text style={styles.button}>
@@ -110,12 +111,6 @@ const mapStateToProps = (state) => {
     event: state.event,
     notRespondedUsers: state.users.filter(user => user.coords && user.coords.latitude === null),
     isHost: Number(state.user.id) === Number(state.event.hostId)
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-
   }
 }
 

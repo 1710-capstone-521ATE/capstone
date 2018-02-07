@@ -7,7 +7,14 @@ export const getEvent = (event) => {
   }
 }
 
-export default (state = '', action) => {
+export const overrideEvent = (event, navigation) => {
+  return (dispatch) => {
+    dispatch(getEvent(event));
+    navigation.navigate('ResultView');
+  }
+}
+
+export default (state = {}, action) => {
   switch (action.type) {
     case GET_EVENT:
       return action.event;

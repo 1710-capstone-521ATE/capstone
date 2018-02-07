@@ -13,17 +13,22 @@ class WaitingRoom extends Component {
         }
     }
 
-render() {
-    return (
-        <View style = {styles.container}>
-        <Text>
-            {this.props.event.name}
-        </Text>
-        <Map />
-        <YelpChoices navigation={this.props.navigation} />
+    override() {
+        this.props.navigation.navigate('ResultView');
+    }
+
+    render() {
+        this.props.event.override && this.override();
+        return (
+            <View style = {styles.container}>
+            <Text>
+                {this.props.event.name}
+            </Text>
+            <Map />
+            <YelpChoices navigation={this.props.navigation} />
         </View>
-    )
-  }
+        )
+    }
 }
 
 const styles = StyleSheet.create({

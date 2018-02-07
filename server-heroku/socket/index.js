@@ -31,5 +31,9 @@ module.exports = (io) => {
     socket.on('vote', (restaurantName, eventCode) => {
       io.to(`${eventCode}`).emit('ballot', restaurantName)
     })
+
+    socket.on('override', (event) => {
+      io.to(`${event.eventCode}`).emit('overridden', event);
+    })
   });
 };

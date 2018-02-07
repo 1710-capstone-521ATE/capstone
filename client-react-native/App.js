@@ -45,7 +45,7 @@ const RootNavigator = StackNavigator({
         backgroundColor: '#62c2b5'
       },
       headerTitle: 'Add your friends',
-      headerLeft: <HomeButton navigation={navigation}/>,
+      headerLeft: <HomeButton navigation={navigation} />,
       gesturesEnabled: false,
       headerRight: <LogOutButton navigation={navigation} />
     })
@@ -69,7 +69,7 @@ const RootNavigator = StackNavigator({
       },
       headerTitle: 'You are going to ...',
       gesturesEnabled: false,
-      headerLeft: <HomeButton navigation={navigation}/>,
+      headerLeft: <HomeButton navigation={navigation} />,
       headerRight: <LogOutButton navigation={navigation} />
     })
   }

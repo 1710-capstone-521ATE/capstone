@@ -42,8 +42,8 @@ class ResultView extends Component {
 
 
   render() {
-    const {users, restaurants, ballot, isHost} = this.props;
-    return this.voteCounter() < this.props.users.length ?
+    const {restaurants, ballot, isHost, event} = this.props;
+    return (this.voteCounter() < this.props.users.length && !event.override) ?
       (<View style={styles.container}>
         {restaurants.map(restaurant => {
           let count = ballot[restaurant.name] || 0
@@ -55,7 +55,7 @@ class ResultView extends Component {
         {isHost &&
         <Button
           title="Override Votes!"
-          onPress={() => socket.emit('override', this.ballot)}
+          onPress={() => socket.emit('override', event)}
         />}
       </View>)
       :
@@ -103,9 +103,9 @@ const mapStateToProps = (state) => {
     restaurants: state.restaurants,
     users: state.users,
     ballot: state.ballot,
-    isHost: Number(state.user.id) === Number(state.event.hostId)
+    isHost: Number(state.user.id) === Number(state.event.hostId),
+    event: state.event
   }
 }
-
 
 export default connect(mapStateToProps)(ResultView);

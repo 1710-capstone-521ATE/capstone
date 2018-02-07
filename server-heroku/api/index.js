@@ -8,6 +8,5 @@ module.exports = async function(ctx, next){
 
   // these routes are either 'users' or 'cuisines'
   ctx.state.routes = routing[1];
-  console.log(ctx.state.routes)
   await require(`./${ctx.state.routes}`).routes()(ctx, next);
 }

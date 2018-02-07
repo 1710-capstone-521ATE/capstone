@@ -14,7 +14,7 @@ import LogOutButton from './components/LogOutButton';
 import HomeButton from './components/HomeButton'
 import './socket';
 
-const RootNavigator = StackNavigator({
+export const RootNavigator = StackNavigator({
   Main: {
     screen: Login,
     navigationOptions: {

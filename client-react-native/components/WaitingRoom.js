@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import Map from './Map'
 import YelpChoices from './YelpChoices'
 // import { fetchUsers, fetchUserEvents } from '../store';
+import ResultView from './ResultView';
+import { Button } from 'react-native-elements';
 
 class WaitingRoom extends Component {
     constructor(props){
@@ -15,11 +17,22 @@ class WaitingRoom extends Component {
 
     override() {
         this.props.navigation.navigate('ResultView');
+        return null;
     }
 
     render() {
-        this.props.event.override && this.override();
-        return (
+        return this.props.event.override ?
+        (
+            <View style={styles.container}>
+                <Text>Host has overriden. Ballot has closed</Text>
+                <Button
+                    title="Continue."
+                    onPress={() => this.props.navigation.navigate('ResultView')}
+                />
+            </View>
+        )
+        :
+        (
             <View style = {styles.container}>
             <Text>
                 {this.props.event.name}

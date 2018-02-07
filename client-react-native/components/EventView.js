@@ -63,7 +63,7 @@ class EventView extends Component {
         <Text>These Are Your Events</Text>
         {
           (!this.state.refreshing) ?
-          <Text>Pull Down to Update!</Text>
+          <Text></Text>
         :
           <Text></Text>
         }
@@ -77,10 +77,12 @@ class EventView extends Component {
             }
           >
             <Button
-              buttonStyle={styles.buttonEventContainer}
-              iconRight={{name: 'thumb-down'}}
+              buttonStyle={styles.inviteFriendsContainer}
+              backgroundColor="transparent"
+              iconRight={{type:'feather', name: 'chevrons-down'}}
               title={`Pull Down to Update!`}
               rounded={true}
+              fontWeight='700'
           />
             {userEvents && userEvents.map(event => {
               if (event) {
@@ -91,14 +93,10 @@ class EventView extends Component {
                 >
                   <Button
                     onPress={() => this.joinRoomHandler(currentUser, event)}
-                    buttonStyle={{
-                      flex:1,
-                      backgroundColor: '#1980b9',
-                      marginTop: 15,
-                      width: 250
-                    }}
+                    buttonStyle={styles.buttonContainer}
                     title={`Join ${event.name}`}
                     rounded={true}
+                    fontWeight='700'
                   />
                   <Icon
                     reverse
@@ -117,6 +115,7 @@ class EventView extends Component {
             buttonStyle={styles.buttonEventContainer}
             title={`Create Event`}
             rounded={true}
+            fontWeight='700'
           />
       </View>
     )
@@ -136,22 +135,21 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flex:1,
     backgroundColor: '#1980b9',
+    marginTop: 10,
+    height: 50,
+    width: 250
+  },
+  buttonPullDownContainer: {
+    backgroundColor: '#11b21f',
     marginTop: 15,
     marginBottom: 10,
-    width: 250
+    width: 345
   },
   buttonEventContainer: {
     backgroundColor: '#11b21f',
     marginTop: 15,
     marginBottom: 10,
-    width: 250
-  },
-  buttonDeclineContainer: {
-    flex:1,
-    backgroundColor: '#1980b9',
-    marginTop: 15,
-    marginBottom: 10,
-    width: 50
+    width: 345
   },
   signupButtonContainer: {
     backgroundColor: '#11b21f',
@@ -168,7 +166,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#F04610',
     textAlign: 'center',
     fontWeight: '700'
-  }
+  },
+  buttonPullDownContainer: {
+    flex:1,
+    position: 'relative',
+    marginTop: 15,
+    marginBottom: 10,
+    width: 345
+  },
 });
 
 const mapStateToProps = (state) => {

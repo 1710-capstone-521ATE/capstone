@@ -101,10 +101,7 @@ const styles = StyleSheet.create({
     minWidth: 300,
     flexWrap: 'wrap',
     height: 40,
-    // backgroundColor: 'rgba(255,255,255,0.2)',
-    // paddingHorizontal: 10,
     color: '#fff',
-    // marginBottom: 10,
     flex: 1
   },
   buttonContainer: {

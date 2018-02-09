@@ -1,4 +1,3 @@
-
 module.exports = async function(ctx, next){
   // routing is right now ['api', '...?'] depending on the path
   // for example, if we do localhost:5218/api/users, routing will be ['api' , 'users']

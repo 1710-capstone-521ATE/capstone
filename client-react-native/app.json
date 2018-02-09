@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "berry-board",
+    "name": "521ate",
     "description": "This project is really great.",
-    "slug": "berry-board",
+    "slug": "521ate",
     "privacy": "public",
     "sdkVersion": "25.0.0",
     "platforms": [
@@ -11,14 +11,18 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo.png",
     "splash": {
       "image": "./assets/tabledoggo.png",
       "resizeMode": "contain",
       "backgroundColor": "#62c2b5"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.fsa1710.521ate"
+    },
+    "android": {
+      "package": ".com.fsa1710.521ate"
     }
   }
 }

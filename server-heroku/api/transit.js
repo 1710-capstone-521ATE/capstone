@@ -1,6 +1,6 @@
 const Router = require('koa-router');
 const transitRouter = new Router({prefix: '/api/transit'});
-const {googleMapTransitId} = process.env.googleMapTransitId || require('../secrets').googleMapTransitId;
+const googleMapTransitId = process.env.googleMapTransitId || require('../secrets').googleMapTransitId;
 const axios = require('axios');
 
 transitRouter.post('/', async (ctx, next) => {

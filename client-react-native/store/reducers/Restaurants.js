@@ -1,4 +1,6 @@
-import { fetchYelpRestaurants, createMidpointUrl } from '../../Utils/restaurantAPI';
+// import { fetchYelpRestaurants, createMidpointUrl } from '../../Utils/restaurantAPI';
+import axios from 'axios';
+import { SERVER } from '../../serverInfo';
 
 const GET_RESTAURANTS = 'GET_RESTAURANTS';
 const CLEAR_RESTAURANTS = 'CLEAR_RESTAURANTS';
@@ -18,9 +20,10 @@ export const clearingRestaurants = () => {
 
 export const fetchRestaurants = (midpoint) => {
   return (dispatch) => {
-    let url = createMidpointUrl(midpoint);
-    return fetchYelpRestaurants(url)
-    .then(restaurants => dispatch(getRestaurants(restaurants)))
+    //let url = createMidpointUrl(midpoint);
+    //return fetchYelpRestaurants(url)
+    return axios.put(`${SERVER}/api/restaurants`, midpoint)
+    .then(restaurants => dispatch(getRestaurants(restaurants.data)))
     .catch(console.error);
   }
 }

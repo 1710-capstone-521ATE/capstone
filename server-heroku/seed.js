@@ -7,23 +7,17 @@ async function seed() {
   // Whoa! Because we `await` the promise that db.sync returns, the next line will not be
   // executed until that promise resolves!
   const users = await Promise.all([
-    User.create({ email: 'pjoe@aol.com', password: '123', firstName: 'Pinata', lastName: 'Joe', dob: '1970-06-17', zipcode: '12345' }),
+    User.create({ email: 'taco@taco.com', password: '123', firstName: 'Taco', lastName: 'Corgo', dob: '1970-06-17', zipcode: '12345' }),
 
-    User.create({ email: 'ppauline@aol.com', password: '123', firstName: 'Pinata', lastName: 'Pauline', dob: '1980-12-25', zipcode: '54321' }),
+    User.create({ email: 'peanut@peanut.com', password: '123', firstName: 'Peanut', lastName: 'Jindo', dob: '1980-12-25', zipcode: '54321' }),
 
-    User.create({ email: 'sam@sam.com', password: '123', firstName: 'Sam', lastName: 'Kim', dob: '1992-05-21', zipcode: '07152' }),
+    User.create({ email: 'leo@leo.com', password: '123', firstName: 'Leo', lastName: 'Cavachon', dob: '1992-05-21', zipcode: '07152' }),
 
-    User.create({ email: 'jason@jason.com', password: '123', firstName: 'Jason', lastName: 'Smith', dob: '1985-07-14', zipcode: '07621' }),
+    User.create({ email: 'gumbo@gumbo.com', password: '123', firstName: 'Gumbo', lastName: 'Mix', dob: '1985-07-14', zipcode: '07621' }),
 
     User.create({ email: 'sarah@sarah.com', password: '123', firstName: 'Sarah', lastName: 'Oliea', dob: '1991-02-17', zipcode: '15345' }),
 
     User.create({ email: 'sandy@sandy.com', password: '123', firstName: 'Sandy', lastName: 'Chesada', dob: '1991-11-15', zipcode: '51221' }),
-
-    User.create({ email: 'bob@bob.com', password: '123', firstName: 'Bob', lastName: 'Lopez', dob: '1992-03-21', zipcode: '01238' }),
-
-    User.create({ email: 'mike@mike.com', password: '123', firstName: 'Mike', lastName: 'Gouda', dob: '1987-01-01', zipcode: '45612' }),
-
-    User.create({ email: 'tiff@tiff.com', password: '123', firstName: 'Tiffany', lastName: 'Crystal', dob: '1912-09-12', zipcode: '08978' })
   ])
 
 
@@ -55,13 +49,12 @@ async function seed() {
   const events = await Promise.all([
     Event.create({ restaurantId: 'Sams Noodles', rating: 4, hostId: 1, groupId: 1, name: "Test Event 1" }),
     Event.create({ restaurantId: 'Pams Noodles', rating: 2, hostId: 4, groupId: 2, name: "Test Event 2" }),
-    Event.create({ restaurantId: 'Dans Noodles', rating: 3, hostId: 7, groupId: 3, name: "Test Event 3" })
+    Event.create({ restaurantId: 'Dans Noodles', rating: 3, hostId: 2, groupId: 3, name: "Test Event 3" })
   ])
 
   const groupMembers = await Promise.all([
     groups[0].addUsers([1, 2, 3]),
     groups[1].addUsers([4, 5, 6]),
-    groups[2].addUsers([7, 8, 9])
   ])
 
 

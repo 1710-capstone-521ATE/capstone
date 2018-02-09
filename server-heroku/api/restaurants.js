@@ -8,7 +8,6 @@ const yelpKey = process.env.yelpKey || require('../secrets').yelpKey;
 
 restRouter.put('/', async(ctx, next) => {
   const url = `https://api.yelp.com/v3/businesses/search?latitude=${ctx.request.body.latitude}&longitude=${ctx.request.body.longitude}&categories=restaurants`;
-  console.log(ctx.request.body)
   ctx.body = await axios(
     {
       method: 'GET',

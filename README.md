@@ -5,9 +5,6 @@
 ## Motivation
 Eating out is fun, but planning a dinner event is complicated. 521ATE's goal was to alleviate the age-old issue of planning an outing amongst a busy group of friends in the city who only have a few hours to meet. Our motivation was to maintain a smooth user interface to allow users to decide on a location within minutes as we handled nested data queries on a headless server.
 
-## Screenshots
-
-
 ## Tech/framework used
 <b>Built with</b>
 - [React-Native]
@@ -15,9 +12,6 @@ Eating out is fun, but planning a dinner event is complicated. 521ATE's goal was
 - [Koa]
 - [Sequelize]
 - [Socket.io]
-
-## Features
-What makes your project stand out?
 
 ## API Reference
 - Yelp API [https://www.yelp.com/developers/documentation/v3]

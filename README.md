@@ -7,11 +7,11 @@ Eating out is fun, but planning a dinner event is complicated. 521ATE's goal was
 
 ## Tech/framework used
 <b>Built with</b>
-- [React-Native]
-- [React-Redux]
-- [Koa]
-- [Sequelize]
-- [Socket.io]
+- React-Native
+- React-Redux
+- Koa
+- Sequelize
+- Socket.io
 
 ## API Reference
 - Yelp API [https://www.yelp.com/developers/documentation/v3]
